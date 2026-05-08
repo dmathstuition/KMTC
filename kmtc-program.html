@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>KMTC 2026 Program — Kingdom Media & Tech Confluence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,300;0,400;0,600;0,700&family=Space+Mono:wght@0,400;0,700&family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet"/>
+<style>
+@font-face {
+  font-family: 'Avorya';
+  src: url('avorya.woff2') format('woff2'), url('avorya.woff') format('woff');
+  font-display: swap;
+}
+:root {
+  --tiger:  #f7572b;
+  --yellow: #ffc703;
+  --green:  #00b675;
+  --indigo: #780ae8;
+  --violet: #e982eb;
+  --black:  #0d0d0d;
+  --ink:    #111116;
+  --white:  #ffffff;
+  --muted:  rgba(255,255,255,0.5);
+  --border: rgba(255,255,255,0.07);
+  --pf:     'Avorya', 'Josefin Sans', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'Nunito', sans-serif; overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 3rem;
+  background: rgba(13,13,13,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-back {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  display: flex; align-items: center; gap: 8px;
+  transition: color 0.2s;
+}
+.nav-back:hover { color: var(--yellow); }
+.nav-logo {
+  font-family: var(--pf);
+  font-size: 1.4rem; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--white);
+}
+.nav-cta {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  padding: 0.6rem 1.4rem;
+  background: var(--tiger); color: var(--white);
+  border: none; cursor: pointer; text-decoration: none;
+  clip-path: polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+  transition: all 0.2s; display: inline-block;
+}
+.nav-cta:hover { background: var(--yellow); color: var(--black); }
+
+/* PROGRAM HERO */
+.prog-hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end;
+  padding: 8rem 4rem 5rem;
+  position: relative; overflow: hidden;
+  background: linear-gradient(140deg, #0a0010 0%, #0d0d0d 40%, #100800 100%);
+}
+.prog-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 10% 80%, rgba(120,10,232,.25) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 20%, rgba(247,87,43,.2) 0%, transparent 55%);
+  pointer-events: none;
+}
+.hero-kicker {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--yellow); border: 1px solid rgba(255,199,3,.4);
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0.3rem 0.9rem; margin-bottom: 2rem; position: relative; z-index: 2;
+}
+.hero-kicker::before {
+  content: ''; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--yellow); animation: blink 1.5s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+.prog-headline {
+  font-family: var(--pf);
+  font-size: clamp(3rem, 6.5vw, 8rem);
+  line-height: 0.9; letter-spacing: 2px; text-transform: uppercase;
+  position: relative; z-index: 2; margin-bottom: 1.5rem;
+}
+.prog-headline .l1 { color: var(--white); display: block; }
+.prog-headline .l2 { color: var(--tiger); display: block; }
+.prog-headline .l3 { color: var(--yellow); display: block; }
+.prog-desc {
+  font-size: 1rem; line-height: 1.8; color: var(--muted);
+  max-width: 560px; position: relative; z-index: 2; margin-bottom: 2.5rem;
+}
+.prog-actions { display: flex; gap: 1rem; flex-wrap: wrap; position: relative; z-index: 2; }
+.btn-p {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
+  padding: 0.9rem 2rem; text-decoration: none; display: inline-block;
+  transition: all 0.2s;
+}
+.btn-p.primary {
+  background: var(--yellow); color: var(--black); font-weight: 700;
+  clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+}
+.btn-p.primary:hover { background: var(--tiger); color: var(--white); transform: scale(1.04); }
+.btn-p.outline { border: 1px solid rgba(255,255,255,.3); color: var(--white); }
+.btn-p.outline:hover { border-color: var(--yellow); color: var(--yellow); }
+
+/* SECTION */
+section { padding: 6rem 4rem; }
+.sec-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--tiger); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 12px;
+}
+.sec-label::before { content: ''; width: 32px; height: 1px; background: var(--tiger); }
+.sec-title {
+  font-family: var(--pf);
+  font-size: clamp(2rem, 3.5vw, 3.2rem); letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.sec-body { font-size: 0.95rem; line-height: 1.85; color: var(--muted); max-width: 640px; }
+
+/* ABOUT EVENT */
+#about-event { background: var(--ink); border-top: 1px solid var(--border); }
+.event-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: center; }
+.event-details { display: flex; flex-direction: column; gap: 1rem; }
+.event-detail-row {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--border); background: rgba(255,255,255,.02);
+}
+.edr-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--tiger); min-width: 70px;
+}
+.edr-val { font-size: 0.9rem; color: var(--white); }
+
+/* TRACKS */
+#tracks { background: var(--black); }
+.tracks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+.track-card {
+  padding: 2rem 1.5rem;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.02);
+  transition: all 0.25s; position: relative; overflow: hidden;
+}
+.track-card:hover { transform: translateY(-4px); }
+.track-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.track-card:nth-child(1)::before { background: var(--tiger); }
+.track-card:nth-child(2)::before { background: var(--indigo); }
+.track-card:nth-child(3)::before { background: var(--yellow); }
+.track-card:nth-child(4)::before { background: var(--green); }
+.track-card:nth-child(5)::before { background: var(--violet); }
+.track-card:nth-child(6)::before { background: var(--tiger); }
+.track-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+.track-name {
+  font-family: var(--pf);
+  font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--white); margin-bottom: 0.6rem;
+}
+.track-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+.track-tag {
+  display: inline-block; margin-top: 1rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase;
+  padding: 0.25rem 0.7rem;
+  border: 1px solid rgba(255,255,255,.15); color: var(--muted);
+}
+
+/* SPEAKERS */
+#speakers { background: var(--ink); border-top: 1px solid var(--border); }
+.speakers-placeholder {
+  margin-top: 3rem;
+  border: 2px dashed rgba(255,255,255,.1);
+  padding: 4rem; text-align: center;
+}
+.speakers-placeholder h3 {
+  font-family: var(--pf);
+  font-size: 1.6rem; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 0.8rem;
+}
+.speakers-placeholder p { font-size: 0.9rem; color: rgba(255,255,255,.3); }
+
+/* SCHEDULE */
+#schedule { background: var(--black); }
+.schedule-tba {
+  margin-top: 3rem;
+  border: 1px solid var(--border);
+  padding: 3rem; text-align: center;
+  background: rgba(255,255,255,.02);
+}
+.schedule-tba p {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* REGISTER CTA */
+.reg-cta {
+  background: linear-gradient(135deg, #1a0a30 0%, #200800 100%);
+  border-top: 1px solid var(--border);
+  padding: 6rem 4rem; text-align: center;
+}
+.reg-cta h2 {
+  font-family: var(--pf);
+  font-size: clamp(2rem, 4vw, 4rem); letter-spacing: 2px; text-transform: uppercase;
+  color: var(--white); margin-bottom: 1rem;
+}
+.reg-cta p { font-size: 1rem; color: var(--muted); margin-bottom: 2.5rem; }
+.reg-cta a {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700;
+  padding: 1rem 2.5rem;
+  background: var(--tiger); color: var(--white);
+  text-decoration: none; display: inline-block;
+  clip-path: polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
+  transition: all 0.2s;
+}
+.reg-cta a:hover { background: var(--yellow); color: var(--black); transform: scale(1.04); }
+
+/* FOOTER */
+footer {
+  background: #070709; border-top: 1px solid var(--border); padding: 2.5rem 4rem;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+}
+.footer-copy {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);
+}
+.footer-logo {
+  font-family: var(--pf);
+  font-size: 1.2rem; letter-spacing: 4px; color: var(--white);
+}
+
+/* FADE UP */
+.fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 860px) {
+  nav { padding: 1rem 1.5rem; }
+  section { padding: 4rem 1.5rem; }
+  .prog-hero { padding: 7rem 1.5rem 3.5rem; }
+  .event-grid { grid-template-columns: 1fr; }
+  .tracks-grid { grid-template-columns: 1fr 1fr; }
+  .reg-cta { padding: 4rem 1.5rem; }
+  footer { padding: 2rem 1.5rem; }
+}
+@media (max-width: 560px) {
+  .tracks-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="kmtc-brand.html" class="nav-back">← KMTC Brand</a>
+  <div class="nav-logo">KMTC 2026</div>
+  <a href="kmtc-register.html" class="nav-cta">Register Now</a>
+</nav>
+
+<!-- HERO -->
+<div class="prog-hero">
+  <div class="hero-kicker">Annual Flagship Gathering · 2026</div>
+  <h1 class="prog-headline">
+    <span class="l1">Kingdom</span>
+    <span class="l2">Media &</span>
+    <span class="l3">Tech Confluence</span>
+  </h1>
+  <p class="prog-desc">
+    An annual gathering where faith, media, and technology align for cultural and spiritual impact. 
+    Practical skill transfer. Spiritual formation. Long-term Kingdom community.
+  </p>
+  <div class="prog-actions">
+    <a href="kmtc-register.html" class="btn-p primary">Secure Your Seat →</a>
+    <a href="#tracks" class="btn-p outline">Explore Tracks</a>
+  </div>
+</div>
+
+<!-- ABOUT EVENT -->
+<section id="about-event">
+  <div class="event-grid">
+    <div>
+      <div class="sec-label">About the Event</div>
+      <h2 class="sec-title">More Than a Conference</h2>
+      <p class="sec-body">
+        KMTC 2026 is a curated, immersive gathering for Kingdom-minded creators, 
+        technologists, and innovators. Expect high-quality practical training, 
+        Spirit-led conversations, world-class speakers, and long-term community connections.
+      </p>
+      <p class="sec-body" style="margin-top:1rem;">
+        Unlike typical conferences, KMTC prioritises Kingdom alignment over hype — 
+        combining practical skill transfer with spiritual formation to build long-term 
+        community, not one-off attendance.
+      </p>
+    </div>
+    <div class="event-details">
+      <div class="event-detail-row">
+        <span class="edr-label">Event</span>
+        <span class="edr-val">KMTC 2026 — Annual Flagship</span>
+      </div>
+      <div class="event-detail-row">
+        <span class="edr-label">Date</span>
+        <span class="edr-val">Dates to be announced</span>
+      </div>
+      <div class="event-detail-row">
+        <span class="edr-label">Location</span>
+        <span class="edr-val">Nigeria (Venue TBA)</span>
+      </div>
+      <div class="event-detail-row">
+        <span class="edr-label">Format</span>
+        <span class="edr-val">In-person (Hybrid Options TBD)</span>
+      </div>
+      <div class="event-detail-row">
+        <span class="edr-label">Community</span>
+        <span class="edr-val">Kingdom Creators, Technologists & Innovators</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRACKS -->
+<section id="tracks">
+  <div class="sec-label">Programme Tracks</div>
+  <h2 class="sec-title">Six Tracks of Impact</h2>
+  <p class="sec-body">
+    Curated training streams designed to equip, challenge, and commission you 
+    in your specific lane of Kingdom influence.
+  </p>
+  <div class="tracks-grid">
+    <div class="track-card fade-up">
+      <div class="track-icon">📡</div>
+      <div class="track-name">Media & Content</div>
+      <p class="track-desc">Broadcast, storytelling, production, social media, and digital media strategy for Kingdom impact.</p>
+      <span class="track-tag">For Media Teams · Content Creators</span>
+    </div>
+    <div class="track-card fade-up">
+      <div class="track-icon">💻</div>
+      <div class="track-name">Tech & Development</div>
+      <p class="track-desc">Software engineering, app development, infrastructure, and emerging technologies in God's Kingdom.</p>
+      <span class="track-tag">For Developers · Tech Leads</span>
+    </div>
+    <div class="track-card fade-up">
+      <div class="track-icon">🎨</div>
+      <div class="track-name">Creative Arts & Design</div>
+      <p class="track-desc">Visual design, branding, photography, videography, and creative expression as acts of worship.</p>
+      <span class="track-tag">For Designers · Creatives</span>
+    </div>
+    <div class="track-card fade-up">
+      <div class="track-icon">🚀</div>
+      <div class="track-name">Kingdom Business</div>
+      <p class="track-desc">Entrepreneurship, Kingdom economics, faith-driven business models, and marketplace ministry.</p>
+      <span class="track-tag">For Entrepreneurs · Founders</span>
+    </div>
+    <div class="track-card fade-up">
+      <div class="track-icon">💡</div>
+      <div class="track-name">Innovation & Systems</div>
+      <p class="track-desc">Social innovation, systems thinking, AI ethics, and Kingdom-aligned solution design.</p>
+      <span class="track-tag">For Innovators · Strategists</span>
+    </div>
+    <div class="track-card fade-up">
+      <div class="track-icon">🙏</div>
+      <div class="track-name">Spiritual Formation</div>
+      <p class="track-desc">Identity, calling, character, and sustaining the anointing through seasons of Kingdom work.</p>
+      <span class="track-tag">For Every Attendee</span>
+    </div>
+  </div>
+</section>
+
+<!-- SPEAKERS -->
+<section id="speakers">
+  <div class="sec-label">Speakers</div>
+  <h2 class="sec-title">Who's Speaking</h2>
+  <div class="speakers-placeholder fade-up">
+    <h3>Speaker Announcements Coming Soon</h3>
+    <p>Follow @kmtc on social media and check back here for speaker reveals and updates.</p>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+  <div class="sec-label">Schedule</div>
+  <h2 class="sec-title">Programme Schedule</h2>
+  <p class="sec-body">A full programme schedule will be published closer to the event. Register now to be first to receive updates.</p>
+  <div class="schedule-tba fade-up">
+    <p>Schedule to be announced · Register to receive programme updates</p>
+  </div>
+</section>
+
+<!-- REGISTER CTA -->
+<div class="reg-cta">
+  <h2>Join the Movement</h2>
+  <p>Secure your spot at KMTC 2026 and become part of a Kingdom community that will shape culture.</p>
+  <a href="kmtc-register.html">Register for KMTC 2026 →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">KMTC<span style="color:var(--tiger)">.</span></div>
+  <span class="footer-copy">© 2026 KINGDOM MEDIA & TECH CONFLUENCE · ALL RIGHTS RESERVED</span>
+  <a href="kmtc-brand.html" style="font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;">← Brand Site</a>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

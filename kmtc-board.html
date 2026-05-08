@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>Board & Leadership — KMTC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400;600;700&family=Nunito:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+<style>
+@font-face{font-family:'Avorya';src:url('avorya.woff2') format('woff2'),url('avorya.woff') format('woff');font-display:swap;}
+:root{
+  --tiger:#f7572b;--yellow:#ffc703;--green:#00b675;
+  --indigo:#780ae8;--violet:#e982eb;
+  --black:#111111;--white:#ffffff;--cream:#fdf8f0;
+  --pf:'Avorya','Josefin Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;overflow-x:hidden;background:var(--cream);}
+
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.96)}}
+@keyframes gradMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+.ao{opacity:1;transform:none;transition:opacity .65s ease,transform .65s ease;}
+.ao.hidden{opacity:0;transform:translateY(24px);}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+.d4{transition-delay:.4s}.d5{transition-delay:.5s}.d6{transition-delay:.6s}
+.d7{transition-delay:.7s}
+
+/* ═══ NAV ═══ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 2.5rem;
+  background:rgba(17,17,17,.97);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,199,3,.1);
+}
+.logo{font-family:var(--pf);font-size:1.5rem;letter-spacing:3px;text-transform:uppercase;color:var(--white);display:flex;align-items:center;text-decoration:none;}
+.logo .cross{color:var(--yellow);animation:pulse 2.5s infinite;}
+.nav-back{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;display:flex;align-items:center;gap:.5rem;transition:color .2s;}
+.nav-back:hover{color:var(--yellow);}
+.ncta{font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:.6rem 1.3rem;background:var(--tiger);color:var(--white);border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:all .22s;}
+.ncta:hover{background:var(--yellow);color:var(--black);}
+
+/* ═══ PAGE HERO ═══ */
+.page-hero{
+  background:var(--black);
+  padding:9rem 4rem 5rem;
+  position:relative;overflow:hidden;
+}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--tiger),var(--yellow),var(--green),var(--indigo),var(--violet));background-size:200%;animation:gradMove 4s linear infinite;}
+.ph-label{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:4px;text-transform:uppercase;color:var(--tiger);display:flex;align-items:center;gap:10px;margin-bottom:.9rem;animation:fadeSlideUp .7s .1s ease both;}
+.ph-label::before{content:'';width:26px;height:2px;background:var(--tiger);}
+.ph-title{font-family:var(--pf);font-size:clamp(2.8rem,7vw,7rem);line-height:.88;text-transform:uppercase;color:var(--white);margin-bottom:1.5rem;animation:fadeSlideUp .7s .25s ease both;}
+.ph-title span{color:var(--yellow);}
+.ph-sub{font-size:1rem;line-height:1.85;color:rgba(255,255,255,.55);max-width:580px;animation:fadeSlideUp .7s .4s ease both;}
+/* colour accents in hero */
+.ph-chips{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:2rem;animation:fadeSlideUp .7s .55s ease both;}
+.ph-chip{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:2px;text-transform:uppercase;padding:.32rem .8rem;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.45);}
+
+/* ═══ BOARD SECTION ═══ */
+.board-section{background:var(--cream);padding:5.5rem 4rem;}
+.bs-label{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:4px;text-transform:uppercase;color:var(--tiger);display:flex;align-items:center;gap:10px;margin-bottom:.8rem;}
+.bs-label::before{content:'';width:26px;height:2px;background:var(--tiger);}
+.bs-title{font-family:var(--pf);font-size:clamp(2rem,4.5vw,3.5rem);line-height:.95;text-transform:uppercase;color:var(--black);margin-bottom:.8rem;}
+.bs-sub{font-size:.95rem;color:#666;max-width:560px;line-height:1.8;margin-bottom:3rem;}
+
+/* Board grid */
+.board-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;}
+
+/* Individual member card */
+.member-card{
+  background:var(--white);
+  display:grid;grid-template-columns:auto 1fr;
+  gap:2rem;
+  padding:2.2rem;
+  transition:all .3s;
+  position:relative;
+  overflow:hidden;
+}
+.member-card::before{
+  content:'';
+  position:absolute;left:0;top:0;bottom:0;width:5px;
+}
+.member-card:nth-child(1)::before{background:var(--tiger);}
+.member-card:nth-child(2)::before{background:var(--indigo);}
+.member-card:nth-child(3)::before{background:var(--green);}
+.member-card:nth-child(4)::before{background:var(--yellow);}
+.member-card:nth-child(5)::before{background:var(--violet);}
+.member-card:nth-child(6)::before{background:var(--tiger);}
+.member-card:nth-child(7)::before{background:var(--indigo);}
+.member-card:nth-child(8)::before{background:var(--green);}
+.member-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.1);}
+
+/* Avatar */
+.member-ava{
+  width:90px;height:90px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--pf);font-size:1.8rem;color:var(--white);
+  flex-shrink:0;position:relative;overflow:hidden;
+  transition:transform .28s;
+}
+.member-card:hover .member-ava{transform:scale(1.06);}
+/* placeholder background shows initials — replace with <img> when photos available */
+.ava-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--pf);font-size:1.8rem;color:var(--white);}
+.member-card:nth-child(1) .member-ava{background:var(--tiger);}
+.member-card:nth-child(2) .member-ava{background:var(--indigo);}
+.member-card:nth-child(3) .member-ava{background:var(--green);}
+.member-card:nth-child(4) .member-ava{background:var(--black);}
+.member-card:nth-child(5) .member-ava{background:var(--violet);}
+.member-card:nth-child(6) .member-ava{background:var(--tiger);}
+.member-card:nth-child(7) .member-ava{background:var(--indigo);}
+.member-card:nth-child(8) .member-ava{background:var(--green);}
+
+/* Member info */
+.member-info{display:flex;flex-direction:column;gap:.4rem;}
+.member-office{
+  font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--tiger);margin-bottom:.1rem;
+}
+.member-card:nth-child(2) .member-office{color:var(--indigo);}
+.member-card:nth-child(3) .member-office{color:var(--green);}
+.member-card:nth-child(4) .member-office{color:var(--black);}
+.member-card:nth-child(5) .member-office{color:var(--violet);}
+.member-card:nth-child(6) .member-office{color:var(--tiger);}
+.member-card:nth-child(7) .member-office{color:var(--indigo);}
+.member-card:nth-child(8) .member-office{color:var(--green);}
+
+.member-name{
+  font-family:var(--pf);font-size:1.3rem;letter-spacing:1px;text-transform:uppercase;
+  color:var(--black);line-height:1.1;
+}
+.member-portfolio{
+  font-size:.82rem;color:#666;line-height:1.6;margin-top:.3rem;
+}
+.member-tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.6rem;}
+.mtag{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:1px;text-transform:uppercase;padding:.28rem .7rem;background:var(--cream);color:#555;border:1px solid rgba(0,0,0,.1);}
+
+/* Social links */
+.member-socials{display:flex;gap:.5rem;margin-top:.8rem;flex-wrap:wrap;}
+.soc-link{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:1px;text-transform:uppercase;
+  padding:.32rem .8rem;background:var(--black);color:rgba(255,255,255,.7);
+  text-decoration:none;transition:all .22s;
+  border:1px solid transparent;
+}
+.soc-link:hover{background:var(--tiger);color:var(--white);}
+.soc-link svg{width:13px;height:13px;stroke:currentColor;}
+.soc-link.li:hover{background:var(--indigo);}
+.soc-link.tw:hover{background:var(--indigo);}
+.soc-link.ig:hover{background:var(--tiger);}
+.soc-link.yt:hover{background:#ff0000;}
+.soc-link.web:hover{background:var(--green);}
+
+/* ═══ FULL WIDTH MEMBER (Founder) ═══ */
+.member-card.featured{
+  grid-column:1/-1;
+  background:var(--black);
+  display:grid;grid-template-columns:auto 1fr;
+  gap:2.5rem;
+}
+.member-card.featured .member-ava{width:110px;height:110px;font-size:2.2rem;background:var(--tiger);}
+.member-card.featured .member-office{color:var(--yellow);}
+.member-card.featured .member-name{color:var(--white);font-size:1.6rem;}
+.member-card.featured .member-portfolio{color:rgba(255,255,255,.65);}
+.member-card.featured .mtag{background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);border-color:rgba(255,255,255,.1);}
+.member-card.featured .soc-link{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.1);}
+.member-card.featured .soc-link:hover{background:var(--tiger);border-color:var(--tiger);}
+.member-card.featured::before{background:var(--yellow);}
+
+/* ═══ INVITE SECTION ═══ */
+.board-invite{background:var(--tiger);padding:5.5rem 4rem;}
+.bi-inner{display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:center;}
+.bi-label{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:10px;margin-bottom:.8rem;}
+.bi-label::before{content:'';width:26px;height:2px;background:var(--yellow);}
+.bi-title{font-family:var(--pf);font-size:clamp(1.8rem,4vw,3.2rem);text-transform:uppercase;color:var(--white);margin-bottom:1rem;line-height:1;}
+.bi-body{font-size:.95rem;color:rgba(255,255,255,.78);line-height:1.8;margin-bottom:1.8rem;}
+.btn-y{font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:.9rem 2rem;background:var(--yellow);color:var(--black);text-decoration:none;display:inline-block;transition:all .25s;}
+.btn-y:hover{background:var(--white);transform:translateY(-2px);}
+.bi-right{display:flex;flex-direction:column;gap:1rem;}
+.bi-stat{background:rgba(0,0,0,.18);padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1rem;}
+.bi-stat svg{min-width:20px;}
+.bi-stat-text h4{font-family:var(--pf);font-size:.88rem;letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:.2rem;}
+.bi-stat-text p{font-size:.8rem;color:rgba(255,255,255,.65);}
+
+/* ═══ FOOTER ═══ */
+footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);padding:2.5rem 4rem;}
+.fbot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.flogo{font-family:var(--pf);font-size:1.3rem;letter-spacing:4px;text-transform:uppercase;color:var(--white);}
+.flogo span{color:var(--tiger);}
+.fcopy{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);}
+.fbow{height:3px;width:70px;background:linear-gradient(90deg,var(--tiger),var(--yellow),var(--green),var(--indigo));}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:900px){
+  nav{padding:.85rem 1.2rem;}
+  .ncta{display:none;}
+  .page-hero{padding:7rem 1.5rem 4rem;}
+  .board-section{padding:4.5rem 1.5rem;}
+  .board-grid{grid-template-columns:1fr;}
+  .member-card.featured{grid-column:auto;}
+  .bi-inner{grid-template-columns:1fr;gap:2.5rem;}
+  .board-invite{padding:4.5rem 1.5rem;}
+  footer{padding:2rem 1.5rem;}
+}
+@media(max-width:540px){
+  .member-card{grid-template-columns:1fr;gap:1.2rem;}
+  .member-card.featured{grid-template-columns:1fr;}
+  .member-ava,.member-card.featured .member-ava{width:72px;height:72px;font-size:1.4rem;}
+  .member-name{font-size:1.1rem;}
+  .member-card.featured .member-name{font-size:1.3rem;}
+  .board-section{padding:3.5rem 1rem;}
+  .board-invite{padding:3.5rem 1rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a href="kmtc-brand.html" class="nav-back">
+    <i data-lucide="arrow-left" style="width:14px;height:14px;stroke:rgba(255,255,255,.45);"></i>
+    Back to KMTC
+  </a>
+  <a href="kmtc-brand.html" class="logo">KM<span class="cross">✝</span>C</a>
+  <a href="kmtc-program.html" class="ncta">View Program →</a>
+</nav>
+
+<!-- ═══ PAGE HERO ═══ -->
+<div class="page-hero">
+  <div class="ph-label">Leadership</div>
+  <h1 class="ph-title">Board &amp;<br><span>Leadership</span></h1>
+  <p class="ph-sub">Meet the eight Kingdom-minded professionals who lead and govern KMTC — each bringing unique expertise in media, technology, ministry, and Kingdom enterprise.</p>
+  <div class="ph-chips">
+    <span class="ph-chip">8 Board Members</span>
+    <span class="ph-chip">Kingdom Leadership</span>
+    <span class="ph-chip">Faith · Excellence · Impact</span>
+  </div>
+</div>
+
+<!-- ═══ BOARD SECTION ═══ -->
+<div class="board-section">
+  <div class="bs-label">The Board</div>
+  <h2 class="bs-title">Our Governing Board</h2>
+  <p class="bs-sub">KMTC is led by a diverse board of eight professionals. Update each member's name, bio, and social links when profiles are confirmed.</p>
+
+  <div class="board-grid">
+
+    <!-- MEMBER 1 — Founder (Featured) -->
+    <div class="member-card featured ao">
+      <div class="member-ava">
+        <div class="ava-placeholder">F</div>
+        <!-- To add photo: <img src="photo.jpg" alt="Name" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"/> -->
+      </div>
+      <div class="member-info">
+        <div class="member-office">Founder &amp; Executive Director</div>
+        <div class="member-name">Name Surname</div>
+        <p class="member-portfolio">Vision carrier and founder of KMTC. A seasoned media professional and Kingdom builder passionate about equipping the next generation of Spirit-led technologists and creatives. [Update with actual bio]</p>
+        <div class="member-tags">
+          <span class="mtag">Founder</span>
+          <span class="mtag">Media</span>
+          <span class="mtag">Kingdom Leadership</span>
+          <span class="mtag">Strategy</span>
+        </div>
+        <div class="member-socials">
+          <a href="#" class="soc-link ig" target="_blank">
+            <i data-lucide="instagram"></i> Instagram
+          </a>
+          <a href="#" class="soc-link tw" target="_blank">
+            <i data-lucide="twitter"></i> Twitter / X
+          </a>
+          <a href="#" class="soc-link li" target="_blank">
+            <i data-lucide="linkedin"></i> LinkedIn
+          </a>
+          <a href="#" class="soc-link web" target="_blank">
+            <i data-lucide="globe"></i> Website
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEMBER 2 -->
+    <div class="member-card ao d1">
+      <div class="member-ava"><div class="ava-placeholder">A</div></div>
+      <div class="member-info">
+        <div class="member-office">Deputy Director / Co-Founder</div>
+        <div class="member-name">Name Surname</div>
+        <p class="member-portfolio">Co-founder and deputy director responsible for programme strategy, partnerships, and KMTC's governance framework. [Update with actual bio]</p>
+        <div class="member-tags"><span class="mtag">Strategy</span><span class="mtag">Governance</span><span class="mtag">Partnerships</span></div>
+        <div class="member-socials">
+          <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
+          <a href="#" class="soc-link li" target="_blank"><i data-lucide="linkedin"></i> LinkedIn</a>
+          <a href="#" class="soc-link web" target="_blank"><i data-lucide="globe"></i> Website</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEMBER 3 -->
+    <div class="member-card ao d2">
+      <div class="member-ava"><div class="ava-placeholder">C</div></div>
+      <div class="member-info">
+        <div class="member-office">Creative Director</div>
+        <div class="member-name">Name Surname</div>
+        <p class="member-portfolio">Leads all creative, brand, and visual identity output at KMTC. Oversees design, motion, photography, and the storytelling layer of the KMTC ecosystem. [Update with actual bio]</p>
+        <div class="member-tags"><span class="mtag">Design</span><span class="mtag">Branding</span><span class="mtag">Creative</span></div>
+        <div class="member-socials">
+          <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
+          <a href="#" class="soc-link tw" target="_blank"><i data-lucide="twitter"></i> Twitter</a>
+          <a href="#" class="soc-link li" target="_blank"><i data-lucide="linkedin"></i> LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEMBER 4 -->
+    <div class="member-card ao d3">
+      <div class="member-ava"><div class="ava-placeholder">T</div></div>
+      <div class="member-info">
+        <div class="member-office">Director of Technology</div>
+        <div class="member-name">Name Surname</div>
+        <p class="member-portfolio">Oversees KMTC's digital infrastructure, tech strategy, and developer community. Bridges the gap between Kingdom vision and technical execution. [Update with actual bio]</p>
+        <div class="member-tags"><span class="mtag">Technology</span><span class="mtag">Dev</span><span class="mtag">Infrastructure</span></div>
+        <div class="member-socials">
+          <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
+          <a href="#" class="soc-link li" target="_blank"><i data-lucide="linkedin"></i> LinkedIn</a>
+          <a href="#" class="soc-link web" target="_blank"><i data-lucide="globe"></i> Website</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEMBER 5 -->
+    <div class="member-card ao d1">
+      <div class="member-ava"><div class="ava-placeholder">M</div></div>
+      <div class="member-info">
+        <div class="member-office">Director of Media &amp; Content</div>
+        <div class="member-name">Name Surname</div>
+        <p class="member-portfolio">Oversees all media production, broadcast, and content strategy at KMTC. Connects media professionals across the Kingdom ecosystem. [Update with actual bio]</p>
+        <div class="member-tags"><span class="mtag">Media</span><span class="mtag">Broadcast</span><span class="mtag">Content</span></div>
+        <div class="member-socials">
+          <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
+          <a href="#" class="soc-link yt" target="_blank"><i data-lucide="youtube"></i> YouTube</a>
+          <a href="#" class="soc-link li" target="_blank"><i data-lucide="linkedin"></i> LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEMBER 6 -->
+    <div class="member-card ao d2">
+      <div class="member-ava"><div class="ava-placeholder">P</div></div>
+      <div class="member-info">
+        <div class="member-office">Director of Partnerships &amp; Strategy</div>
+        <div class="member-name">Name Surname</div>
+        <p class="member-portfolio">Manages KMTC's relationships with churches, brands, sponsors, and institutional partners. Drives Kingdom-aligned strategic alliances. [Update with actual bio]</p>
+        <div class="member-tags"><span class="mtag">Partnerships</span><span class="mtag">Strategy</span><span class="mtag">Business</span></div>
+        <div class="member-socials">
+          <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
+          <a href="#" class="soc-link li" target="_blank"><i data-lucide="linkedin"></i> LinkedIn</a>
+          <a href="#" class="soc-link web" target="_blank"><i data-lucide="globe"></i> Website</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEMBER 7 -->
+    <div class="member-card ao d3">
+      <div class="member-ava"><div class="ava-placeholder">S</div></div>
+      <div class="member-info">
+        <div class="member-office">Director of Spiritual Formation</div>
+        <div class="member-name">Name Surname</div>
+        <p class="member-portfolio">Provides spiritual covering, pastoral leadership, and Kingdom alignment for all KMTC activities. Ensures that excellence and anointing remain inseparable. [Update with actual bio]</p>
+        <div class="member-tags"><span class="mtag">Ministry</span><span class="mtag">Pastoral</span><span class="mtag">Formation</span></div>
+        <div class="member-socials">
+          <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
+          <a href="#" class="soc-link tw" target="_blank"><i data-lucide="twitter"></i> Twitter</a>
+          <a href="#" class="soc-link web" target="_blank"><i data-lucide="globe"></i> Website</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEMBER 8 -->
+    <div class="member-card ao d4">
+      <div class="member-ava"><div class="ava-placeholder">O</div></div>
+      <div class="member-info">
+        <div class="member-office">Director of Operations &amp; Finance</div>
+        <div class="member-name">Name Surname</div>
+        <p class="member-portfolio">Manages KMTC's operational systems, event logistics, finances, and governance structures — ensuring every programme runs with Kingdom excellence. [Update with actual bio]</p>
+        <div class="member-tags"><span class="mtag">Operations</span><span class="mtag">Finance</span><span class="mtag">Logistics</span></div>
+        <div class="member-socials">
+          <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
+          <a href="#" class="soc-link li" target="_blank"><i data-lucide="linkedin"></i> LinkedIn</a>
+          <a href="#" class="soc-link web" target="_blank"><i data-lucide="globe"></i> Website</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /board-grid -->
+</div>
+
+<!-- ═══ INVITE SECTION ═══ -->
+<div class="board-invite">
+  <div class="bi-inner">
+    <div>
+      <div class="bi-label ao">Join the Team</div>
+      <h2 class="bi-title ao">Interested in Being Part of KMTC Leadership?</h2>
+      <p class="bi-body ao">KMTC is always looking for Kingdom-minded professionals who carry excellence, integrity, and a heart for God's purposes in media and technology.</p>
+      <a href="kmtc-program.html" class="btn-y ao">Explore KMTC 2026</a>
+    </div>
+    <div class="bi-right">
+      <div class="bi-stat ao">
+        <i data-lucide="award" style="width:20px;height:20px;stroke:#ffc703;min-width:20px;"></i>
+        <div class="bi-stat-text">
+          <h4>Kingdom-first Leadership</h4>
+          <p>Every board member is committed to Christ-centred excellence and Kingdom impact.</p>
+        </div>
+      </div>
+      <div class="bi-stat ao d1">
+        <i data-lucide="users" style="width:20px;height:20px;stroke:#ffc703;min-width:20px;"></i>
+        <div class="bi-stat-text">
+          <h4>Diverse Expertise</h4>
+          <p>Spanning media, technology, ministry, operations, strategy, and creative arts.</p>
+        </div>
+      </div>
+      <div class="bi-stat ao d2">
+        <i data-lucide="globe-2" style="width:20px;height:20px;stroke:#ffc703;min-width:20px;"></i>
+        <div class="bi-stat-text">
+          <h4>Kingdom Mandate</h4>
+          <p>United by the conviction that faith, creativity, and technology must intersect for God's glory.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="fbot">
+    <div class="flogo">KM<span>✝</span>C</div>
+    <span class="fcopy">© 2026 KINGDOM MEDIA & TECH CONFLUENCE · ALL RIGHTS RESERVED</span>
+    <div class="fbow"></div>
+  </div>
+</footer>
+
+<script>
+lucide.createIcons();
+
+const animItems = document.querySelectorAll('.ao');
+animItems.forEach(el => el.classList.add('hidden'));
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.remove('hidden'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+animItems.forEach(el => obs.observe(el));
+setTimeout(() => animItems.forEach(el => el.classList.remove('hidden')), 2500);
+</script>
+</body>
+</html>
