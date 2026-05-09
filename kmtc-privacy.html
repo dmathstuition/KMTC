@@ -67,13 +67,66 @@ nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,.5);}
 /* LAYOUT */
 .doc-layout{display:grid;grid-template-columns:260px 1fr;gap:0;min-height:60vh;}
 
-/* SIDEBAR */
-.doc-sidebar{background:#0e0e0e;border-right:1px solid rgba(255,255,255,.06);padding:3rem 1.8rem;position:sticky;top:64px;align-self:start;height:calc(100vh - 64px);overflow-y:auto;}
+/* SIDEBAR — desktop */
+.doc-sidebar{
+  background:#0e0e0e;
+  border-right:1px solid rgba(255,255,255,.06);
+  padding:3rem 1.8rem;
+  position:sticky;top:64px;
+  align-self:start;
+  height:calc(100vh - 64px);
+  overflow-y:auto;
+  z-index:10; /* prevent content bleed-through */
+}
 .sidebar-label{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid rgba(255,255,255,.06);}
 .sidebar-nav{display:flex;flex-direction:column;gap:.2rem;}
 .sidebar-nav a{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.38);text-decoration:none;padding:.6rem .8rem;border-left:2px solid transparent;transition:all .2s;line-height:1.4;}
-.sidebar-nav a:hover{color:var(--indigo);border-color:var(--indigo);background:rgba(120,10,232,.04);}
-.sidebar-nav a.active{color:var(--indigo);border-color:var(--indigo);background:rgba(120,10,232,.06);}
+.sidebar-nav a:hover{color:var(--indigo);border-color:var(--indigo);background:rgba(120,10,232,.08);}
+.sidebar-nav a.active{color:var(--indigo);border-color:var(--indigo);background:rgba(120,10,232,.12);}
+
+/* MOBILE CONTENTS DROPDOWN */
+.mob-toc{display:none;position:relative;z-index:50;margin:0;}
+.mob-toc-btn{
+  width:100%;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 1.4rem;
+  background:#1a1a1a;
+  border:none;border-bottom:2px solid var(--indigo);
+  font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.7);cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:background .2s;
+}
+.mob-toc-btn:hover,.mob-toc-btn:active{background:#222;}
+.mob-toc-btn svg{width:16px;height:16px;stroke:var(--indigo);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .28s;flex-shrink:0;}
+.mob-toc-btn.open svg{transform:rotate(180deg);}
+.mob-toc-panel{
+  position:absolute;left:0;right:0;top:100%;
+  /* SOLID background — no transparency */
+  background:#1a1a1a;
+  border-bottom:2px solid var(--indigo);
+  box-shadow:0 12px 40px rgba(0,0,0,.9);
+  z-index:999;
+  display:none;
+  flex-direction:column;
+  max-height:70vh;
+  overflow-y:auto;
+}
+.mob-toc-panel.open{display:flex;}
+.mob-toc-panel a{
+  font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:1px;text-transform:uppercase;
+  color:rgba(255,255,255,.6);text-decoration:none;
+  padding:1rem 1.4rem;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:space-between;
+  background:#1a1a1a; /* fully solid */
+  transition:background .15s,color .15s;
+  min-height:48px;
+}
+.mob-toc-panel a:last-child{border-bottom:none;}
+.mob-toc-panel a:hover,.mob-toc-panel a:active{background:#252525;color:var(--indigo);}
+.mob-toc-panel a.active{background:#1e1533;color:var(--indigo);border-left:3px solid var(--indigo);}
+.mob-toc-panel a .arr{color:rgba(255,255,255,.25);font-size:.7rem;}
 
 /* CONTENT */
 .doc-content{padding:4rem 5rem 6rem 4rem;max-width:860px;}
@@ -131,11 +184,14 @@ footer{background:#0a0a0a;border-top:1px solid rgba(255,255,255,.06);padding:2.5
   nav{padding:0 1.2rem;}
   .page-hero{padding:7rem 1.2rem 3.5rem;}
   .commit-banner{padding:1.2rem 1.2rem;}
+  /* Switch to mobile dropdown layout */
   .doc-layout{grid-template-columns:1fr;}
-  .doc-sidebar{display:none;}
-  .doc-content{padding:3rem 1.2rem 5rem;}
+  .doc-sidebar{display:none;}          /* hide sticky sidebar on mobile */
+  .mob-toc{display:block;}             /* show mobile dropdown instead */
+  .doc-content{padding:2.5rem 1.2rem 5rem;}
   .rights-grid{grid-template-columns:1fr;}
   footer{padding:2rem 1.2rem;}
+  .data-table{display:block;overflow-x:auto;}/* scroll table on mobile */
 }
 </style>
 </head>
@@ -174,6 +230,27 @@ footer{background:#0a0a0a;border-top:1px solid rgba(255,255,255,.06);padding:2.5
 <div class="commit-banner">
   <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
   <p><strong>Our commitment to you:</strong> KMTC will never sell, rent, or trade your personal data to third parties. Your information is used only to facilitate your participation in KMTC events and to keep you informed about our community.</p>
+</div>
+
+<!-- ── MOBILE TABLE OF CONTENTS DROPDOWN ── -->
+<div class="mob-toc" id="mobToc">
+  <button class="mob-toc-btn" id="tocBtn" aria-expanded="false" aria-controls="tocPanel">
+    <span>Contents — Privacy Policy</span>
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <nav class="mob-toc-panel" id="tocPanel" role="navigation" aria-label="Page sections">
+    <a href="#who-we-are"    onclick="closeToc()">1. Who We Are <span class="arr">›</span></a>
+    <a href="#data-collected" onclick="closeToc()">2. Data We Collect <span class="arr">›</span></a>
+    <a href="#how-we-use"    onclick="closeToc()">3. How We Use It <span class="arr">›</span></a>
+    <a href="#data-sharing"  onclick="closeToc()">4. Data Sharing <span class="arr">›</span></a>
+    <a href="#data-storage"  onclick="closeToc()">5. Storage &amp; Security <span class="arr">›</span></a>
+    <a href="#cookies"       onclick="closeToc()">6. Cookies <span class="arr">›</span></a>
+    <a href="#your-rights"   onclick="closeToc()">7. Your Rights <span class="arr">›</span></a>
+    <a href="#children"      onclick="closeToc()">8. Children <span class="arr">›</span></a>
+    <a href="#third-party"   onclick="closeToc()">9. Third-Party Links <span class="arr">›</span></a>
+    <a href="#changes"       onclick="closeToc()">10. Policy Changes <span class="arr">›</span></a>
+    <a href="#contact-pp"    onclick="closeToc()">11. Contact Us <span class="arr">›</span></a>
+  </nav>
 </div>
 
 <div class="doc-layout">
@@ -403,21 +480,52 @@ footer{background:#0a0a0a;border-top:1px solid rgba(255,255,255,.06);padding:2.5
 </footer>
 
 <script>
+// ── NAV scroll shadow ──
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
 }, { passive: true });
 
-const clauses = document.querySelectorAll('.clause');
-const sideLinks = document.querySelectorAll('.sidebar-nav a');
+// ── MOBILE TABLE OF CONTENTS DROPDOWN ──
+const tocBtn   = document.getElementById('tocBtn');
+const tocPanel = document.getElementById('tocPanel');
+let tocOpen = false;
+
+function openToc() {
+  tocOpen = true;
+  tocBtn.classList.add('open');
+  tocPanel.classList.add('open');
+  tocBtn.setAttribute('aria-expanded', 'true');
+}
+function closeToc() {
+  tocOpen = false;
+  tocBtn.classList.remove('open');
+  tocPanel.classList.remove('open');
+  tocBtn.setAttribute('aria-expanded', 'false');
+}
+
+if (tocBtn) {
+  tocBtn.addEventListener('click', () => tocOpen ? closeToc() : openToc());
+}
+// Close on outside tap
+document.addEventListener('click', (e) => {
+  if (tocOpen && !document.getElementById('mobToc').contains(e.target)) closeToc();
+});
+
+// ── SCROLL SPY — highlight active section in both sidebars ──
+const clauses   = document.querySelectorAll('.clause');
+const sideLinks = document.querySelectorAll('.sidebar-nav a, .mob-toc-panel a');
+
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       sideLinks.forEach(a => a.classList.remove('active'));
-      const active = document.querySelector(`.sidebar-nav a[href="#${e.target.id}"]`);
-      if (active) active.classList.add('active');
+      // Highlight matching link in both desktop sidebar and mobile panel
+      document.querySelectorAll(`.sidebar-nav a[href="#${e.target.id}"], .mob-toc-panel a[href="#${e.target.id}"]`)
+        .forEach(a => a.classList.add('active'));
     }
   });
 }, { threshold: 0.35, rootMargin: '-80px 0px -40% 0px' });
+
 clauses.forEach(c => obs.observe(c));
 </script>
 </body>
