@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Terms & Conditions — KMTC 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400;600;700&family=Space+Mono:wght@400;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+@font-face{font-family:'Avorya';src:url('avorya.woff2') format('woff2'),url('avorya.woff') format('woff');font-display:swap;}
+:root{
+  --tiger:#f7572b;--yellow:#ffc703;--green:#00b675;
+  --indigo:#780ae8;--violet:#e982eb;
+  --black:#111111;--white:#ffffff;--cream:#fdf8f0;
+  --pf:'Avorya','Josefin Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;overflow-x:hidden;background:var(--black);color:var(--white);}
+
+@keyframes gradMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;height:64px;
+  background:rgba(17,17,17,.98);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,199,3,.1);
+  transition:box-shadow .3s;
+}
+nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,.5);}
+.nav-back{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;}
+.nav-back:hover{color:var(--yellow);}
+.logo{display:flex;align-items:center;text-decoration:none;}
+.nav-cta{font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:.6rem 1.3rem;background:var(--tiger);color:var(--white);text-decoration:none;display:inline-block;transition:all .22s;}
+.nav-cta:hover{background:var(--yellow);color:var(--black);}
+
+/* PAGE HERO */
+.page-hero{
+  background:var(--black);
+  padding:9rem 4rem 5rem;
+  position:relative;overflow:hidden;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--tiger),var(--yellow),var(--green),var(--indigo),var(--violet));background-size:200%;animation:gradMove 4s linear infinite;}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(120,10,232,.1) 0%,transparent 55%),radial-gradient(ellipse at 15% 80%,rgba(247,87,43,.08) 0%,transparent 55%);pointer-events:none;}
+.ph-label{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:4px;text-transform:uppercase;color:var(--tiger);display:flex;align-items:center;gap:10px;margin-bottom:.9rem;position:relative;z-index:2;animation:fadeSlideUp .7s .1s ease both;}
+.ph-label::before{content:'';width:26px;height:2px;background:var(--tiger);}
+.ph-title{font-family:var(--pf);font-size:clamp(2.5rem,6vw,6rem);line-height:.9;text-transform:uppercase;position:relative;z-index:2;margin-bottom:1.5rem;animation:fadeSlideUp .7s .25s ease both;}
+.ph-title .t1{color:var(--white);display:block;}
+.ph-title .t2{color:var(--yellow);display:block;}
+.ph-meta{display:flex;gap:2rem;flex-wrap:wrap;position:relative;z-index:2;animation:fadeSlideUp .7s .4s ease both;}
+.ph-meta-item{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:.5rem;}
+.ph-meta-item svg{width:12px;height:12px;stroke:rgba(255,255,255,.35);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+/* LAYOUT */
+.doc-layout{display:grid;grid-template-columns:260px 1fr;gap:0;min-height:60vh;}
+
+/* SIDEBAR */
+.doc-sidebar{
+  background:#0e0e0e;border-right:1px solid rgba(255,255,255,.06);
+  padding:3rem 1.8rem;position:sticky;top:64px;align-self:start;
+  height:calc(100vh - 64px);overflow-y:auto;
+}
+.sidebar-label{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid rgba(255,255,255,.06);}
+.sidebar-nav{display:flex;flex-direction:column;gap:.2rem;}
+.sidebar-nav a{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.38);text-decoration:none;padding:.6rem .8rem;border-left:2px solid transparent;transition:all .2s;line-height:1.4;}
+.sidebar-nav a:hover{color:var(--yellow);border-color:var(--yellow);background:rgba(255,199,3,.04);}
+.sidebar-nav a.active{color:var(--tiger);border-color:var(--tiger);background:rgba(247,87,43,.04);}
+
+/* CONTENT */
+.doc-content{padding:4rem 5rem 6rem 4rem;max-width:860px;}
+.doc-intro{font-size:1rem;line-height:1.85;color:rgba(255,255,255,.55);margin-bottom:3.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.06);}
+
+/* Each clause block */
+.clause{margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.05);scroll-margin-top:90px;}
+.clause:last-child{border-bottom:none;margin-bottom:0;}
+.clause-num{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:3px;text-transform:uppercase;color:var(--tiger);margin-bottom:.5rem;display:flex;align-items:center;gap:8px;}
+.clause-num::before{content:'';width:20px;height:1.5px;background:var(--tiger);}
+.clause-title{font-family:var(--pf);font-size:clamp(1.3rem,2.5vw,1.9rem);letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:1.2rem;line-height:1.1;}
+.clause-body{font-size:.95rem;line-height:1.9;color:rgba(255,255,255,.62);}
+.clause-body+.clause-body{margin-top:1rem;}
+.clause-body strong{color:var(--white);font-weight:700;}
+.clause-body a{color:var(--yellow);text-decoration:none;}
+.clause-body a:hover{text-decoration:underline;}
+
+/* List inside clause */
+.clause-list{list-style:none;margin-top:1rem;display:flex;flex-direction:column;gap:.6rem;}
+.clause-list li{display:flex;align-items:flex-start;gap:.75rem;font-size:.92rem;line-height:1.7;color:rgba(255,255,255,.58);}
+.clause-list li::before{content:'→';color:var(--tiger);font-weight:700;flex-shrink:0;margin-top:.05rem;}
+
+/* Highlight box */
+.clause-highlight{background:rgba(255,199,3,.06);border:1px solid rgba(255,199,3,.18);border-left:4px solid var(--yellow);padding:1.2rem 1.5rem;margin:1.2rem 0;}
+.clause-highlight p{font-size:.9rem;line-height:1.75;color:rgba(255,255,255,.7);}
+.clause-highlight strong{color:var(--yellow);}
+
+/* Contact block */
+.contact-block{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);padding:2rem;margin-top:1.5rem;}
+.contact-row{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem;}
+.contact-row:last-child{margin-bottom:0;}
+.contact-row svg{width:16px;height:16px;fill:none;stroke:var(--tiger);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;min-width:16px;}
+.contact-row a,.contact-row span{font-size:.88rem;color:rgba(255,255,255,.65);}
+.contact-row a{color:var(--yellow);text-decoration:none;}
+.contact-row a:hover{text-decoration:underline;}
+
+/* FOOTER */
+footer{background:#0a0a0a;border-top:1px solid rgba(255,255,255,.06);padding:2.5rem 4rem;}
+.ft-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.fcopy{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);}
+.fback{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;}
+.fback:hover{color:var(--yellow);}
+.fbow{height:3px;width:100%;background:linear-gradient(90deg,var(--tiger),var(--yellow),var(--green),var(--indigo));margin-top:1.5rem;}
+
+@media(max-width:860px){
+  nav{padding:0 1.2rem;}
+  .page-hero{padding:7rem 1.2rem 3.5rem;}
+  .doc-layout{grid-template-columns:1fr;}
+  .doc-sidebar{display:none;}
+  .doc-content{padding:3rem 1.2rem 5rem;}
+  footer{padding:2rem 1.2rem;}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="kmtc-brand.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to KMTC
+  </a>
+  <a href="kmtc-brand.html" class="logo">
+    <img src="logo.png" alt="KMTC" style="height:40px;width:auto;display:block;"/>
+  </a>
+  <a href="kmtc-register.html" class="nav-cta">Register Now</a>
+</nav>
+
+<div class="page-hero">
+  <div class="ph-label">Legal</div>
+  <h1 class="ph-title">
+    <span class="t1">Terms &amp;</span>
+    <span class="t2">Conditions</span>
+  </h1>
+  <div class="ph-meta">
+    <span class="ph-meta-item">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Last Updated: January 2026
+    </span>
+    <span class="ph-meta-item">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Nigeria · Kingdom Media &amp; Tech Confluence
+    </span>
+  </div>
+</div>
+
+<div class="doc-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="doc-sidebar">
+    <div class="sidebar-label">Contents</div>
+    <nav class="sidebar-nav" id="sideNav">
+      <a href="#acceptance" class="active">1. Acceptance</a>
+      <a href="#event">2. Event Details</a>
+      <a href="#registration">3. Registration</a>
+      <a href="#conduct">4. Code of Conduct</a>
+      <a href="#content">5. Content &amp; Media</a>
+      <a href="#liability">6. Liability</a>
+      <a href="#cancellation">7. Cancellation</a>
+      <a href="#ip">8. Intellectual Property</a>
+      <a href="#privacy-ref">9. Privacy</a>
+      <a href="#governing">10. Governing Law</a>
+      <a href="#contact-tc">11. Contact Us</a>
+    </nav>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="doc-content">
+
+    <p class="doc-intro">
+      These Terms and Conditions govern your participation in and access to Kingdom Media & Tech Confluence (KMTC) 2026 and all associated events, platforms, and communications. By registering for or attending KMTC, you agree to be bound by these terms. Please read them carefully.
+    </p>
+
+    <div class="clause" id="acceptance">
+      <div class="clause-num">Clause 01</div>
+      <h2 class="clause-title">Acceptance of Terms</h2>
+      <p class="clause-body">By completing the KMTC registration process, attending the event, accessing our website, or participating in any KMTC programme or community, you confirm that you have read, understood, and agree to these Terms and Conditions in full.</p>
+      <p class="clause-body">If you do not agree to these terms, you must not register for or attend KMTC 2026. KMTC reserves the right to update these terms at any time. Continued participation after updates constitutes acceptance of the revised terms.</p>
+    </div>
+
+    <div class="clause" id="event">
+      <div class="clause-num">Clause 02</div>
+      <h2 class="clause-title">Event Details</h2>
+      <p class="clause-body">Kingdom Media & Tech Confluence (KMTC) 2026 is an annual faith-driven gathering bringing together media professionals, technologists, creatives, innovators, and Kingdom builders. KMTC is produced and managed by the KMTC Organisation.</p>
+      <div class="clause-highlight">
+        <p><strong>KMTC 2026 is 100% free to attend.</strong> There is no registration fee or ticket cost. Attendance is subject to availability and confirmation of your registration.</p>
+      </div>
+      <p class="clause-body">Event details including dates, venue, schedule, speakers, and format are subject to change. KMTC will communicate updates to registered attendees via email and official social media channels. KMTC reserves the right to modify, postpone, or cancel the event at its discretion.</p>
+    </div>
+
+    <div class="clause" id="registration">
+      <div class="clause-num">Clause 03</div>
+      <h2 class="clause-title">Registration</h2>
+      <p class="clause-body">Registration is open to all individuals who align with KMTC's mission and values. By registering, you confirm that the information provided is accurate and complete. Providing false information may result in cancellation of your registration without notice.</p>
+      <ul class="clause-list">
+        <li>Each registration is personal and non-transferable without prior written approval from KMTC.</li>
+        <li>KMTC reserves the right to decline or revoke any registration at its discretion.</li>
+        <li>Registration confirmation will be sent to the email address provided. Please check your spam folder if you do not receive it.</li>
+        <li>Your registration code is unique to you and must be presented at check-in for entry to the event.</li>
+        <li>KMTC may use your registration data to send event-related communications. See our <a href="kmtc-privacy.html">Privacy Policy</a> for full details.</li>
+      </ul>
+    </div>
+
+    <div class="clause" id="conduct">
+      <div class="clause-num">Clause 04</div>
+      <h2 class="clause-title">Code of Conduct</h2>
+      <p class="clause-body">KMTC is a Kingdom-aligned community committed to excellence, honour, and respect. All attendees, speakers, volunteers, and partners are expected to conduct themselves in a manner consistent with these values at all times during KMTC events and activities.</p>
+      <ul class="clause-list">
+        <li>Treat all participants, staff, and volunteers with dignity and respect.</li>
+        <li>Refrain from any form of harassment, discrimination, or abusive behaviour — verbal, physical, or digital.</li>
+        <li>Do not engage in activities that disrupt sessions, workshops, or the general atmosphere of the event.</li>
+        <li>Respect the venue, its property, and any equipment provided.</li>
+        <li>Align your conduct with the Christian values and Kingdom culture that KMTC represents.</li>
+      </ul>
+      <p class="clause-body" style="margin-top:1rem;">KMTC reserves the right to remove any individual whose behaviour violates this code of conduct, without refund or compensation, and to take further action as appropriate.</p>
+    </div>
+
+    <div class="clause" id="content">
+      <div class="clause-num">Clause 05</div>
+      <h2 class="clause-title">Content &amp; Media</h2>
+      <p class="clause-body">KMTC 2026 may be photographed, filmed, live-streamed, and recorded. By attending, you grant KMTC and its authorised partners a perpetual, royalty-free licence to use your image, voice, and likeness in event documentation, promotional materials, social media, broadcast content, and any future communications without additional consent or compensation.</p>
+      <ul class="clause-list">
+        <li>If you do not wish to be photographed or filmed, please notify the KMTC team at the event.</li>
+        <li>You may not record or broadcast sessions without prior written permission from KMTC.</li>
+        <li>Any content shared at KMTC — by speakers, facilitators, or participants — is the intellectual property of its respective creator. Do not reproduce or distribute without permission.</li>
+      </ul>
+    </div>
+
+    <div class="clause" id="liability">
+      <div class="clause-num">Clause 06</div>
+      <h2 class="clause-title">Limitation of Liability</h2>
+      <p class="clause-body">KMTC is not liable for any loss, damage, injury, or cost incurred by attendees in connection with the event, including but not limited to: travel delays, accommodation issues, loss of personal property, medical incidents, or any changes to the event programme.</p>
+      <div class="clause-highlight">
+        <p>Attendees participate in KMTC 2026 <strong>at their own risk.</strong> KMTC strongly recommends that attendees arrange their own travel insurance and take appropriate personal precautions.</p>
+      </div>
+      <p class="clause-body">KMTC's total liability to any attendee, for any reason, shall not exceed the amount paid by that attendee to attend the event (which in the case of KMTC 2026 is zero, as the event is free).</p>
+    </div>
+
+    <div class="clause" id="cancellation">
+      <div class="clause-num">Clause 07</div>
+      <h2 class="clause-title">Cancellation &amp; Changes</h2>
+      <p class="clause-body">As KMTC 2026 is a free event, no refunds are applicable. If you are unable to attend, please cancel your registration by notifying us at <a href="mailto:hello@kmtc.com">hello@kmtc.com</a> so your spot may be made available to others.</p>
+      <ul class="clause-list">
+        <li>KMTC reserves the right to cancel, postpone, or modify the event at any time due to circumstances beyond its control, including but not limited to force majeure, governmental directives, or safety concerns.</li>
+        <li>In the event of cancellation or postponement, KMTC will notify registered attendees via email as soon as reasonably practicable.</li>
+        <li>KMTC shall not be liable for any costs incurred by attendees as a result of event cancellation or postponement.</li>
+      </ul>
+    </div>
+
+    <div class="clause" id="ip">
+      <div class="clause-num">Clause 08</div>
+      <h2 class="clause-title">Intellectual Property</h2>
+      <p class="clause-body">All KMTC branding, content, materials, presentations, and intellectual property remain the sole property of Kingdom Media & Tech Confluence and its respective contributors. Unauthorised reproduction, distribution, or commercial use of any KMTC materials is strictly prohibited.</p>
+      <ul class="clause-list">
+        <li>The KMTC name, logo, brand marks, and associated designs are protected trademarks.</li>
+        <li>Speaker presentations, workshop materials, and proprietary content shared at KMTC remain the intellectual property of their respective authors.</li>
+        <li>You may share general insights and learnings from KMTC sessions, but must not reproduce or distribute proprietary materials without permission.</li>
+      </ul>
+    </div>
+
+    <div class="clause" id="privacy-ref">
+      <div class="clause-num">Clause 09</div>
+      <h2 class="clause-title">Privacy</h2>
+      <p class="clause-body">Your privacy matters to us. KMTC collects and processes personal data in connection with event registration and participation. All data is handled in accordance with our Privacy Policy, which forms part of these Terms and Conditions.</p>
+      <p class="clause-body">By registering, you consent to the collection and use of your personal data as described in our <a href="kmtc-privacy.html">Privacy Policy</a>. We will never sell your data to third parties.</p>
+    </div>
+
+    <div class="clause" id="governing">
+      <div class="clause-num">Clause 10</div>
+      <h2 class="clause-title">Governing Law</h2>
+      <p class="clause-body">These Terms and Conditions are governed by and construed in accordance with the laws of the Federal Republic of Nigeria. Any disputes arising from these terms or your participation in KMTC shall be subject to the exclusive jurisdiction of the courts of Nigeria.</p>
+      <p class="clause-body">If any provision of these terms is found to be unenforceable, the remaining provisions shall continue in full force and effect.</p>
+    </div>
+
+    <div class="clause" id="contact-tc">
+      <div class="clause-num">Clause 11</div>
+      <h2 class="clause-title">Contact Us</h2>
+      <p class="clause-body">If you have any questions, concerns, or feedback regarding these Terms and Conditions, please reach out to us through any of the following channels:</p>
+      <div class="contact-block">
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:hello@kmtc.com">hello@kmtc.com</a>
+        </div>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.36a2 2 0 0 1 2-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.29 6.29l1.14-1.14a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:+2348035284541">+234 803 528 4541</a>
+        </div>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <a href="kmtc-brand.html">kmtc.com</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <div class="ft-inner">
+    <img src="logo.png" alt="KMTC" style="height:40px;width:auto;display:block;"/>
+    <span class="fcopy">© 2026 KINGDOM MEDIA & TECH CONFLUENCE · ALL RIGHTS RESERVED</span>
+    <div style="display:flex;gap:1.2rem;">
+      <a href="kmtc-privacy.html" class="fback">Privacy Policy</a>
+      <a href="kmtc-brand.html" class="fback">← Brand Site</a>
+    </div>
+  </div>
+  <div class="fbow"></div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+// Highlight active sidebar link on scroll
+const clauses = document.querySelectorAll('.clause');
+const sideLinks = document.querySelectorAll('.sidebar-nav a');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      sideLinks.forEach(a => a.classList.remove('active'));
+      const active = document.querySelector(`.sidebar-nav a[href="#${e.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { threshold: 0.4, rootMargin: '-80px 0px -40% 0px' });
+clauses.forEach(c => obs.observe(c));
+</script>
+</body>
+</html>
