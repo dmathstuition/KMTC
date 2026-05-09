@@ -318,15 +318,61 @@ section{padding:6rem 4rem;}
 }
 .cta-free-badge svg{width:16px;height:16px;stroke:var(--green);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
 
+/* ═══ § SPONSOR SECTION (Black) ═══ */
+.sponsor-section{background:var(--black);position:relative;overflow:hidden;padding:7rem 4rem;}
+.sponsor-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(120,10,232,.08) 0%,transparent 55%),radial-gradient(ellipse at 80% 30%,rgba(255,199,3,.06) 0%,transparent 55%);pointer-events:none;}
+.sponsor-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr 1fr;gap:5rem;align-items:center;}
+.sponsor-left .slbl{color:rgba(255,255,255,.5);}
+.sponsor-left .slbl::before{background:var(--yellow);}
+.sponsor-left .sh{color:var(--white);}
+.sponsor-left p{font-size:1rem;line-height:1.85;color:rgba(255,255,255,.55);max-width:480px;margin-bottom:2rem;}
+.sponsor-btn{
+  font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:.9rem 2.2rem;background:var(--yellow);color:var(--black);
+  text-decoration:none;display:inline-block;transition:all .25s;
+}
+.sponsor-btn:hover{background:var(--white);transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,199,3,.25);}
+.sponsor-right{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.spon-tier{
+  background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.07);
+  padding:1.5rem 1.4rem;position:relative;overflow:hidden;transition:all .28s;
+}
+.spon-tier::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;}
+.spon-tier:nth-child(1)::before{background:var(--yellow);}
+.spon-tier:nth-child(2)::before{background:var(--indigo);}
+.spon-tier:nth-child(3)::before{background:rgba(255,255,255,.25);}
+.spon-tier:nth-child(4)::before{background:var(--green);}
+.spon-tier:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);transform:translateY(-3px);}
+.spon-tier-badge{
+  font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:2px;text-transform:uppercase;
+  padding:.22rem .6rem;display:inline-block;margin-bottom:.7rem;
+}
+.spon-tier:nth-child(1) .spon-tier-badge{background:rgba(255,199,3,.15);color:var(--yellow);}
+.spon-tier:nth-child(2) .spon-tier-badge{background:rgba(120,10,232,.2);color:var(--violet);}
+.spon-tier:nth-child(3) .spon-tier-badge{background:rgba(255,255,255,.08);color:rgba(255,255,255,.5);}
+.spon-tier:nth-child(4) .spon-tier-badge{background:rgba(0,182,117,.15);color:var(--green);}
+.spon-tier-name{font-family:var(--pf);font-size:.88rem;letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:.4rem;}
+.spon-tier-desc{font-size:.75rem;color:rgba(255,255,255,.4);line-height:1.55;}
+
 /* ═══ FOOTER ═══ */
 footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);padding:3rem 4rem;}
 .ft-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;}
-.flogo{font-family:var(--pf);font-size:1.3rem;letter-spacing:4px;text-transform:uppercase;color:var(--white);}
-.flogo span{color:var(--tiger);}
 .fcopy{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);}
 .fback{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s;}
 .fback:hover{color:var(--yellow);}
 .fbow{height:3px;width:100%;background:linear-gradient(90deg,var(--tiger),var(--yellow),var(--green),var(--indigo));margin-top:2rem;}
+/* Legal links row */
+.ft-legal{
+  display:flex;align-items:center;justify-content:center;gap:2rem;
+  padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.05);
+  margin-top:1.5rem;flex-wrap:wrap;
+}
+.ft-legal a{
+  font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.2);text-decoration:none;transition:color .2s;
+}
+.ft-legal a:hover{color:rgba(255,255,255,.5);}
+.ft-legal span{color:rgba(255,255,255,.08);font-size:.5rem;}
 
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:1024px){
@@ -345,7 +391,10 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   .cta-inner{grid-template-columns:1fr;gap:2.5rem;}
   .hero-facts{flex-wrap:wrap;gap:.5rem;}
   .hf-item{border-right:none;padding-right:1.5rem;margin-right:0;}
+  .sponsor-section{padding:4.5rem 1.2rem;}
+  .sponsor-inner{grid-template-columns:1fr;gap:2.5rem;}
   footer{padding:2.5rem 1.2rem;}
+  .ft-legal{gap:1.2rem;}
 }
 @media(max-width:560px){
   .tracks-grid{grid-template-columns:1fr;}
@@ -364,7 +413,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
     Home
   </a>
-  <a href="index.html" class="logo">
+  <a href="kmtc-brand.html" class="logo">
     <img src="logo.png" alt="KMTC" style="height: 40px; width: auto; display: block;" />
   </a>
   <a href="kmtc-register.html" class="nav-cta">Register Now</a>
@@ -699,7 +748,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
     </div>
     <div class="cta-right ao d1">
       <a href="kmtc-register.html">Register for KMTC 2026 →</a>
-      <a href="index.html" class="outline">Learn About KMTC</a>
+      <a href="kmtc-brand.html" class="outline">Learn About KMTC</a>
       <div class="cta-free-badge">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
         100% Free — No payment required
@@ -708,14 +757,59 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   </div>
 </div>
 
+<!-- ═══ § BECOME A SPONSOR ═══ -->
+<div class="sponsor-section">
+  <div class="sponsor-inner">
+    <div class="sponsor-left">
+      <div class="slbl ao">Partnership</div>
+      <h2 class="sh ao">Become a<br>Sponsor</h2>
+      <p class="ao">Partner with KMTC 2026 and position your brand alongside a curated community of Kingdom-minded creators, technologists, and innovators. Meaningful exposure. Lasting Kingdom impact.</p>
+      <a href="kmtc-sponsor.html" class="sponsor-btn ao">View Sponsorship Packages →</a>
+    </div>
+    <div class="sponsor-right ao">
+      <div class="spon-tier">
+        <div class="spon-tier-badge">★ Exclusive</div>
+        <div class="spon-tier-name">Title Sponsor</div>
+        <div class="spon-tier-desc">Naming rights &amp; maximum visibility across all KMTC 2026 assets.</div>
+      </div>
+      <div class="spon-tier">
+        <div class="spon-tier-badge">1 Slot</div>
+        <div class="spon-tier-name">Gold Sponsor</div>
+        <div class="spon-tier-desc">High-visibility placement, panel participation &amp; exhibition booth.</div>
+      </div>
+      <div class="spon-tier">
+        <div class="spon-tier-badge">Open</div>
+        <div class="spon-tier-name">Silver Sponsor</div>
+        <div class="spon-tier-desc">Logo placement, digital visibility &amp; post-event content inclusion.</div>
+      </div>
+      <div class="spon-tier">
+        <div class="spon-tier-badge">Partner</div>
+        <div class="spon-tier-name">Media Partner</div>
+        <div class="spon-tier-desc">Co-branded content, media credits &amp; long-term collaboration.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ FOOTER ═══ -->
 <footer>
- <div class="ft-inner">
-  <img src="logo.png" alt="KMTC" style="height:42px;width:auto;display:block;"/>
-  <span class="fcopy">© 2026 KINGDOM MEDIA & TECH CONFLUENCE · ALL RIGHTS RESERVED</span>
+  <div class="ft-inner">
+    <img src="logo.png" alt="KMTC" style="height:42px;width:auto;display:block;"/>
+    <span class="fcopy">© 2026 KINGDOM MEDIA & TECH CONFLUENCE · ALL RIGHTS RESERVED</span>
     <a href="index.html" class="fback">← Brand Site</a>
   </div>
   <div class="fbow"></div>
+  <div class="ft-legal">
+    <a href="kmtc-privacy.html">Privacy Policy</a>
+    <span>·</span>
+    <a href="kmtc-terms.html">Terms &amp; Conditions</a>
+    <span>·</span>
+    <a href="kmtc-sponsor.html">Sponsorship</a>
+    <span>·</span>
+    <a href="kmtc-register.html">Register for KMTC 2026</a>
+    <span>·</span>
+    <a href="mailto:hello@kmtc.com">hello@kmtc.com</a>
+  </div>
 </footer>
 
 <script>
