@@ -43,6 +43,7 @@ nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,.5);}
 .page-hero{
   background:var(--black);padding:9rem 4rem 5rem;
   position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06);
+  z-index:20;
 }
 .page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--indigo),var(--violet),var(--tiger),var(--yellow));background-size:200%;animation:gradMove 4s linear infinite;}
 .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 85% 20%,rgba(120,10,232,.12) 0%,transparent 55%),radial-gradient(ellipse at 10% 80%,rgba(0,182,117,.07) 0%,transparent 55%);pointer-events:none;}
@@ -59,6 +60,7 @@ nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,.5);}
 .commit-banner{
   background:rgba(120,10,232,.1);border-bottom:1px solid rgba(120,10,232,.2);
   padding:1.4rem 4rem;display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;
+  position:relative;z-index:20;
 }
 .commit-banner svg{width:20px;height:20px;stroke:var(--indigo);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;min-width:20px;}
 .commit-banner p{font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.6;}
@@ -76,7 +78,7 @@ nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,.5);}
   align-self:start;
   height:calc(100vh - 64px);
   overflow-y:auto;
-  z-index:10; /* prevent content bleed-through */
+  z-index:5; /* below hero (z-index:20) so it never overlaps the page header */
 }
 .sidebar-label{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid rgba(255,255,255,.06);}
 .sidebar-nav{display:flex;flex-direction:column;gap:.2rem;}
