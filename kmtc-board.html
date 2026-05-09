@@ -98,11 +98,20 @@ nav{
 
 /* Avatar */
 .member-ava{
-  width:90px;height:90px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--pf);font-size:1.8rem;color:var(--white);
-  flex-shrink:0;position:relative;overflow:hidden;
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  overflow:hidden;
+  flex-shrink:0;
+  position:relative;
   transition:transform .28s;
+}
+
+.member-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 .member-card:hover .member-ava{transform:scale(1.06);}
 /* placeholder background shows initials — replace with <img> when photos available */
@@ -320,7 +329,9 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
 
     <!-- MEMBER 4 -->
     <div class="member-card ao d3">
-      <div class="member-ava"><div class="ava-placeholder">T</div></div>
+    <div class="member-ava">
+     <img src="images/tech-director.jpg" alt="Director of Technology" class="member-img">
+      </div>
       <div class="member-info">
         <div class="member-office">Director of Technology</div>
         <div class="member-name">Name Surname</div>
