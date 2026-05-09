@@ -39,12 +39,7 @@ body{font-family:'Nunito',sans-serif;overflow-x:hidden;background:var(--cream);}
 /* ── Scroll Progress Bar ── */
 #scroll-bar{position:fixed;top:0;left:0;z-index:10000;height:3px;width:0%;background:linear-gradient(90deg,var(--tiger),var(--yellow),var(--green),var(--indigo),var(--violet));background-size:200%;animation:gradMove 3s linear infinite;transition:width .05s linear;pointer-events:none;}
 
-/* ── Page Loader ── */
-#loader{position:fixed;inset:0;z-index:99999;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.8rem;transition:opacity .5s ease;pointer-events:all;}
-#loader.done{opacity:0;pointer-events:none;}
-.loader-bar-wrap{width:200px;height:2px;background:rgba(255,255,255,.1);overflow:hidden;}
-.loader-bar{height:100%;background:linear-gradient(90deg,var(--tiger),var(--yellow),var(--green));animation:loadFill 1.8s ease forwards;}
-.loader-txt{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.35);}
+
 
 /* ── Cursor Glow ── */
 #cursor-glow{position:fixed;pointer-events:none;z-index:9990;width:360px;height:360px;border-radius:50%;background:radial-gradient(ellipse,rgba(120,10,232,.07) 0%,transparent 70%);transform:translate(-50%,-50%);transition:left .12s ease,top .12s ease,opacity .4s;opacity:0;}
@@ -208,10 +203,6 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
 .fcopy{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);}
 .fbow{height:3px;width:70px;background:linear-gradient(90deg,var(--tiger),var(--yellow),var(--green),var(--indigo));}
 
-/* ── Stagger children ── */
-.stagger-child{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease;}
-.stagger-child.in{opacity:1;transform:translateY(0);}
-
 /* ── Tilt ── */
 .tilt{transform-style:preserve-3d;transition:transform .15s ease;}
 
@@ -246,16 +237,6 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
 
 <!-- ── CURSOR GLOW ── -->
 <div id="cursor-glow"></div>
-
-<!-- ── PAGE LOADER ── -->
-<div id="loader">
-  <img src="logo.png" alt="KMTC"
-       style="height:70px;width:auto;display:block;animation:pulse 1.8s ease infinite;"
-       onerror="this.style.display='none';document.getElementById('loader-fallback').style.display='flex'"/>
-  <div id="loader-fallback" style="display:none;font-family:var(--pf);font-size:2.2rem;letter-spacing:6px;text-transform:uppercase;color:var(--white);">KM<span style="color:var(--yellow);">✝</span>C</div>
-  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
-  <div class="loader-txt">Board &amp; Leadership · KMTC 2026</div>
-</div>
 
 <!-- ═══ NAV ═══ -->
 <nav id="nav">
@@ -478,46 +459,59 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
 </footer>
 
 <script>
-lucide.createIcons();
+try { lucide.createIcons(); } catch(e) {}
 
-// ── 1. LOADER ──────────────────────────────────────────────
-function dismissLoader() {
-  const loader = document.getElementById('loader');
-  if (!loader) return;
-  loader.classList.add('done');
-  setTimeout(() => { if (loader.parentNode) loader.parentNode.removeChild(loader); }, 600);
-}
-// Fire as soon as DOM is ready, no waiting for images
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => setTimeout(dismissLoader, 1600));
-} else {
-  setTimeout(dismissLoader, 1600);
-}
-// Absolute failsafe — always remove after 3s no matter what
-setTimeout(dismissLoader, 3000);
+/* ══════════════════════════════
+   REVEAL ANIMATION
+══════════════════════════════ */
+const animItems = document.querySelectorAll('.ao');
+animItems.forEach(el => el.classList.add('hidden'));
 
-// ── 2. SCROLL PROGRESS BAR ─────────────────────────────────
+const revObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.remove('hidden');
+      revObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.05, rootMargin: '0px 0px -10px 0px' });
+animItems.forEach(el => revObs.observe(el));
+
+// Fallback — show everything after 1s
+setTimeout(() => animItems.forEach(el => el.classList.remove('hidden')), 1000);
+
+/* ══════════════════════════════
+   SCROLL PROGRESS BAR
+══════════════════════════════ */
 const scrollBar = document.getElementById('scroll-bar');
 window.addEventListener('scroll', () => {
   const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-  scrollBar.style.width = pct + '%';
+  scrollBar.style.width = Math.min(pct, 100) + '%';
 }, { passive: true });
 
-// ── 3. NAV SHADOW ──────────────────────────────────────────
+/* ══════════════════════════════
+   NAV SCROLL SHADOW
+══════════════════════════════ */
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
 }, { passive: true });
 
-// ── 4. CURSOR GLOW ─────────────────────────────────────────
+/* ══════════════════════════════
+   CURSOR GLOW
+══════════════════════════════ */
 const glow = document.getElementById('cursor-glow');
-document.addEventListener('mousemove', e => {
-  glow.style.left = e.clientX + 'px';
-  glow.style.top  = e.clientY + 'px';
-  glow.style.opacity = '1';
-});
-document.addEventListener('mouseleave', () => glow.style.opacity = '0');
+if (glow) {
+  document.addEventListener('mousemove', e => {
+    glow.style.left    = e.clientX + 'px';
+    glow.style.top     = e.clientY + 'px';
+    glow.style.opacity = '1';
+  });
+  document.addEventListener('mouseleave', () => glow.style.opacity = '0');
+}
 
-// ── 5. HERO PARTICLES ──────────────────────────────────────
+/* ══════════════════════════════
+   HERO PARTICLES
+══════════════════════════════ */
 (function(){
   const c = document.getElementById('particles');
   if (!c) return;
@@ -531,7 +525,9 @@ document.addEventListener('mouseleave', () => glow.style.opacity = '0');
   }
 })();
 
-// ── 6. PARALLAX HERO RINGS ─────────────────────────────────
+/* ══════════════════════════════
+   PARALLAX HERO RINGS
+══════════════════════════════ */
 window.addEventListener('scroll', () => {
   const sy = window.scrollY;
   document.querySelectorAll('.hero-ring').forEach((r, i) => {
@@ -539,10 +535,12 @@ window.addEventListener('scroll', () => {
   });
 }, { passive: true });
 
-// ── 7. MAGNETIC BUTTONS ────────────────────────────────────
-document.querySelectorAll('.btn-y,.ncta,.soc-link').forEach(btn => {
+/* ══════════════════════════════
+   MAGNETIC BUTTONS
+══════════════════════════════ */
+document.querySelectorAll('.btn-y,.ncta').forEach(btn => {
   btn.addEventListener('mousemove', e => {
-    const r = btn.getBoundingClientRect();
+    const r  = btn.getBoundingClientRect();
     const dx = e.clientX - (r.left + r.width  / 2);
     const dy = e.clientY - (r.top  + r.height / 2);
     btn.style.transform = `translate(${dx*.18}px,${dy*.18}px)`;
@@ -550,9 +548,10 @@ document.querySelectorAll('.btn-y,.ncta,.soc-link').forEach(btn => {
   btn.addEventListener('mouseleave', () => btn.style.transform = '');
 });
 
-// ── 8. 3D TILT on member cards ─────────────────────────────
+/* ══════════════════════════════
+   3D TILT on member cards
+══════════════════════════════ */
 document.querySelectorAll('.member-card').forEach(card => {
-  card.classList.add('tilt');
   card.addEventListener('mousemove', e => {
     const r = card.getBoundingClientRect();
     const x = (e.clientX - r.left) / r.width  - .5;
@@ -565,32 +564,94 @@ document.querySelectorAll('.member-card').forEach(card => {
     card.style.boxShadow = '';
   });
 });
+</script>
+const scrollBar = document.getElementById('scroll-bar');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  scrollBar.style.width = Math.min(pct, 100) + '%';
+}, { passive: true });
 
-// ── 9. STAGGER board grid on entry ─────────────────────────
-const staggerObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      Array.from(e.target.children).forEach((child, i) => {
-        child.classList.add('stagger-child');
-        setTimeout(() => child.classList.add('in'), i * 90);
-      });
-      staggerObs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.05 });
-const grid = document.getElementById('boardGrid');
-if (grid) staggerObs.observe(grid);
+/* ══════════════════════════════
+   4. NAV SCROLL SHADOW
+══════════════════════════════ */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
 
-// ── 10. REVEAL ANIMATION ───────────────────────────────────
-const animItems = document.querySelectorAll('.ao');
-animItems.forEach(el => el.classList.add('hidden'));
-const revObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.remove('hidden'); revObs.unobserve(e.target); }
+/* ══════════════════════════════
+   5. CURSOR GLOW
+══════════════════════════════ */
+const glow = document.getElementById('cursor-glow');
+if (glow) {
+  document.addEventListener('mousemove', e => {
+    glow.style.left    = e.clientX + 'px';
+    glow.style.top     = e.clientY + 'px';
+    glow.style.opacity = '1';
   });
-}, { threshold: 0.06, rootMargin: '0px 0px -20px 0px' });
-animItems.forEach(el => revObs.observe(el));
-setTimeout(() => animItems.forEach(el => el.classList.remove('hidden')), 2500);
+  document.addEventListener('mouseleave', () => glow.style.opacity = '0');
+}
+
+/* ══════════════════════════════
+   6. HERO PARTICLES
+══════════════════════════════ */
+(function(){
+  const c = document.getElementById('particles');
+  if (!c) return;
+  const cols = ['#f7572b','#ffc703','#00b675','#780ae8','#e982eb'];
+  for (let i = 0; i < 18; i++) {
+    const p   = document.createElement('div');
+    p.className = 'pt';
+    const s   = Math.random() * 5 + 2;
+    p.style.cssText = `
+      width:${s}px;height:${s}px;
+      left:${Math.random()*100}%;
+      background:${cols[Math.floor(Math.random()*cols.length)]};
+      animation-duration:${Math.random()*14+10}s;
+      animation-delay:${Math.random()*12}s;
+    `;
+    c.appendChild(p);
+  }
+})();
+
+/* ══════════════════════════════
+   7. PARALLAX HERO RINGS
+══════════════════════════════ */
+window.addEventListener('scroll', () => {
+  const sy = window.scrollY;
+  document.querySelectorAll('.hero-ring').forEach((r, i) => {
+    r.style.transform = `translateY(${sy * (i + 1) * 0.15}px)`;
+  });
+}, { passive: true });
+
+/* ══════════════════════════════
+   8. MAGNETIC BUTTONS
+══════════════════════════════ */
+document.querySelectorAll('.btn-y,.ncta').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const r  = btn.getBoundingClientRect();
+    const dx = e.clientX - (r.left + r.width  / 2);
+    const dy = e.clientY - (r.top  + r.height / 2);
+    btn.style.transform = `translate(${dx*.18}px,${dy*.18}px)`;
+  });
+  btn.addEventListener('mouseleave', () => btn.style.transform = '');
+});
+
+/* ══════════════════════════════
+   9. 3D TILT on member cards
+══════════════════════════════ */
+document.querySelectorAll('.member-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - .5;
+    const y = (e.clientY - r.top ) / r.height - .5;
+    card.style.transform   = `perspective(900px) rotateY(${x*6}deg) rotateX(${-y*6}deg) translateY(-5px)`;
+    card.style.boxShadow   = `${-x*16}px ${y*16}px 40px rgba(0,0,0,.14)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+    card.style.boxShadow = '';
+  });
+});
 </script>
 </body>
 </html>
