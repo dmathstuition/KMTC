@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Privacy Policy — KMTC 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400;600;700&family=Space+Mono:wght@400;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+@font-face{font-family:'Avorya';src:url('avorya.woff2') format('woff2'),url('avorya.woff') format('woff');font-display:swap;}
+:root{
+  --tiger:#f7572b;--yellow:#ffc703;--green:#00b675;
+  --indigo:#780ae8;--violet:#e982eb;
+  --black:#111111;--white:#ffffff;--cream:#fdf8f0;
+  --pf:'Avorya','Josefin Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;overflow-x:hidden;background:var(--black);color:var(--white);}
+
+@keyframes gradMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;height:64px;
+  background:rgba(17,17,17,.98);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,199,3,.1);
+  transition:box-shadow .3s;
+}
+nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,.5);}
+.nav-back{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;}
+.nav-back:hover{color:var(--yellow);}
+.logo{display:flex;align-items:center;text-decoration:none;}
+.nav-cta{font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:.6rem 1.3rem;background:var(--tiger);color:var(--white);text-decoration:none;display:inline-block;transition:all .22s;}
+.nav-cta:hover{background:var(--yellow);color:var(--black);}
+
+/* HERO */
+.page-hero{
+  background:var(--black);padding:9rem 4rem 5rem;
+  position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06);
+}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--indigo),var(--violet),var(--tiger),var(--yellow));background-size:200%;animation:gradMove 4s linear infinite;}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 85% 20%,rgba(120,10,232,.12) 0%,transparent 55%),radial-gradient(ellipse at 10% 80%,rgba(0,182,117,.07) 0%,transparent 55%);pointer-events:none;}
+.ph-label{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:4px;text-transform:uppercase;color:var(--indigo);display:flex;align-items:center;gap:10px;margin-bottom:.9rem;position:relative;z-index:2;animation:fadeSlideUp .7s .1s ease both;}
+.ph-label::before{content:'';width:26px;height:2px;background:var(--indigo);}
+.ph-title{font-family:var(--pf);font-size:clamp(2.5rem,6vw,6rem);line-height:.9;text-transform:uppercase;position:relative;z-index:2;margin-bottom:1.5rem;animation:fadeSlideUp .7s .25s ease both;}
+.ph-title .t1{color:var(--white);display:block;}
+.ph-title .t2{color:var(--indigo);display:block;}
+.ph-meta{display:flex;gap:2rem;flex-wrap:wrap;position:relative;z-index:2;animation:fadeSlideUp .7s .4s ease both;}
+.ph-meta-item{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:.5rem;}
+.ph-meta-item svg{width:12px;height:12px;stroke:rgba(255,255,255,.35);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+/* COMMITMENT BANNER */
+.commit-banner{
+  background:rgba(120,10,232,.1);border-bottom:1px solid rgba(120,10,232,.2);
+  padding:1.4rem 4rem;display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;
+}
+.commit-banner svg{width:20px;height:20px;stroke:var(--indigo);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;min-width:20px;}
+.commit-banner p{font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.6;}
+.commit-banner strong{color:var(--white);}
+
+/* LAYOUT */
+.doc-layout{display:grid;grid-template-columns:260px 1fr;gap:0;min-height:60vh;}
+
+/* SIDEBAR */
+.doc-sidebar{background:#0e0e0e;border-right:1px solid rgba(255,255,255,.06);padding:3rem 1.8rem;position:sticky;top:64px;align-self:start;height:calc(100vh - 64px);overflow-y:auto;}
+.sidebar-label{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid rgba(255,255,255,.06);}
+.sidebar-nav{display:flex;flex-direction:column;gap:.2rem;}
+.sidebar-nav a{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.38);text-decoration:none;padding:.6rem .8rem;border-left:2px solid transparent;transition:all .2s;line-height:1.4;}
+.sidebar-nav a:hover{color:var(--indigo);border-color:var(--indigo);background:rgba(120,10,232,.04);}
+.sidebar-nav a.active{color:var(--indigo);border-color:var(--indigo);background:rgba(120,10,232,.06);}
+
+/* CONTENT */
+.doc-content{padding:4rem 5rem 6rem 4rem;max-width:860px;}
+.doc-intro{font-size:1rem;line-height:1.85;color:rgba(255,255,255,.55);margin-bottom:3.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.06);}
+
+.clause{margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.05);scroll-margin-top:90px;}
+.clause:last-child{border-bottom:none;margin-bottom:0;}
+.clause-num{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:3px;text-transform:uppercase;color:var(--indigo);margin-bottom:.5rem;display:flex;align-items:center;gap:8px;}
+.clause-num::before{content:'';width:20px;height:1.5px;background:var(--indigo);}
+.clause-title{font-family:var(--pf);font-size:clamp(1.3rem,2.5vw,1.9rem);letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:1.2rem;line-height:1.1;}
+.clause-body{font-size:.95rem;line-height:1.9;color:rgba(255,255,255,.62);}
+.clause-body+.clause-body{margin-top:1rem;}
+.clause-body strong{color:var(--white);}
+.clause-body a{color:var(--yellow);text-decoration:none;}
+.clause-body a:hover{text-decoration:underline;}
+
+.clause-list{list-style:none;margin-top:1rem;display:flex;flex-direction:column;gap:.6rem;}
+.clause-list li{display:flex;align-items:flex-start;gap:.75rem;font-size:.92rem;line-height:1.7;color:rgba(255,255,255,.58);}
+.clause-list li::before{content:'→';color:var(--indigo);font-weight:700;flex-shrink:0;margin-top:.05rem;}
+
+.clause-highlight{background:rgba(120,10,232,.08);border:1px solid rgba(120,10,232,.2);border-left:4px solid var(--indigo);padding:1.2rem 1.5rem;margin:1.2rem 0;}
+.clause-highlight p{font-size:.9rem;line-height:1.75;color:rgba(255,255,255,.7);}
+.clause-highlight strong{color:var(--violet);}
+
+/* Data table */
+.data-table{width:100%;border-collapse:collapse;margin-top:1.2rem;}
+.data-table th{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:2px;text-transform:uppercase;color:var(--indigo);padding:.8rem 1rem;border-bottom:2px solid rgba(120,10,232,.3);text-align:left;background:rgba(120,10,232,.05);}
+.data-table td{font-size:.85rem;color:rgba(255,255,255,.6);padding:.85rem 1rem;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:top;line-height:1.6;}
+.data-table tr:hover td{background:rgba(255,255,255,.02);}
+
+/* Rights grid */
+.rights-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.2rem;}
+.right-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:1.2rem 1.4rem;border-left:3px solid var(--indigo);transition:border-color .22s;}
+.right-item:hover{border-color:var(--violet);}
+.right-item h4{font-family:var(--pf);font-size:.82rem;letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:.35rem;}
+.right-item p{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.6;}
+
+.contact-block{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);padding:2rem;margin-top:1.5rem;}
+.contact-row{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem;}
+.contact-row:last-child{margin-bottom:0;}
+.contact-row svg{width:16px;height:16px;fill:none;stroke:var(--indigo);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;min-width:16px;}
+.contact-row a{font-size:.88rem;color:var(--yellow);text-decoration:none;}
+.contact-row a:hover{text-decoration:underline;}
+.contact-row span{font-size:.88rem;color:rgba(255,255,255,.55);}
+
+/* FOOTER */
+footer{background:#0a0a0a;border-top:1px solid rgba(255,255,255,.06);padding:2.5rem 4rem;}
+.ft-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.fcopy{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);}
+.fback{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;}
+.fback:hover{color:var(--yellow);}
+.fbow{height:3px;width:100%;background:linear-gradient(90deg,var(--indigo),var(--violet),var(--tiger),var(--yellow));margin-top:1.5rem;}
+
+@media(max-width:860px){
+  nav{padding:0 1.2rem;}
+  .page-hero{padding:7rem 1.2rem 3.5rem;}
+  .commit-banner{padding:1.2rem 1.2rem;}
+  .doc-layout{grid-template-columns:1fr;}
+  .doc-sidebar{display:none;}
+  .doc-content{padding:3rem 1.2rem 5rem;}
+  .rights-grid{grid-template-columns:1fr;}
+  footer{padding:2rem 1.2rem;}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="kmtc-brand.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to KMTC
+  </a>
+  <a href="kmtc-brand.html" class="logo">
+    <img src="logo.png" alt="KMTC" style="height:40px;width:auto;display:block;"/>
+  </a>
+  <a href="kmtc-register.html" class="nav-cta">Register Now</a>
+</nav>
+
+<div class="page-hero">
+  <div class="ph-label">Legal</div>
+  <h1 class="ph-title">
+    <span class="t1">Privacy</span>
+    <span class="t2">Policy</span>
+  </h1>
+  <div class="ph-meta">
+    <span class="ph-meta-item">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Last Updated: January 2026
+    </span>
+    <span class="ph-meta-item">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Kingdom Media &amp; Tech Confluence · Nigeria
+    </span>
+  </div>
+</div>
+
+<!-- Commitment Banner -->
+<div class="commit-banner">
+  <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+  <p><strong>Our commitment to you:</strong> KMTC will never sell, rent, or trade your personal data to third parties. Your information is used only to facilitate your participation in KMTC events and to keep you informed about our community.</p>
+</div>
+
+<div class="doc-layout">
+
+  <aside class="doc-sidebar">
+    <div class="sidebar-label">Contents</div>
+    <nav class="sidebar-nav" id="sideNav">
+      <a href="#who-we-are" class="active">1. Who We Are</a>
+      <a href="#data-collected">2. Data We Collect</a>
+      <a href="#how-we-use">3. How We Use It</a>
+      <a href="#data-sharing">4. Data Sharing</a>
+      <a href="#data-storage">5. Storage &amp; Security</a>
+      <a href="#cookies">6. Cookies</a>
+      <a href="#your-rights">7. Your Rights</a>
+      <a href="#children">8. Children</a>
+      <a href="#third-party">9. Third-Party Links</a>
+      <a href="#changes">10. Policy Changes</a>
+      <a href="#contact-pp">11. Contact Us</a>
+    </nav>
+  </aside>
+
+  <main class="doc-content">
+
+    <p class="doc-intro">
+      This Privacy Policy explains how Kingdom Media & Tech Confluence (KMTC) collects, uses, stores, and protects your personal information when you register for, attend, or interact with KMTC events, websites, and communications. We are committed to handling your data responsibly, transparently, and in alignment with our Kingdom values.
+    </p>
+
+    <div class="clause" id="who-we-are">
+      <div class="clause-num">Section 01</div>
+      <h2 class="clause-title">Who We Are</h2>
+      <p class="clause-body">Kingdom Media & Tech Confluence (KMTC) is a faith-driven movement and annual conference organisation based in Nigeria. We operate the KMTC event, website, registration platform, and associated community channels.</p>
+      <p class="clause-body">For the purposes of this Privacy Policy, KMTC is the data controller responsible for your personal information. You can reach us at <a href="mailto:hello@kmtc.com">hello@kmtc.com</a> for any privacy-related enquiries.</p>
+    </div>
+
+    <div class="clause" id="data-collected">
+      <div class="clause-num">Section 02</div>
+      <h2 class="clause-title">Data We Collect</h2>
+      <p class="clause-body">We collect only the personal information necessary to facilitate your participation in KMTC and to improve our services. The following table outlines what we collect and why:</p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Data Type</th>
+            <th>Examples</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:var(--white);">Identity Data</strong></td>
+            <td>First name, last name</td>
+            <td>Registration &amp; event check-in</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--white);">Contact Data</strong></td>
+            <td>Email address, phone number</td>
+            <td>Confirmation emails, event communications</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--white);">Professional Data</strong></td>
+            <td>Role, organisation, industry</td>
+            <td>Track selection, community matching</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--white);">Location Data</strong></td>
+            <td>City, country</td>
+            <td>Event logistics, community insights</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--white);">Preference Data</strong></td>
+            <td>T-shirt size, group attendance</td>
+            <td>Event management &amp; logistics</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--white);">Engagement Data</strong></td>
+            <td>How you heard about KMTC, expectations</td>
+            <td>Programme improvement &amp; outreach</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--white);">Technical Data</strong></td>
+            <td>IP address, browser type (website only)</td>
+            <td>Website security &amp; analytics</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="clause-highlight" style="margin-top:1.5rem;">
+        <p>We do <strong>not</strong> collect sensitive personal data such as financial information, government ID numbers, or health data. KMTC 2026 is a free event and requires no payment information.</p>
+      </div>
+    </div>
+
+    <div class="clause" id="how-we-use">
+      <div class="clause-num">Section 03</div>
+      <h2 class="clause-title">How We Use Your Data</h2>
+      <p class="clause-body">Your personal data is used solely for legitimate purposes connected to your participation in KMTC. Specifically, we use your data to:</p>
+      <ul class="clause-list">
+        <li>Process and confirm your event registration and issue your unique registration code.</li>
+        <li>Send you event-related communications including confirmation emails, reminders, schedule updates, and speaker announcements.</li>
+        <li>Manage event logistics including check-in, track allocation, and resource distribution.</li>
+        <li>Invite you to join the KMTC WhatsApp community and other official channels.</li>
+        <li>Improve future editions of KMTC through feedback, attendance data, and engagement analytics.</li>
+        <li>Send you updates about future KMTC events and initiatives (you may opt out at any time).</li>
+        <li>Comply with legal and regulatory obligations.</li>
+      </ul>
+      <p class="clause-body" style="margin-top:1rem;">We will never use your data for purposes unrelated to KMTC without your explicit consent.</p>
+    </div>
+
+    <div class="clause" id="data-sharing">
+      <div class="clause-num">Section 04</div>
+      <h2 class="clause-title">Data Sharing</h2>
+      <p class="clause-body">KMTC does not sell, rent, or trade your personal data to any third party. We may share your data only in the following limited circumstances:</p>
+      <ul class="clause-list">
+        <li><strong>Service Providers:</strong> Trusted third-party platforms that help us operate the event (e.g. Google for registration data storage, email service providers). These partners are contractually bound to protect your data.</li>
+        <li><strong>Event Partners &amp; Sponsors:</strong> Only aggregated, non-identifiable statistics (e.g. "500 attendees") are shared with sponsors. We do not share your personal details with sponsors without your explicit consent.</li>
+        <li><strong>Legal Requirements:</strong> If required by law, court order, or governmental authority, we may disclose your information to comply with applicable legal obligations.</li>
+      </ul>
+    </div>
+
+    <div class="clause" id="data-storage">
+      <div class="clause-num">Section 05</div>
+      <h2 class="clause-title">Storage &amp; Security</h2>
+      <p class="clause-body">Your personal data is stored securely in Google Sheets and associated Google Workspace services, which are protected by Google's industry-leading security infrastructure. Access to your data is restricted to authorised KMTC team members only.</p>
+      <ul class="clause-list">
+        <li>We retain your data for a maximum of two years following the event, after which it is securely deleted unless you have consented to ongoing communications.</li>
+        <li>You may request deletion of your data at any time by contacting us at <a href="mailto:hello@kmtc.com">hello@kmtc.com</a>.</li>
+        <li>While we implement appropriate technical measures to protect your data, no system is entirely impenetrable. If you become aware of any security issue, please notify us immediately.</li>
+      </ul>
+    </div>
+
+    <div class="clause" id="cookies">
+      <div class="clause-num">Section 06</div>
+      <h2 class="clause-title">Cookies</h2>
+      <p class="clause-body">Our website may use cookies and similar tracking technologies to improve your browsing experience and gather anonymised analytics data. Cookies are small text files stored on your device when you visit our site.</p>
+      <ul class="clause-list">
+        <li><strong>Essential cookies:</strong> Required for the website to function correctly. These cannot be disabled.</li>
+        <li><strong>Analytics cookies:</strong> Help us understand how visitors interact with our site so we can improve it. These are anonymised and non-identifying.</li>
+      </ul>
+      <p class="clause-body" style="margin-top:1rem;">You can control or disable cookies through your browser settings. Note that disabling cookies may affect the functionality of some website features.</p>
+    </div>
+
+    <div class="clause" id="your-rights">
+      <div class="clause-num">Section 07</div>
+      <h2 class="clause-title">Your Rights</h2>
+      <p class="clause-body">You have the following rights regarding your personal data held by KMTC. To exercise any of these rights, contact us at <a href="mailto:hello@kmtc.com">hello@kmtc.com</a>:</p>
+      <div class="rights-grid">
+        <div class="right-item">
+          <h4>Right to Access</h4>
+          <p>Request a copy of the personal data we hold about you.</p>
+        </div>
+        <div class="right-item">
+          <h4>Right to Rectification</h4>
+          <p>Request correction of any inaccurate or incomplete data.</p>
+        </div>
+        <div class="right-item">
+          <h4>Right to Erasure</h4>
+          <p>Request deletion of your personal data, subject to legal obligations.</p>
+        </div>
+        <div class="right-item">
+          <h4>Right to Object</h4>
+          <p>Object to the processing of your data for marketing purposes at any time.</p>
+        </div>
+        <div class="right-item">
+          <h4>Right to Portability</h4>
+          <p>Request your data in a structured, machine-readable format.</p>
+        </div>
+        <div class="right-item">
+          <h4>Right to Withdraw Consent</h4>
+          <p>Withdraw consent for communications at any time by clicking unsubscribe.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="clause" id="children">
+      <div class="clause-num">Section 08</div>
+      <h2 class="clause-title">Children's Privacy</h2>
+      <p class="clause-body">KMTC events and digital platforms are not directed at children under the age of 13. We do not knowingly collect personal data from children under 13 without verifiable parental or guardian consent.</p>
+      <p class="clause-body">If you are a parent or guardian and believe your child has provided us with personal data without consent, please contact us immediately at <a href="mailto:hello@kmtc.com">hello@kmtc.com</a> and we will promptly delete such information.</p>
+    </div>
+
+    <div class="clause" id="third-party">
+      <div class="clause-num">Section 09</div>
+      <h2 class="clause-title">Third-Party Links</h2>
+      <p class="clause-body">Our website and communications may contain links to third-party websites, social media platforms, and external services. These are provided for your convenience and do not constitute an endorsement.</p>
+      <p class="clause-body">KMTC is not responsible for the privacy practices or content of any third-party websites. We encourage you to review the privacy policies of any external platforms you visit.</p>
+    </div>
+
+    <div class="clause" id="changes">
+      <div class="clause-num">Section 10</div>
+      <h2 class="clause-title">Policy Changes</h2>
+      <p class="clause-body">KMTC may update this Privacy Policy from time to time to reflect changes in our practices, legal requirements, or organisational structure. The most current version will always be published on our website with the date of the latest update.</p>
+      <div class="clause-highlight">
+        <p>Significant changes will be communicated to registered attendees via email. <strong>Continued engagement with KMTC following policy updates constitutes acceptance of the revised Privacy Policy.</strong></p>
+      </div>
+    </div>
+
+    <div class="clause" id="contact-pp">
+      <div class="clause-num">Section 11</div>
+      <h2 class="clause-title">Contact Us</h2>
+      <p class="clause-body">For any questions, requests, or concerns regarding this Privacy Policy or how your data is handled, please contact us:</p>
+      <div class="contact-block">
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:hello@kmtc.com">hello@kmtc.com</a>
+        </div>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.36a2 2 0 0 1 2-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.29 6.29l1.14-1.14a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:+2348035284541">+234 803 528 4541</a>
+        </div>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Kingdom Media &amp; Tech Confluence · Nigeria</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <div class="ft-inner">
+    <img src="logo.png" alt="KMTC" style="height:40px;width:auto;display:block;"/>
+    <span class="fcopy">© 2026 KINGDOM MEDIA & TECH CONFLUENCE · ALL RIGHTS RESERVED</span>
+    <div style="display:flex;gap:1.2rem;">
+      <a href="kmtc-terms.html" class="fback">Terms &amp; Conditions</a>
+      <a href="kmtc-brand.html" class="fback">← Brand Site</a>
+    </div>
+  </div>
+  <div class="fbow"></div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+const clauses = document.querySelectorAll('.clause');
+const sideLinks = document.querySelectorAll('.sidebar-nav a');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      sideLinks.forEach(a => a.classList.remove('active'));
+      const active = document.querySelector(`.sidebar-nav a[href="#${e.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { threshold: 0.35, rootMargin: '-80px 0px -40% 0px' });
+clauses.forEach(c => obs.observe(c));
+</script>
+</body>
+</html>
