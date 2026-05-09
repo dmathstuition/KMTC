@@ -6,285 +6,380 @@
 <title>KMTC 2026 Program — Kingdom Media & Tech Confluence</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,300;0,400;0,600;0,700&family=Space+Mono:wght@0,400;0,700&family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400;600;700&family=Space+Mono:wght@400;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
-@font-face {
-  font-family: 'Avorya';
-  src: url('avorya.woff2') format('woff2'), url('avorya.woff') format('woff');
-  font-display: swap;
+@font-face{font-family:'Avorya';src:url('avorya.woff2') format('woff2'),url('avorya.woff') format('woff');font-display:swap;}
+:root{
+  --tiger:#f7572b;--yellow:#ffc703;--green:#00b675;
+  --indigo:#780ae8;--violet:#e982eb;
+  --black:#111111;--white:#ffffff;--cream:#fdf8f0;
+  --pf:'Avorya','Josefin Sans',sans-serif;
 }
-:root {
-  --tiger:  #f7572b;
-  --yellow: #ffc703;
-  --green:  #00b675;
-  --indigo: #780ae8;
-  --violet: #e982eb;
-  --black:  #0d0d0d;
-  --ink:    #111116;
-  --white:  #ffffff;
-  --muted:  rgba(255,255,255,0.5);
-  --border: rgba(255,255,255,0.07);
-  --pf:     'Avorya', 'Josefin Sans', sans-serif;
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { background: var(--black); color: var(--white); font-family: 'Nunito', sans-serif; overflow-x: hidden; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;overflow-x:hidden;background:var(--black);}
 
-/* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 1rem 3rem;
-  background: rgba(13,13,13,0.92);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-}
-.nav-back {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--muted); text-decoration: none;
-  display: flex; align-items: center; gap: 8px;
-  transition: color 0.2s;
-}
-.nav-back:hover { color: var(--yellow); }
-.nav-logo {
-  font-family: var(--pf);
-  font-size: 1.4rem; letter-spacing: 4px; text-transform: uppercase;
-  color: var(--white);
-}
-.nav-cta {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-  padding: 0.6rem 1.4rem;
-  background: var(--tiger); color: var(--white);
-  border: none; cursor: pointer; text-decoration: none;
-  clip-path: polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
-  transition: all 0.2s; display: inline-block;
-}
-.nav-cta:hover { background: var(--yellow); color: var(--black); }
+/* ═══ ANIMATIONS ═══ */
+@keyframes gradMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.96)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
 
-/* PROGRAM HERO */
-.prog-hero {
-  min-height: 100vh;
-  display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end;
-  padding: 8rem 4rem 5rem;
-  position: relative; overflow: hidden;
-  background: linear-gradient(140deg, #0a0010 0%, #0d0d0d 40%, #100800 100%);
+.ao{opacity:1;transform:none;transition:opacity .7s ease,transform .7s ease;}
+.ao.hidden{opacity:0;transform:translateY(28px);}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+
+/* ═══ NAV ═══ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;height:64px;
+  background:rgba(17,17,17,.97);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,199,3,.1);
+  transition:box-shadow .3s;
 }
-.prog-hero::before {
-  content: '';
-  position: absolute; inset: 0;
+nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,.5);}
+.nav-back{
+  font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.45);text-decoration:none;
+  display:flex;align-items:center;gap:8px;transition:color .2s;
+}
+.nav-back:hover{color:var(--yellow);}
+.logo{display:flex;align-items:center;text-decoration:none;}
+.nav-cta{
+  font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:.6rem 1.3rem;background:var(--tiger);color:var(--white);
+  border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:all .22s;white-space:nowrap;
+}
+.nav-cta:hover{background:var(--yellow);color:var(--black);}
+
+/* ═══ HERO ═══ */
+.prog-hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:flex-start;justify-content:flex-end;
+  padding:8rem 4rem 5rem;position:relative;overflow:hidden;
+  background:var(--black);
+}
+.prog-hero::before{
+  content:'';position:absolute;inset:0;
   background:
-    radial-gradient(ellipse at 10% 80%, rgba(120,10,232,.25) 0%, transparent 55%),
-    radial-gradient(ellipse at 90% 20%, rgba(247,87,43,.2) 0%, transparent 55%);
-  pointer-events: none;
+    radial-gradient(ellipse at 10% 75%,rgba(120,10,232,.18) 0%,transparent 55%),
+    radial-gradient(ellipse at 85% 20%,rgba(247,87,43,.15) 0%,transparent 55%);
+  pointer-events:none;
 }
-.hero-kicker {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase;
-  color: var(--yellow); border: 1px solid rgba(255,199,3,.4);
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 0.3rem 0.9rem; margin-bottom: 2rem; position: relative; z-index: 2;
+.prog-hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--tiger),var(--yellow),var(--green),var(--indigo),var(--violet));
+  background-size:200%;animation:gradMove 4s linear infinite;
 }
-.hero-kicker::before {
-  content: ''; width: 7px; height: 7px; border-radius: 50%;
-  background: var(--yellow); animation: blink 1.5s infinite;
-}
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
-.prog-headline {
-  font-family: var(--pf);
-  font-size: clamp(3rem, 6.5vw, 8rem);
-  line-height: 0.9; letter-spacing: 2px; text-transform: uppercase;
-  position: relative; z-index: 2; margin-bottom: 1.5rem;
-}
-.prog-headline .l1 { color: var(--white); display: block; }
-.prog-headline .l2 { color: var(--tiger); display: block; }
-.prog-headline .l3 { color: var(--yellow); display: block; }
-.prog-desc {
-  font-size: 1rem; line-height: 1.8; color: var(--muted);
-  max-width: 560px; position: relative; z-index: 2; margin-bottom: 2.5rem;
-}
-.prog-actions { display: flex; gap: 1rem; flex-wrap: wrap; position: relative; z-index: 2; }
-.btn-p {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
-  padding: 0.9rem 2rem; text-decoration: none; display: inline-block;
-  transition: all 0.2s;
-}
-.btn-p.primary {
-  background: var(--yellow); color: var(--black); font-weight: 700;
-  clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
-}
-.btn-p.primary:hover { background: var(--tiger); color: var(--white); transform: scale(1.04); }
-.btn-p.outline { border: 1px solid rgba(255,255,255,.3); color: var(--white); }
-.btn-p.outline:hover { border-color: var(--yellow); color: var(--yellow); }
+/* decorative rings */
+.hero-ring{position:absolute;border-radius:50%;pointer-events:none;animation:float 7s ease-in-out infinite;}
+.hr1{width:420px;height:420px;border:1px solid rgba(255,199,3,.05);top:-80px;right:-80px;}
+.hr2{width:260px;height:260px;border:1px solid rgba(247,87,43,.06);bottom:80px;right:60px;animation-delay:3s;}
+.hr3{width:160px;height:160px;border:1px solid rgba(0,182,117,.07);top:30%;left:42%;animation-delay:1.5s;}
 
-/* SECTION */
-section { padding: 6rem 4rem; }
-.sec-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.62rem; letter-spacing: 4px; text-transform: uppercase;
-  color: var(--tiger); margin-bottom: 1rem;
-  display: flex; align-items: center; gap: 12px;
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:4px;text-transform:uppercase;
+  color:var(--yellow);border:1.5px solid rgba(255,199,3,.4);
+  padding:.3rem .9rem;margin-bottom:2rem;position:relative;z-index:2;
+  animation:fadeSlideUp .8s .1s ease both;
 }
-.sec-label::before { content: ''; width: 32px; height: 1px; background: var(--tiger); }
-.sec-title {
-  font-family: var(--pf);
-  font-size: clamp(2rem, 3.5vw, 3.2rem); letter-spacing: 2px; text-transform: uppercase;
-  margin-bottom: 1.2rem;
+.hero-kicker::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--yellow);animation:blink 1.5s infinite;}
+.prog-headline{
+  font-family:var(--pf);
+  font-size:clamp(3rem,7vw,8.5rem);
+  line-height:.86;letter-spacing:1px;text-transform:uppercase;
+  position:relative;z-index:2;margin-bottom:1.8rem;
 }
-.sec-body { font-size: 0.95rem; line-height: 1.85; color: var(--muted); max-width: 640px; }
+.prog-headline .l1{color:var(--white);display:block;animation:fadeSlideUp .8s .2s ease both;}
+.prog-headline .l2{color:var(--tiger);display:block;animation:fadeSlideUp .8s .35s ease both;}
+.prog-headline .l3{color:var(--yellow);display:block;animation:fadeSlideUp .8s .5s ease both;}
+.prog-desc{
+  font-size:1rem;line-height:1.85;color:rgba(255,255,255,.6);
+  max-width:520px;position:relative;z-index:2;margin-bottom:2.5rem;
+  animation:fadeSlideUp .8s .65s ease both;
+}
+.prog-actions{display:flex;gap:1rem;flex-wrap:wrap;position:relative;z-index:2;animation:fadeSlideUp .8s .8s ease both;}
+.btn-primary{
+  font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:.9rem 2rem;background:var(--yellow);color:var(--black);
+  text-decoration:none;display:inline-block;transition:all .25s;border:none;cursor:pointer;
+}
+.btn-primary:hover{background:var(--white);transform:translateY(-3px);box-shadow:0 8px 24px rgba(255,199,3,.3);}
+.btn-outline{
+  font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;
+  padding:.9rem 2rem;background:transparent;border:1.5px solid rgba(255,255,255,.3);
+  color:var(--white);text-decoration:none;display:inline-block;transition:all .25s;
+}
+.btn-outline:hover{border-color:var(--yellow);color:var(--yellow);}
 
-/* ABOUT EVENT */
-#about-event { background: var(--ink); border-top: 1px solid var(--border); }
-.event-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: center; }
-.event-details { display: flex; flex-direction: column; gap: 1rem; }
-.event-detail-row {
-  display: flex; align-items: center; gap: 1rem;
-  padding: 1rem 1.2rem;
-  border: 1px solid var(--border); background: rgba(255,255,255,.02);
+/* hero quick-facts strip */
+.hero-facts{
+  display:flex;gap:0;position:relative;z-index:2;
+  margin-top:3rem;border-top:1px solid rgba(255,255,255,.07);
+  animation:fadeSlideUp .8s .95s ease both;
 }
-.edr-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--tiger); min-width: 70px;
+.hf-item{
+  padding:1.2rem 2rem 0 0;margin-right:2rem;border-right:1px solid rgba(255,255,255,.07);
 }
-.edr-val { font-size: 0.9rem; color: var(--white); }
+.hf-item:last-child{border-right:none;}
+.hf-val{font-family:var(--pf);font-size:1.8rem;color:var(--yellow);letter-spacing:1px;line-height:1;}
+.hf-val.green{color:var(--green);}
+.hf-val.tiger{color:var(--tiger);}
+.hf-lbl{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.3rem;}
 
-/* TRACKS */
-#tracks { background: var(--black); }
-.tracks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
-.track-card {
-  padding: 2rem 1.5rem;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,.02);
-  transition: all 0.25s; position: relative; overflow: hidden;
+/* ═══ SHARED ═══ */
+section{padding:6rem 4rem;}
+.slbl{
+  font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:4px;text-transform:uppercase;
+  margin-bottom:.8rem;display:flex;align-items:center;gap:10px;
 }
-.track-card:hover { transform: translateY(-4px); }
-.track-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+.slbl::before{content:'';width:26px;height:2px;flex-shrink:0;}
+.sh{
+  font-family:var(--pf);
+  font-size:clamp(2rem,4.5vw,4rem);line-height:.95;letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:1.2rem;
 }
-.track-card:nth-child(1)::before { background: var(--tiger); }
-.track-card:nth-child(2)::before { background: var(--indigo); }
-.track-card:nth-child(3)::before { background: var(--yellow); }
-.track-card:nth-child(4)::before { background: var(--green); }
-.track-card:nth-child(5)::before { background: var(--violet); }
-.track-card:nth-child(6)::before { background: var(--tiger); }
-.track-icon { font-size: 1.8rem; margin-bottom: 1rem; }
-.track-name {
-  font-family: var(--pf);
-  font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--white); margin-bottom: 0.6rem;
-}
-.track-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
-.track-tag {
-  display: inline-block; margin-top: 1rem;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase;
-  padding: 0.25rem 0.7rem;
-  border: 1px solid rgba(255,255,255,.15); color: var(--muted);
-}
+.sbody{font-size:1rem;line-height:1.85;color:rgba(255,255,255,.72);}
+.sbody-dark{font-size:1rem;line-height:1.85;color:#555;}
 
-/* SPEAKERS */
-#speakers { background: var(--ink); border-top: 1px solid var(--border); }
-.speakers-placeholder {
-  margin-top: 3rem;
-  border: 2px dashed rgba(255,255,255,.1);
-  padding: 4rem; text-align: center;
+/* ═══ § ABOUT EVENT (Tiger Flame) ═══ */
+#about-event{background:var(--tiger);position:relative;overflow:hidden;}
+.burst{position:absolute;pointer-events:none;animation:spin 40s linear infinite;}
+#about-event .slbl{color:rgba(255,255,255,.7);}#about-event .slbl::before{background:var(--yellow);}
+#about-event .sh{color:var(--white);}
+.event-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:start;}
+.event-body{font-size:1rem;line-height:1.85;color:rgba(255,255,255,.88);max-width:520px;}
+.event-body+.event-body{margin-top:1rem;}
+.event-tags{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1.8rem;}
+.etag{
+  font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;
+  padding:.45rem .95rem;background:rgba(0,0,0,.18);color:var(--white);
+  border:1.5px solid rgba(255,255,255,.25);transition:all .22s;cursor:default;
 }
-.speakers-placeholder h3 {
-  font-family: var(--pf);
-  font-size: 1.6rem; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 0.8rem;
+.etag:hover{background:var(--yellow);color:var(--black);border-color:var(--yellow);}
+/* detail rows */
+.event-details{display:flex;flex-direction:column;gap:1rem;}
+.edr{
+  background:rgba(0,0,0,.15);padding:1.2rem 1.5rem;
+  border-left:4px solid var(--yellow);
+  display:flex;align-items:center;gap:1rem;transition:all .22s;
 }
-.speakers-placeholder p { font-size: 0.9rem; color: rgba(255,255,255,.3); }
+.edr:hover{background:rgba(0,0,0,.25);transform:translateX(4px);}
+.edr-icon{width:36px;height:36px;min-width:36px;display:flex;align-items:center;justify-content:center;}
+.edr-icon svg{width:20px;height:20px;stroke:var(--yellow);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.edr-lbl{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);display:block;margin-bottom:.2rem;}
+.edr-val{font-size:.92rem;font-weight:700;color:var(--white);}
 
-/* SCHEDULE */
-#schedule { background: var(--black); }
-.schedule-tba {
-  margin-top: 3rem;
-  border: 1px solid var(--border);
-  padding: 3rem; text-align: center;
-  background: rgba(255,255,255,.02);
+/* ═══ § TRACKS (Yellow) ═══ */
+#tracks{background:var(--yellow);position:relative;overflow:hidden;}
+.vburst{position:absolute;right:2rem;top:2rem;opacity:.06;pointer-events:none;animation:spin 60s linear infinite;}
+#tracks .slbl{color:rgba(0,0,0,.5);}#tracks .slbl::before{background:var(--black);}
+#tracks .sh{color:var(--black);}
+.tracks-intro{font-size:1rem;line-height:1.8;color:rgba(0,0,0,.65);max-width:560px;margin-bottom:3rem;}
+.tracks-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;}
+.track-card{
+  background:var(--black);padding:2rem 1.8rem;
+  position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s;
 }
-.schedule-tba p {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--muted);
+.track-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:0;background:rgba(255,199,3,.06);transition:height .3s;}
+.track-card:hover{transform:translateY(-5px);box-shadow:0 16px 38px rgba(0,0,0,.3);}
+.track-card:hover::before{height:100%;}
+.track-num{position:absolute;top:.4rem;right:.7rem;font-family:var(--pf);font-size:3rem;color:rgba(255,255,255,.04);line-height:1;}
+.track-icon-wrap{
+  width:50px;height:50px;display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.2rem;
 }
-
-/* REGISTER CTA */
-.reg-cta {
-  background: linear-gradient(135deg, #1a0a30 0%, #200800 100%);
-  border-top: 1px solid var(--border);
-  padding: 6rem 4rem; text-align: center;
-}
-.reg-cta h2 {
-  font-family: var(--pf);
-  font-size: clamp(2rem, 4vw, 4rem); letter-spacing: 2px; text-transform: uppercase;
-  color: var(--white); margin-bottom: 1rem;
-}
-.reg-cta p { font-size: 1rem; color: var(--muted); margin-bottom: 2.5rem; }
-.reg-cta a {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700;
-  padding: 1rem 2.5rem;
-  background: var(--tiger); color: var(--white);
-  text-decoration: none; display: inline-block;
-  clip-path: polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
-  transition: all 0.2s;
-}
-.reg-cta a:hover { background: var(--yellow); color: var(--black); transform: scale(1.04); }
-
-/* FOOTER */
-footer {
-  background: #070709; border-top: 1px solid var(--border); padding: 2.5rem 4rem;
-  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
-}
-.footer-copy {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.58rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);
-}
-.footer-logo {
-  font-family: var(--pf);
-  font-size: 1.2rem; letter-spacing: 4px; color: var(--white);
+.track-icon-wrap svg{width:28px;height:28px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.track-card:nth-child(1) .track-icon-wrap svg{stroke:var(--tiger);}
+.track-card:nth-child(2) .track-icon-wrap svg{stroke:var(--indigo);}
+.track-card:nth-child(3) .track-icon-wrap svg{stroke:var(--yellow);}
+.track-card:nth-child(4) .track-icon-wrap svg{stroke:var(--green);}
+.track-card:nth-child(5) .track-icon-wrap svg{stroke:var(--violet);}
+.track-card:nth-child(6) .track-icon-wrap svg{stroke:var(--tiger);}
+.track-top-line{height:3px;width:40px;margin-bottom:1.4rem;transition:width .3s;}
+.track-card:hover .track-top-line{width:100%;}
+.track-card:nth-child(1) .track-top-line{background:var(--tiger);}
+.track-card:nth-child(2) .track-top-line{background:var(--indigo);}
+.track-card:nth-child(3) .track-top-line{background:var(--yellow);}
+.track-card:nth-child(4) .track-top-line{background:var(--green);}
+.track-card:nth-child(5) .track-top-line{background:var(--violet);}
+.track-card:nth-child(6) .track-top-line{background:var(--tiger);}
+.track-name{font-family:var(--pf);font-size:1rem;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin-bottom:.55rem;}
+.track-desc{font-size:.82rem;color:rgba(255,255,255,.55);line-height:1.65;}
+.track-tag{
+  display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;
+  font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:1px;text-transform:uppercase;
+  padding:.28rem .7rem;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4);
 }
 
-/* FADE UP */
-.fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.fade-up.visible { opacity: 1; transform: translateY(0); }
-
-@media (max-width: 860px) {
-  nav { padding: 1rem 1.5rem; }
-  section { padding: 4rem 1.5rem; }
-  .prog-hero { padding: 7rem 1.5rem 3.5rem; }
-  .event-grid { grid-template-columns: 1fr; }
-  .tracks-grid { grid-template-columns: 1fr 1fr; }
-  .reg-cta { padding: 4rem 1.5rem; }
-  footer { padding: 2rem 1.5rem; }
+/* ═══ § SPEAKERS (Green) ═══ */
+#speakers{background:var(--green);position:relative;overflow:hidden;}
+#speakers .slbl{color:rgba(255,255,255,.7);}#speakers .slbl::before{background:var(--yellow);}
+#speakers .sh{color:var(--white);}
+.speakers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:2.5rem;}
+.speaker-card{
+  background:rgba(0,0,0,.15);padding:1.8rem 1.4rem;text-align:center;
+  border:1.5px solid rgba(255,255,255,.15);transition:all .28s;
 }
-@media (max-width: 560px) {
-  .tracks-grid { grid-template-columns: 1fr; }
+.speaker-card:hover{background:rgba(0,0,0,.25);border-color:var(--yellow);transform:translateY(-4px);}
+.speaker-ava{
+  width:68px;height:68px;border-radius:50%;margin:0 auto 1rem;
+  background:rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;
+  border:2px dashed rgba(255,255,255,.2);transition:border-color .28s;
+}
+.speaker-card:hover .speaker-ava{border-color:var(--yellow);}
+.speaker-ava svg{width:28px;height:28px;stroke:rgba(255,255,255,.4);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.speaker-name{font-family:var(--pf);font-size:.88rem;letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:.3rem;}
+.speaker-role{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.45);}
+.speakers-cta{
+  margin-top:2.5rem;
+  background:rgba(0,0,0,.15);border:1.5px solid rgba(255,255,255,.15);
+  padding:2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;
+}
+.speakers-cta p{font-size:.92rem;color:rgba(255,255,255,.75);}
+.speakers-cta a{
+  font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:.7rem 1.5rem;background:var(--yellow);color:var(--black);text-decoration:none;transition:all .22s;white-space:nowrap;
+}
+.speakers-cta a:hover{background:var(--white);}
+
+/* ═══ § WHY KMTC DIFFERENT (White) ═══ */
+#why-different{background:var(--white);position:relative;overflow:hidden;}
+.wd-burst-tl{position:absolute;top:-15px;left:-15px;pointer-events:none;}
+.wd-burst-br{position:absolute;bottom:-20px;right:2rem;opacity:.12;pointer-events:none;}
+#why-different .slbl{color:var(--indigo);}#why-different .slbl::before{background:var(--indigo);}
+#why-different .sh{color:var(--black);}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;margin-top:3rem;}
+.why-card{
+  background:var(--cream);padding:2rem 1.8rem;
+  border-top:5px solid transparent;transition:all .28s;
+}
+.why-card:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(0,0,0,.09);}
+.why-card:nth-child(1){border-color:var(--tiger);}
+.why-card:nth-child(2){border-color:var(--indigo);}
+.why-card:nth-child(3){border-color:var(--green);}
+.why-ic{width:44px;height:44px;display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;}
+.why-ic svg{width:26px;height:26px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.why-card:nth-child(1) .why-ic svg{stroke:var(--tiger);}
+.why-card:nth-child(2) .why-ic svg{stroke:var(--indigo);}
+.why-card:nth-child(3) .why-ic svg{stroke:var(--green);}
+.why-title{font-family:var(--pf);font-size:1rem;letter-spacing:2px;text-transform:uppercase;color:var(--black);margin-bottom:.6rem;}
+.why-desc{font-size:.84rem;color:#555;line-height:1.7;}
+
+/* ═══ § SCHEDULE (Indigo) ═══ */
+#schedule{background:var(--indigo);position:relative;overflow:hidden;}
+#schedule .slbl{color:rgba(255,255,255,.6);}#schedule .slbl::before{background:var(--violet);}
+#schedule .sh{color:var(--white);}
+.schedule-coming{
+  margin-top:2.5rem;
+  background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.14);
+  padding:3.5rem;text-align:center;
+}
+.schedule-coming svg{width:52px;height:52px;stroke:rgba(255,255,255,.3);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 1.2rem;display:block;}
+.schedule-coming h3{font-family:var(--pf);font-size:1.4rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:.6rem;}
+.schedule-coming p{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);}
+/* what to expect rows */
+.expect-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2.5rem;}
+.expect-item{
+  background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);
+  padding:1.4rem;display:flex;align-items:flex-start;gap:1rem;transition:all .22s;
+}
+.expect-item:hover{background:rgba(255,255,255,.15);border-color:var(--yellow);}
+.expect-item svg{width:20px;height:20px;stroke:var(--yellow);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;min-width:20px;margin-top:1px;}
+.expect-item h4{font-family:var(--pf);font-size:.85rem;letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:.25rem;}
+.expect-item p{font-size:.8rem;color:rgba(255,255,255,.6);line-height:1.55;}
+
+/* ═══ § REGISTER CTA (Tiger + Yellow diagonal) ═══ */
+.reg-cta{background:var(--tiger);position:relative;overflow:hidden;padding:7rem 4rem;}
+.cta-band{position:absolute;inset:0;clip-path:polygon(0 28%,62% 0%,100% 0%,100% 72%,38% 100%,0% 100%);background:var(--yellow);pointer-events:none;}
+.cta-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr 1fr;gap:5rem;align-items:center;}
+.cta-left h2{font-family:var(--pf);font-size:clamp(2rem,4.5vw,4rem);letter-spacing:1px;text-transform:uppercase;color:var(--black);line-height:.95;margin-bottom:1rem;}
+.cta-left p{font-size:1rem;line-height:1.8;color:rgba(0,0,0,.6);max-width:440px;}
+.cta-right{display:flex;flex-direction:column;align-items:flex-start;gap:1rem;}
+.cta-right a{
+  font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:.9rem 2.2rem;background:var(--black);color:var(--white);
+  text-decoration:none;display:inline-block;transition:all .25s;
+}
+.cta-right a:hover{background:var(--tiger);color:var(--white);transform:translateY(-2px);}
+.cta-right a.outline{background:transparent;border:2px solid rgba(0,0,0,.3);color:var(--black);}
+.cta-right a.outline:hover{background:rgba(0,0,0,.1);border-color:var(--black);}
+.cta-free-badge{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(0,0,0,.55);margin-top:.4rem;
+}
+.cta-free-badge svg{width:16px;height:16px;stroke:var(--green);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+
+/* ═══ FOOTER ═══ */
+footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);padding:3rem 4rem;}
+.ft-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;}
+.flogo{font-family:var(--pf);font-size:1.3rem;letter-spacing:4px;text-transform:uppercase;color:var(--white);}
+.flogo span{color:var(--tiger);}
+.fcopy{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);}
+.fback{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s;}
+.fback:hover{color:var(--yellow);}
+.fbow{height:3px;width:100%;background:linear-gradient(90deg,var(--tiger),var(--yellow),var(--green),var(--indigo));margin-top:2rem;}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  section{padding:5rem 2.5rem;}
+  nav{padding:0 2rem;}
+}
+@media(max-width:860px){
+  nav{padding:0 1.2rem;}
+  .prog-hero{padding:5.5rem 1.2rem 3.5rem;min-height:auto;}
+  section{padding:4.5rem 1.2rem;}
+  .event-grid{grid-template-columns:1fr;gap:2.5rem;}
+  .tracks-grid{grid-template-columns:1fr 1fr;}
+  .speakers-grid{grid-template-columns:1fr 1fr;}
+  .why-grid{grid-template-columns:1fr;}
+  .expect-grid{grid-template-columns:1fr;}
+  .cta-inner{grid-template-columns:1fr;gap:2.5rem;}
+  .hero-facts{flex-wrap:wrap;gap:.5rem;}
+  .hf-item{border-right:none;padding-right:1.5rem;margin-right:0;}
+  footer{padding:2.5rem 1.2rem;}
+}
+@media(max-width:560px){
+  .tracks-grid{grid-template-columns:1fr;}
+  .speakers-grid{grid-template-columns:1fr 1fr;}
+  .prog-actions{flex-direction:column;}
+  .btn-primary,.btn-outline{text-align:center;}
+  .reg-cta{padding:5rem 1.2rem;}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-back">← Home</a>
- <a href="kmtc-brand.html" class="logo">
-  <img src="logo.png" alt="KMTC" style="height: 40px; width: auto; display: block;" />
-</a>
+<!-- ═══ NAV ═══ -->
+<nav id="nav">
+  <a href="index.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Home
+  </a>
+  <a href="kmtc-brand.html" class="logo">
+    <img src="logo.png" alt="KMTC" style="height: 40px; width: auto; display: block;" />
+  </a>
   <a href="kmtc-register.html" class="nav-cta">Register Now</a>
 </nav>
 
-<!-- HERO -->
+<!-- ═══ HERO ═══ -->
 <div class="prog-hero">
+  <div class="hero-ring hr1"></div>
+  <div class="hero-ring hr2"></div>
+  <div class="hero-ring hr3"></div>
+
   <div class="hero-kicker">Annual Flagship Gathering · 2026</div>
   <h1 class="prog-headline">
     <span class="l1">Kingdom</span>
-    <span class="l2">Media &</span>
+    <span class="l2">Media &amp;</span>
     <span class="l3">Tech Confluence</span>
   </h1>
   <p class="prog-desc">
@@ -292,140 +387,353 @@ footer {
     Practical skill transfer. Spiritual formation. Long-term Kingdom community.
   </p>
   <div class="prog-actions">
-    <a href="kmtc-register.html" class="btn-p primary">Secure Your Seat →</a>
-    <a href="#tracks" class="btn-p outline">Explore Tracks</a>
+    <a href="kmtc-register.html" class="btn-primary">Secure Your Seat →</a>
+    <a href="#tracks" class="btn-outline">Explore Tracks</a>
+  </div>
+
+  <div class="hero-facts">
+    <div class="hf-item">
+      <div class="hf-val">FREE</div>
+      <div class="hf-lbl">Entry</div>
+    </div>
+    <div class="hf-item">
+      <div class="hf-val green">6</div>
+      <div class="hf-lbl">Tracks</div>
+    </div>
+    <div class="hf-item">
+      <div class="hf-val tiger">2026</div>
+      <div class="hf-lbl">Nigeria</div>
+    </div>
   </div>
 </div>
 
-<!-- ABOUT EVENT -->
+<!-- ═══ § ABOUT EVENT (Tiger Flame) ═══ -->
 <section id="about-event">
+  <svg class="burst" style="right:-70px;bottom:-70px;opacity:.08;" width="260" height="260" viewBox="0 0 100 100" fill="white"><polygon points="50,2 56,38 90,14 68,44 98,50 68,56 90,86 56,62 50,98 44,62 10,86 32,56 2,50 32,44 10,14 44,38"/></svg>
+
+  <div class="slbl ao">About the Event</div>
   <div class="event-grid">
     <div>
-      <div class="sec-label">About the Event</div>
-      <h2 class="sec-title">More Than a Conference</h2>
-      <p class="sec-body">
+      <h2 class="sh ao">More Than a Conference</h2>
+      <p class="event-body ao">
         KMTC 2026 is a curated, immersive gathering for Kingdom-minded creators, 
         technologists, and innovators. Expect high-quality practical training, 
         Spirit-led conversations, world-class speakers, and long-term community connections.
       </p>
-      <p class="sec-body" style="margin-top:1rem;">
+      <p class="event-body ao">
         Unlike typical conferences, KMTC prioritises Kingdom alignment over hype — 
         combining practical skill transfer with spiritual formation to build long-term 
         community, not one-off attendance.
       </p>
+      <div class="event-tags ao">
+        <span class="etag">100% Free</span>
+        <span class="etag">In-Person</span>
+        <span class="etag">Nigeria · 2026</span>
+        <span class="etag">Kingdom-first</span>
+      </div>
     </div>
     <div class="event-details">
-      <div class="event-detail-row">
-        <span class="edr-label">Event</span>
-        <span class="edr-val">KMTC 2026 — Annual Flagship</span>
+      <div class="edr ao">
+        <div class="edr-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div>
+          <span class="edr-lbl">Event</span>
+          <div class="edr-val">KMTC 2026 — Annual Flagship</div>
+        </div>
       </div>
-      <div class="event-detail-row">
-        <span class="edr-label">Date</span>
-        <span class="edr-val">Dates to be announced</span>
+      <div class="edr ao d1">
+        <div class="edr-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <span class="edr-lbl">Date</span>
+          <div class="edr-val">Dates to be announced</div>
+        </div>
       </div>
-      <div class="event-detail-row">
-        <span class="edr-label">Location</span>
-        <span class="edr-val">Nigeria (Venue TBA)</span>
+      <div class="edr ao d2">
+        <div class="edr-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <span class="edr-lbl">Location</span>
+          <div class="edr-val">Nigeria (Venue TBA)</div>
+        </div>
       </div>
-      <div class="event-detail-row">
-        <span class="edr-label">Format</span>
-        <span class="edr-val">In-person (Hybrid Options TBD)</span>
+      <div class="edr ao d3">
+        <div class="edr-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <span class="edr-lbl">Community</span>
+          <div class="edr-val">Creators, Technologists &amp; Innovators</div>
+        </div>
       </div>
-      <div class="event-detail-row">
-        <span class="edr-label">Community</span>
-        <span class="edr-val">Kingdom Creators, Technologists & Innovators</span>
+      <div class="edr ao d4">
+        <div class="edr-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div>
+          <span class="edr-lbl">Format</span>
+          <div class="edr-val">In-person · Hybrid Options TBD</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TRACKS -->
+<!-- ═══ § TRACKS (Yellow) ═══ -->
 <section id="tracks">
-  <div class="sec-label">Programme Tracks</div>
-  <h2 class="sec-title">Six Tracks of Impact</h2>
-  <p class="sec-body">
-    Curated training streams designed to equip, challenge, and commission you 
-    in your specific lane of Kingdom influence.
-  </p>
+  <svg class="vburst" width="220" height="220" viewBox="0 0 100 100" fill="none" stroke="black" stroke-width="1.5"><polygon points="50,2 56,38 90,14 68,44 98,50 68,56 90,86 56,62 50,98 44,62 10,86 32,56 2,50 32,44 10,14 44,38"/></svg>
+  <div class="slbl ao">Programme Tracks</div>
+  <h2 class="sh ao">Six Tracks of Impact</h2>
+  <p class="tracks-intro ao">Curated training streams designed to equip, challenge, and commission you in your specific lane of Kingdom influence.</p>
   <div class="tracks-grid">
-    <div class="track-card fade-up">
-      <div class="track-icon">📡</div>
-      <div class="track-name">Media & Content</div>
+
+    <div class="track-card ao">
+      <div class="track-num">01</div>
+      <div class="track-top-line"></div>
+      <div class="track-icon-wrap">
+        <!-- Broadcast / signal icon -->
+        <svg viewBox="0 0 24 24"><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><circle cx="12" cy="12" r="2"/></svg>
+      </div>
+      <div class="track-name">Media &amp; Content</div>
       <p class="track-desc">Broadcast, storytelling, production, social media, and digital media strategy for Kingdom impact.</p>
-      <span class="track-tag">For Media Teams · Content Creators</span>
+      <span class="track-tag">Media Teams · Content Creators</span>
     </div>
-    <div class="track-card fade-up">
-      <div class="track-icon">💻</div>
-      <div class="track-name">Tech & Development</div>
+
+    <div class="track-card ao d1">
+      <div class="track-num">02</div>
+      <div class="track-top-line"></div>
+      <div class="track-icon-wrap">
+        <!-- Code icon -->
+        <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <div class="track-name">Tech &amp; Development</div>
       <p class="track-desc">Software engineering, app development, infrastructure, and emerging technologies in God's Kingdom.</p>
-      <span class="track-tag">For Developers · Tech Leads</span>
+      <span class="track-tag">Developers · Tech Leads</span>
     </div>
-    <div class="track-card fade-up">
-      <div class="track-icon">🎨</div>
-      <div class="track-name">Creative Arts & Design</div>
+
+    <div class="track-card ao d2">
+      <div class="track-num">03</div>
+      <div class="track-top-line"></div>
+      <div class="track-icon-wrap">
+        <!-- Pen tool icon -->
+        <svg viewBox="0 0 24 24"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+      </div>
+      <div class="track-name">Creative Arts &amp; Design</div>
       <p class="track-desc">Visual design, branding, photography, videography, and creative expression as acts of worship.</p>
-      <span class="track-tag">For Designers · Creatives</span>
+      <span class="track-tag">Designers · Creatives</span>
     </div>
-    <div class="track-card fade-up">
-      <div class="track-icon">🚀</div>
+
+    <div class="track-card ao">
+      <div class="track-num">04</div>
+      <div class="track-top-line"></div>
+      <div class="track-icon-wrap">
+        <!-- Rocket icon -->
+        <svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+      </div>
       <div class="track-name">Kingdom Business</div>
       <p class="track-desc">Entrepreneurship, Kingdom economics, faith-driven business models, and marketplace ministry.</p>
-      <span class="track-tag">For Entrepreneurs · Founders</span>
+      <span class="track-tag">Entrepreneurs · Founders</span>
     </div>
-    <div class="track-card fade-up">
-      <div class="track-icon">💡</div>
-      <div class="track-name">Innovation & Systems</div>
+
+    <div class="track-card ao d1">
+      <div class="track-num">05</div>
+      <div class="track-top-line"></div>
+      <div class="track-icon-wrap">
+        <!-- Lightbulb / Innovation icon -->
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5z"/><path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5z"/></svg>
+      </div>
+      <div class="track-name">Innovation &amp; Systems</div>
       <p class="track-desc">Social innovation, systems thinking, AI ethics, and Kingdom-aligned solution design.</p>
-      <span class="track-tag">For Innovators · Strategists</span>
+      <span class="track-tag">Innovators · Strategists</span>
     </div>
-    <div class="track-card fade-up">
-      <div class="track-icon">🙏</div>
+
+    <div class="track-card ao d2">
+      <div class="track-num">06</div>
+      <div class="track-top-line"></div>
+      <div class="track-icon-wrap">
+        <!-- Cross / spiritual icon -->
+        <svg viewBox="0 0 24 24"><path d="M11 2a2 2 0 0 0-2 2v5H4a2 2 0 0 0-2 2v2c0 1.1.9 2 2 2h5v5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-5h5a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-5V4a2 2 0 0 0-2-2h-2z"/></svg>
+      </div>
       <div class="track-name">Spiritual Formation</div>
       <p class="track-desc">Identity, calling, character, and sustaining the anointing through seasons of Kingdom work.</p>
       <span class="track-tag">For Every Attendee</span>
     </div>
+
   </div>
 </section>
 
-<!-- SPEAKERS -->
+<!-- ═══ § SPEAKERS (Green) ═══ -->
 <section id="speakers">
-  <div class="sec-label">Speakers</div>
-  <h2 class="sec-title">Who's Speaking</h2>
-  <div class="speakers-placeholder fade-up">
-    <h3>Speaker Announcements Coming Soon</h3>
-    <p>Follow @kmtc on social media and check back here for speaker reveals and updates.</p>
+  <div class="slbl ao">Speakers</div>
+  <h2 class="sh ao">Who's Speaking</h2>
+  <p class="sbody ao">Kingdom-minded thought leaders, practitioners, and innovators from across media, technology, and ministry. Announcements coming soon.</p>
+
+  <div class="speakers-grid">
+    <div class="speaker-card ao">
+      <div class="speaker-ava">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div class="speaker-name">Coming Soon</div>
+      <div class="speaker-role">Keynote Speaker</div>
+    </div>
+    <div class="speaker-card ao d1">
+      <div class="speaker-ava">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div class="speaker-name">Coming Soon</div>
+      <div class="speaker-role">Media Track Lead</div>
+    </div>
+    <div class="speaker-card ao d2">
+      <div class="speaker-ava">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div class="speaker-name">Coming Soon</div>
+      <div class="speaker-role">Tech Track Lead</div>
+    </div>
+    <div class="speaker-card ao d3">
+      <div class="speaker-ava">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div class="speaker-name">Coming Soon</div>
+      <div class="speaker-role">Business Track Lead</div>
+    </div>
+  </div>
+
+  <div class="speakers-cta ao">
+    <p>Follow @kmtc for speaker announcements, reveals, and exclusive previews before the event.</p>
+    <a href="https://instagram.com/kmtc" target="_blank" rel="noopener">Follow @kmtc →</a>
   </div>
 </section>
 
-<!-- SCHEDULE -->
+<!-- ═══ § WHY KMTC DIFFERENT (White) ═══ -->
+<section id="why-different">
+  <div class="wd-burst-tl">
+    <svg width="130" height="130" viewBox="0 0 100 100" fill="#f7572b"><polygon points="50,2 56,38 90,14 68,44 98,50 68,56 90,86 56,62 50,98 44,62 10,86 32,56 2,50 32,44 10,14 44,38"/></svg>
+  </div>
+  <div class="wd-burst-br">
+    <svg width="200" height="200" viewBox="0 0 100 100" fill="none" stroke="#00b675" stroke-width="2"><polygon points="50,2 56,38 90,14 68,44 98,50 68,56 90,86 56,62 50,98 44,62 10,86 32,56 2,50 32,44 10,14 44,38"/></svg>
+  </div>
+
+  <div class="slbl ao">What Makes It Different</div>
+  <h2 class="sh ao">KMTC Is Not<br>Just a Conference</h2>
+  <p class="sbody-dark ao" style="max-width:580px;margin-bottom:0;">Three things that set KMTC apart from every other gathering.</p>
+  <div class="why-grid">
+    <div class="why-card ao">
+      <div class="why-ic">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+      </div>
+      <div class="why-title">Kingdom Alignment Over Hype</div>
+      <p class="why-desc">We prioritise spiritual depth and Kingdom alignment over entertainment, trends, or celebrity culture. Excellence, not noise.</p>
+    </div>
+    <div class="why-card ao d1">
+      <div class="why-ic">
+        <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <div class="why-title">Skill Transfer + Formation</div>
+      <p class="why-desc">Practical, high-quality skill training combined with intentional spiritual formation. You leave with both tools and transformation.</p>
+    </div>
+    <div class="why-card ao d2">
+      <div class="why-ic">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="why-title">Community Over Events</div>
+      <p class="why-desc">We build lasting Kingdom community — not one-off attendance. You belong to a tribe before, during, and long after the event.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ § SCHEDULE (Indigo) ═══ -->
 <section id="schedule">
-  <div class="sec-label">Schedule</div>
-  <h2 class="sec-title">Programme Schedule</h2>
-  <p class="sec-body">A full programme schedule will be published closer to the event. Register now to be first to receive updates.</p>
-  <div class="schedule-tba fade-up">
-    <p>Schedule to be announced · Register to receive programme updates</p>
+  <div class="slbl ao">Schedule</div>
+  <h2 class="sh ao">Programme Schedule</h2>
+  <p class="sbody ao">A full programme schedule will be published closer to the event. Register now to be first to receive updates.</p>
+
+  <div class="expect-grid ao">
+    <div class="expect-item">
+      <svg viewBox="0 0 24 24"><path d="m12 8-9.04 9.06a2.82 2.82 0 1 0 3.98 3.98L16 12"/><circle cx="17" cy="7" r="5"/></svg>
+      <div>
+        <h4>Keynote Sessions</h4>
+        <p>High-impact main stage talks from Kingdom leaders in media, technology, and ministry.</p>
+      </div>
+    </div>
+    <div class="expect-item">
+      <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      <div>
+        <h4>Practical Workshops</h4>
+        <p>Hands-on skill sessions across all six tracks — tools, techniques, and real-world application.</p>
+      </div>
+    </div>
+    <div class="expect-item">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <div>
+        <h4>Networking &amp; Community</h4>
+        <p>Structured networking sessions, collaborative spaces, and community-building activities.</p>
+      </div>
+    </div>
+    <div class="expect-item">
+      <svg viewBox="0 0 24 24"><path d="M11 2a2 2 0 0 0-2 2v5H4a2 2 0 0 0-2 2v2c0 1.1.9 2 2 2h5v5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-5h5a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-5V4a2 2 0 0 0-2-2h-2z"/></svg>
+      <div>
+        <h4>Worship &amp; Spiritual Alignment</h4>
+        <p>Times of corporate worship, prayer, and spiritual alignment woven throughout the programme.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="schedule-coming ao">
+    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    <h3>Full Schedule Coming Soon</h3>
+    <p>Register to receive programme updates · Schedule to be announced</p>
   </div>
 </section>
 
-<!-- REGISTER CTA -->
+<!-- ═══ § REGISTER CTA ═══ -->
 <div class="reg-cta">
-  <h2>Join the Movement</h2>
-  <p>Secure your spot at KMTC 2026 and become part of a Kingdom community that will shape culture.</p>
-  <a href="kmtc-register.html">Register for KMTC 2026 →</a>
+  <div class="cta-band"></div>
+  <div class="cta-inner">
+    <div class="cta-left ao">
+      <h2>Join the Movement</h2>
+      <p>Secure your spot at KMTC 2026 and become part of a Kingdom community that will shape culture, build systems, and leave a lasting legacy.</p>
+    </div>
+    <div class="cta-right ao d1">
+      <a href="kmtc-register.html">Register for KMTC 2026 →</a>
+      <a href="kmtc-brand.html" class="outline">Learn About KMTC</a>
+      <div class="cta-free-badge">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        100% Free — No payment required
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- FOOTER -->
+<!-- ═══ FOOTER ═══ -->
 <footer>
-  <div class="footer-logo">KMTC<span style="color:var(--tiger)">.</span></div>
-  <span class="footer-copy">© 2026 KINGDOM MEDIA & TECH CONFLUENCE · ALL RIGHTS RESERVED</span>
-  <a href="kmtc-brand.html" style="font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;">← Brand Site</a>
+ <div class="ft-inner">
+  <img src="logo.png" alt="KMTC" style="height:42px;width:auto;display:block;"/>
+  <span class="fcopy">© 2026 KINGDOM MEDIA & TECH CONFLUENCE · ALL RIGHTS RESERVED</span>
+    <a href="kmtc-brand.html" class="fback">← Brand Site</a>
+  </div>
+  <div class="fbow"></div>
 </footer>
 
 <script>
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+// ── REVEAL ANIMATION ──
+const animItems = document.querySelectorAll('.ao');
+animItems.forEach(el => el.classList.add('hidden'));
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.remove('hidden'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+animItems.forEach(el => obs.observe(el));
+setTimeout(() => animItems.forEach(el => el.classList.remove('hidden')), 2000);
+
+// ── NAV shadow on scroll ──
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
 </script>
 </body>
 </html>
