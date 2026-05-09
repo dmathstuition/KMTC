@@ -575,9 +575,181 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   #board-cta{padding:4rem 1rem;}
   .why-grid{grid-template-columns:1fr;}
 }
+/* ═══════════════════════════════════════
+   PROFESSIONAL ANIMATIONS & ENHANCEMENTS
+═══════════════════════════════════════ */
+
+/* ── Scroll Progress Bar ── */
+#scroll-bar{
+  position:fixed;top:0;left:0;z-index:10000;
+  height:3px;width:0%;
+  background:linear-gradient(90deg,var(--tiger),var(--yellow),var(--green),var(--indigo),var(--violet));
+  background-size:200%;animation:gradMove 3s linear infinite;
+  transition:width .05s linear;
+  pointer-events:none;
+}
+
+/* ── Page Loader ── */
+#loader{
+  position:fixed;inset:0;z-index:99999;
+  background:var(--black);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.8rem;
+  transition:opacity .6s ease,visibility .6s ease;
+}
+#loader.done{opacity:0;visibility:hidden;pointer-events:none;}
+.loader-logo{
+  font-family:var(--pf);font-size:2.5rem;letter-spacing:6px;text-transform:uppercase;
+  color:var(--white);display:flex;align-items:center;gap:.1rem;
+}
+.loader-logo .lc{color:var(--yellow);animation:pulse 1.5s ease infinite;}
+.loader-bar-wrap{width:220px;height:2px;background:rgba(255,255,255,.1);overflow:hidden;}
+.loader-bar{height:100%;background:linear-gradient(90deg,var(--tiger),var(--yellow),var(--green));animation:loadFill 1.8s ease forwards;}
+@keyframes loadFill{from{width:0}to{width:100%}}
+.loader-txt{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.35);}
+
+/* ── Cursor Glow ── */
+#cursor-glow{
+  position:fixed;pointer-events:none;z-index:9990;
+  width:380px;height:380px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(120,10,232,.06) 0%,transparent 70%);
+  transform:translate(-50%,-50%);
+  transition:left .12s ease,top .12s ease,opacity .4s;
+  opacity:0;
+}
+
+/* ── Magnetic buttons ── */
+.btn-mag{transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease,background .22s;}
+
+/* ── Tilt cards ── */
+.tilt{transform-style:preserve-3d;transition:transform .15s ease;}
+
+/* ── Animated gradient text ── */
+.grad-text{
+  background:linear-gradient(90deg,var(--tiger),var(--yellow),var(--green),var(--indigo),var(--violet),var(--tiger));
+  background-size:300%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:gradMove 5s linear infinite;
+}
+
+/* ── Stagger reveal ── */
+.stagger-child{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease;}
+.stagger-child.in{opacity:1;transform:translateY(0);}
+
+/* ── Shimmer on cards (hover) ── */
+.shimmer{position:relative;overflow:hidden;}
+.shimmer::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.06) 50%,transparent 60%);
+  transform:translateX(-100%);transition:transform .5s ease;
+}
+.shimmer:hover::after{transform:translateX(100%);}
+
+/* ── Floating particles ── */
+#particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;}
+.pt{
+  position:absolute;border-radius:50%;
+  animation:ptFloat linear infinite;
+  opacity:0;
+}
+@keyframes ptFloat{
+  0%{transform:translateY(100vh) scale(0);opacity:0;}
+  10%{opacity:1;}
+  90%{opacity:1;}
+  100%{transform:translateY(-80px) scale(1);opacity:0;}
+}
+
+/* ── Typewriter cursor ── */
+.tw-cursor{display:inline-block;width:3px;height:.85em;background:var(--yellow);margin-left:4px;vertical-align:middle;animation:blink-cur .7s step-end infinite;}
+@keyframes blink-cur{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ── Counting numbers ── */
+.count-num{display:inline-block;}
+
+/* ── Section entry line ── */
+.sec-line{width:0;height:2px;background:var(--tiger);transition:width .8s ease;margin-bottom:1rem;}
+.sec-line.expanded{width:60px;}
+
+/* ── Nav active underline ── */
+.nl a.nav-active{color:var(--yellow);}
+.nl a.nav-active::after{width:100%;}
+
+/* ── Noise texture overlay on hero ── */
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 20% 50%,rgba(247,87,43,.12) 0%,transparent 55%),
+    radial-gradient(ellipse at 80% 20%,rgba(120,10,232,.1) 0%,transparent 50%);
+  pointer-events:none;
+}
+
+/* ── Glowing border on hover for acards ── */
+.acard,.dcard,.wyi,.vc2{position:relative;}
+.acard::after,.dcard::after{
+  content:'';position:absolute;inset:0;opacity:0;
+  box-shadow:0 0 0 1px rgba(255,199,3,.4);
+  transition:opacity .25s;
+  pointer-events:none;
+}
+.acard:hover::after,.dcard:hover::after{opacity:1;}
+
+/* ── Smooth image zoom on hover ── */
+.pp img,.ppc img,.pp-wide img,.gppc img,.who-img img{
+  transition:transform .6s ease;
+}
+.pp:hover img,.ppc:hover img,.pp-wide:hover img,.gppc:hover img{transform:scale(1.04);}
+
+/* ── Scroll-triggered section labels ── */
+.slbl.animated::before{
+  animation:lineGrow .6s ease forwards;
+}
+@keyframes lineGrow{from{width:0}to{width:26px}}
+
+/* ── Who-it's-for card glow ── */
+.wc{position:relative;}
+.wc::after{
+  content:'';position:absolute;inset:0;border-radius:0;
+  box-shadow:0 0 0 0 var(--yellow);
+  transition:box-shadow .28s;pointer-events:none;
+}
+.wc:hover::after{box-shadow:0 0 24px rgba(255,199,3,.12);}
+
+/* ── Prog card animated left stripe ── */
+.prog-card::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:5px;
+  background:linear-gradient(180deg,var(--tiger),var(--yellow));
+  background-size:100% 200%;
+  animation:stripeShift 2.5s ease infinite;
+}
+@keyframes stripeShift{0%,100%{background-position:0 0}50%{background-position:0 100%}}
+
+/* ── Footer social pop ── */
+.sb{transform:scale(1);}
+.sb:hover{transform:scale(1.18) translateY(-2px);}
+
+/* ── Mobile responsive stays intact ── */
+@media(max-width:860px){
+  #cursor-glow{display:none;}
+}
 </style>
 </head>
 <body>
+
+<!-- ── SCROLL PROGRESS BAR ── -->
+<div id="scroll-bar"></div>
+
+<!-- ── CURSOR GLOW ── -->
+<div id="cursor-glow"></div>
+
+<!-- ── PAGE LOADER ── -->
+<div id="loader">
+  <img src="logo.png" alt="KMTC"
+       style="height:70px;width:auto;display:block;animation:pulse 1.8s ease infinite;"
+       onerror="this.style.display='none';document.getElementById('loader-fallback').style.display='flex'"/>
+  <div id="loader-fallback" style="display:none;font-family:var(--pf);font-size:2.2rem;letter-spacing:6px;text-transform:uppercase;color:var(--white);">KM<span style="color:var(--yellow);">✝</span>C</div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  <div class="loader-txt">Kingdom Media &amp; Tech Confluence</div>
+</div>
 
 <!-- ═══ NAV ═══ -->
 <nav id="nav">
@@ -611,6 +783,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
+  <!-- ── floating particles ── -->
+  <div id="particles"></div>
   <div class="hero-ring hr1"></div>
   <div class="hero-ring hr2"></div>
 
@@ -690,7 +864,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
       <img src="image2.jpeg" alt="KMTC community photo" style="width:100%;height:100%;object-fit:cover;"/>
     </div>
     <div class="pp ao d1">
-      <img src="image1.jpeg" alt="KMTC community photo" style="width:100%;height:100%;object-fit:cover;"/>
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.38)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+      <span>Add Photo</span>
     </div>
     <div class="pp ao d2">
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.38)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
@@ -1029,12 +1204,10 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
 
 <!-- ═══ FOOTER ═══ -->
 <footer>
-<div class="ftop">
-  <div>
-    <div class="flogo">
-      <img src="logo.png" alt="KMTC" style="height: 45px; width: auto; display: block; margin-bottom: .9rem;" />
-    </div>
-    <p class="fdesc">Kingdom Media & Tech Confluence — an ecosystem for Kingdom-minded creators, technologists, and innovators. Faith · Media · Technology · Impact</p>
+  <div class="ftop">
+    <div>
+      <div class="flogo">KM<span>✝</span>C</div>
+      <p class="fdesc">Kingdom Media & Tech Confluence — an ecosystem for Kingdom-minded creators, technologists, and innovators. Faith · Media · Technology · Impact</p>
       <!-- ─── SOCIAL ICONS: inline SVG paths — guaranteed to render ─── -->
       <div class="fsoc">
         <a class="sb" href="https://instagram.com/kmtc" target="_blank" rel="noopener" aria-label="Instagram">
@@ -1080,7 +1253,96 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
 </footer>
 
 <script>
-// ── REVEAL ANIMATION ──
+/* ════════════════════════════════
+   KMTC — PROFESSIONAL JS SUITE
+════════════════════════════════ */
+
+// ── 1. PAGE LOADER ──────────────────────────────────────────
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('done');
+  }, 1900);
+});
+
+// ── 2. SCROLL PROGRESS BAR ──────────────────────────────────
+const scrollBar = document.getElementById('scroll-bar');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  scrollBar.style.width = pct + '%';
+}, { passive: true });
+
+// ── 3. NAV SCROLL SHADOW ────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+// ── 4. CURSOR GLOW ──────────────────────────────────────────
+const cursorGlow = document.getElementById('cursor-glow');
+let cx = 0, cy = 0;
+document.addEventListener('mousemove', e => {
+  cx = e.clientX; cy = e.clientY;
+  cursorGlow.style.left = cx + 'px';
+  cursorGlow.style.top  = cy + 'px';
+  cursorGlow.style.opacity = '1';
+});
+document.addEventListener('mouseleave', () => { cursorGlow.style.opacity = '0'; });
+
+// ── 5. HERO PARTICLES ───────────────────────────────────────
+(function spawnParticles() {
+  const container = document.getElementById('particles');
+  if (!container) return;
+  const colors = ['#f7572b','#ffc703','#00b675','#780ae8','#e982eb'];
+  const total   = 22;
+  for (let i = 0; i < total; i++) {
+    const p = document.createElement('div');
+    p.className = 'pt';
+    const size = Math.random() * 5 + 2;
+    p.style.cssText = `
+      width:${size}px;height:${size}px;
+      left:${Math.random() * 100}%;
+      background:${colors[Math.floor(Math.random() * colors.length)]};
+      animation-duration:${Math.random() * 14 + 10}s;
+      animation-delay:${Math.random() * 12}s;
+      opacity:0;
+    `;
+    container.appendChild(p);
+  }
+})();
+
+// ── 6. MAGNETIC BUTTONS ─────────────────────────────────────
+document.querySelectorAll('.btn-y,.btn-gw,.ncta,.btn-dark,.inv-btn,.prog-action a').forEach(btn => {
+  btn.classList.add('btn-mag');
+  btn.addEventListener('mousemove', e => {
+    const r   = btn.getBoundingClientRect();
+    const dx  = e.clientX - (r.left + r.width  / 2);
+    const dy  = e.clientY - (r.top  + r.height / 2);
+    btn.style.transform = `translate(${dx * .22}px, ${dy * .22}px)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = '';
+  });
+});
+
+// ── 7. TILT CARDS ───────────────────────────────────────────
+document.querySelectorAll('.vc2,.wyi,.track-card,.why-card,.wc,.speaker-card').forEach(card => {
+  card.classList.add('tilt');
+  card.addEventListener('mousemove', e => {
+    const r   = card.getBoundingClientRect();
+    const x   = (e.clientX - r.left) / r.width  - .5;
+    const y   = (e.clientY - r.top ) / r.height - .5;
+    card.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateZ(6px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+// ── 8. SHIMMER CARDS ────────────────────────────────────────
+document.querySelectorAll('.acard,.dcard,.edr,.spon-tier,.obj-card').forEach(el => {
+  el.classList.add('shimmer');
+});
+
+// ── 9. REVEAL ANIMATION (enhanced stagger) ──────────────────
 const animItems = document.querySelectorAll('.ao');
 animItems.forEach(el => el.classList.add('hidden'));
 const revObs = new IntersectionObserver((entries) => {
@@ -1094,12 +1356,54 @@ const revObs = new IntersectionObserver((entries) => {
 animItems.forEach(el => revObs.observe(el));
 setTimeout(() => animItems.forEach(el => el.classList.remove('hidden')), 2000);
 
-// ── NAV scroll ──
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
-}, {passive:true});
+// ── 10. STAGGER CHILDREN in section grids ───────────────────
+const staggerObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      Array.from(e.target.children).forEach((child, i) => {
+        child.classList.add('stagger-child');
+        setTimeout(() => child.classList.add('in'), i * 80);
+      });
+      staggerObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.val-grid,.who-grid,.why-grid,.tracks-grid,.obj-grid,.speakers-grid').forEach(g => {
+  staggerObs.observe(g);
+});
 
-// ── Mobile nav ──
+// ── 11. SECTION LABEL LINE ANIMATION ────────────────────────
+const lblObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('animated');
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.slbl,.ph-label,.block-label').forEach(l => lblObs.observe(l));
+
+// ── 12. ACTIVE NAV on scroll ────────────────────────────────
+const sections = document.querySelectorAll('section[id], div[id]');
+const navLinks = document.querySelectorAll('.nl a');
+const sectObs  = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('nav-active'));
+      const match = document.querySelector(`.nl a[href="#${e.target.id}"]`);
+      if (match) match.classList.add('nav-active');
+    }
+  });
+}, { threshold: 0.35, rootMargin: '-64px 0px -40% 0px' });
+sections.forEach(s => sectObs.observe(s));
+
+// ── 13. PARALLAX on hero rings ──────────────────────────────
+window.addEventListener('scroll', () => {
+  const sy = window.scrollY;
+  document.querySelectorAll('.hero-ring').forEach((r, i) => {
+    const speed = (i + 1) * 0.18;
+    r.style.transform = `translateY(${sy * speed}px)`;
+  });
+}, { passive: true });
+
+// ── 14. MOBILE NAV ──────────────────────────────────────────
 const mobNav = document.getElementById('mobNav');
 const hamBtn = document.getElementById('hamBtn');
 let mobOpen = false;
@@ -1109,7 +1413,7 @@ function toggleMob() {
   const spans = hamBtn.querySelectorAll('span');
   if (mobOpen) {
     spans[0].style.transform = 'rotate(45deg) translate(5px,5px)';
-    spans[1].style.opacity = '0';
+    spans[1].style.opacity   = '0';
     spans[2].style.transform = 'rotate(-45deg) translate(5px,-5px)';
   } else {
     spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
@@ -1118,13 +1422,33 @@ function toggleMob() {
 function closeMob() {
   mobOpen = false;
   mobNav.classList.remove('open');
-  const spans = hamBtn.querySelectorAll('span');
-  spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+  hamBtn.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
 }
 hamBtn.addEventListener('click', toggleMob);
 document.addEventListener('click', (e) => {
   if (mobOpen && !mobNav.contains(e.target) && !hamBtn.contains(e.target)) closeMob();
 });
+
+// ── 16. SMOOTH HERO HEADLINE TYPEWRITER ─────────────────────
+// Runs after loader clears
+setTimeout(() => {
+  const words = ['Faith','Meets','Tech'];
+  const spans = ['.w1','.w2','.w3'];
+  spans.forEach((sel, i) => {
+    const el = document.querySelector(sel);
+    if (!el) return;
+    const text = words[i];
+    el.textContent = '';
+    el.style.opacity = '1';
+    let j = 0;
+    const type = setInterval(() => {
+      el.textContent += text[j];
+      j++;
+      if (j >= text.length) clearInterval(type);
+    }, 55 + i * 25);
+  });
+}, 2100);
+
 </script>
 </body>
 </html>
