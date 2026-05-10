@@ -20,35 +20,40 @@
 html{scroll-behavior:smooth;}
 body{font-family:'Nunito',sans-serif;overflow-x:hidden;background:var(--cream);}
 
+/* ── Keyframes ── */
 @keyframes fadeSlideUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.96)}}
 @keyframes gradMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-@keyframes loadFill{from{width:0}to{width:100%}}
 @keyframes ptFloat{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-80px) scale(1);opacity:0}}
-@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes stripeShift{0%,100%{background-position:0 0}50%{background-position:0 100%}}
-@keyframes shimmerMove{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+@keyframes gradBorderSpin{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes faqOpen{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 
+/* ── Reveal ── */
 .ao{opacity:1;transform:none;transition:opacity .65s ease,transform .65s ease;}
 .ao.hidden{opacity:0;transform:translateY(24px);}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
-.d4{transition-delay:.4s}.d5{transition-delay:.5s}.d6{transition-delay:.6s}
-.d7{transition-delay:.7s}
+.d4{transition-delay:.4s}.d5{transition-delay:.5s}
 
 /* ── Scroll Progress Bar ── */
-#scroll-bar{position:fixed;top:0;left:0;z-index:10000;height:3px;width:0%;background:linear-gradient(90deg,var(--tiger),var(--yellow),var(--green),var(--indigo),var(--violet));background-size:200%;animation:gradMove 3s linear infinite;transition:width .05s linear;pointer-events:none;}
-
-
+#scroll-bar{position:fixed;top:0;left:0;z-index:10000;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--tiger),var(--yellow),var(--green),var(--indigo),var(--violet));
+  background-size:200%;animation:gradMove 3s linear infinite;
+  transition:width .05s linear;pointer-events:none;}
 
 /* ── Cursor Glow ── */
-#cursor-glow{position:fixed;pointer-events:none;z-index:9990;width:360px;height:360px;border-radius:50%;background:radial-gradient(ellipse,rgba(120,10,232,.07) 0%,transparent 70%);transform:translate(-50%,-50%);transition:left .12s ease,top .12s ease,opacity .4s;opacity:0;}
+#cursor-glow{position:fixed;pointer-events:none;z-index:9990;
+  width:360px;height:360px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(120,10,232,.07) 0%,transparent 70%);
+  transform:translate(-50%,-50%);
+  transition:left .1s ease,top .1s ease,opacity .4s;opacity:0;}
 
 /* ── Particles ── */
 #particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;}
 .pt{position:absolute;border-radius:50%;animation:ptFloat linear infinite;opacity:0;}
 
-/* ═══ NAV ═══ */
+/* ══════════════ NAV ══════════════ */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:9999;
   display:flex;align-items:center;justify-content:space-between;
@@ -59,38 +64,50 @@ nav{
   transition:box-shadow .3s;
 }
 nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,.5);}
-.logo{font-family:var(--pf);font-size:1.5rem;letter-spacing:3px;text-transform:uppercase;color:var(--white);display:flex;align-items:center;text-decoration:none;}
-.logo .cross{color:var(--yellow);animation:pulse 2.5s infinite;}
-.nav-back{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;display:flex;align-items:center;gap:.5rem;transition:color .2s;}
+.nav-back{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.45);text-decoration:none;display:flex;align-items:center;gap:.5rem;transition:color .2s;}
 .nav-back:hover{color:var(--yellow);}
-.ncta{font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:.6rem 1.3rem;background:var(--tiger);color:var(--white);border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:all .22s;}
+.logo{display:flex;align-items:center;text-decoration:none;}
+.ncta{font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:.6rem 1.3rem;background:var(--tiger);color:var(--white);
+  border:none;cursor:pointer;text-decoration:none;display:inline-block;
+  transition:background .22s,color .22s,transform .22s,box-shadow .22s;}
 .ncta:hover{background:var(--yellow);color:var(--black);}
 
-/* ═══ PAGE HERO ═══ */
+/* ══════════════ HERO ══════════════ */
 .page-hero{
-  background:var(--black);
-  padding:9rem 4rem 5rem;
-  position:relative;overflow:hidden;
-  z-index:20;
+  background:var(--black);padding:9rem 4rem 5rem;
+  position:relative;overflow:hidden;z-index:20;
 }
-.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(120,10,232,.14) 0%,transparent 55%),radial-gradient(ellipse at 15% 80%,rgba(247,87,43,.1) 0%,transparent 55%);pointer-events:none;}
-.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--tiger),var(--yellow),var(--green),var(--indigo),var(--violet));background-size:200%;animation:gradMove 4s linear infinite;}
-/* floating rings in hero */
+.page-hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 80% 20%,rgba(120,10,232,.14) 0%,transparent 55%),
+             radial-gradient(ellipse at 15% 80%,rgba(247,87,43,.1) 0%,transparent 55%);
+  pointer-events:none;}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--tiger),var(--yellow),var(--green),var(--indigo),var(--violet));
+  background-size:200%;animation:gradMove 4s linear infinite;}
 .hero-ring{position:absolute;border-radius:50%;pointer-events:none;animation:float 7s ease-in-out infinite;}
 .hr1{width:360px;height:360px;border:1px solid rgba(255,199,3,.05);top:-80px;right:-80px;}
 .hr2{width:200px;height:200px;border:1px solid rgba(247,87,43,.06);bottom:60px;right:60px;animation-delay:3s;}
-.ph-label{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:4px;text-transform:uppercase;color:var(--tiger);display:flex;align-items:center;gap:10px;margin-bottom:.9rem;animation:fadeSlideUp .7s .1s ease both;position:relative;z-index:2;}
+.ph-label{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:4px;text-transform:uppercase;
+  color:var(--tiger);display:flex;align-items:center;gap:10px;margin-bottom:.9rem;
+  animation:fadeSlideUp .7s .1s ease both;position:relative;z-index:2;}
 .ph-label::before{content:'';width:26px;height:2px;background:var(--tiger);}
-.ph-title{font-family:var(--pf);font-size:clamp(2.8rem,7vw,7rem);line-height:.88;text-transform:uppercase;color:var(--white);margin-bottom:1.5rem;animation:fadeSlideUp .7s .25s ease both;position:relative;z-index:2;}
+.ph-title{font-family:var(--pf);font-size:clamp(2.8rem,7vw,7rem);line-height:.88;text-transform:uppercase;
+  color:var(--white);margin-bottom:1.5rem;animation:fadeSlideUp .7s .25s ease both;position:relative;z-index:2;}
 .ph-title span{color:var(--yellow);}
-.ph-sub{font-size:1rem;line-height:1.85;color:rgba(255,255,255,.55);max-width:580px;animation:fadeSlideUp .7s .4s ease both;position:relative;z-index:2;}
-.ph-chips{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:2rem;animation:fadeSlideUp .7s .55s ease both;position:relative;z-index:2;}
-.ph-chip{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:2px;text-transform:uppercase;padding:.32rem .8rem;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.45);transition:all .22s;}
+.ph-sub{font-size:1rem;line-height:1.85;color:rgba(255,255,255,.55);max-width:580px;
+  animation:fadeSlideUp .7s .4s ease both;position:relative;z-index:2;}
+.ph-chips{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:2rem;
+  animation:fadeSlideUp .7s .55s ease both;position:relative;z-index:2;}
+.ph-chip{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:2px;text-transform:uppercase;
+  padding:.32rem .8rem;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.45);transition:all .22s;}
 .ph-chip:hover{border-color:var(--yellow);color:var(--yellow);}
 
-/* ═══ BOARD SECTION ═══ */
+/* ══════════════ BOARD SECTION ══════════════ */
 .board-section{background:var(--cream);padding:5.5rem 4rem;}
-.bs-label{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:4px;text-transform:uppercase;color:var(--tiger);display:flex;align-items:center;gap:10px;margin-bottom:.8rem;}
+.bs-label{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:4px;text-transform:uppercase;
+  color:var(--tiger);display:flex;align-items:center;gap:10px;margin-bottom:.8rem;}
 .bs-label::before{content:'';width:26px;height:2px;background:var(--tiger);}
 .bs-title{font-family:var(--pf);font-size:clamp(2rem,4.5vw,3.5rem);line-height:.95;text-transform:uppercase;color:var(--black);margin-bottom:.8rem;}
 .bs-sub{font-size:.95rem;color:#666;max-width:560px;line-height:1.8;margin-bottom:3rem;}
@@ -98,22 +115,39 @@ nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,.5);}
 /* Board grid */
 .board-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;}
 
-/* Member card */
+/* ══════════════════════════════════════
+   1. GLASSMORPHISM CARD HOVER
+══════════════════════════════════════ */
 .member-card{
   background:var(--white);
   display:grid;grid-template-columns:auto 1fr;
   gap:2rem;padding:2.2rem;
-  transition:transform .3s,box-shadow .3s;
   position:relative;overflow:hidden;
+  /* smooth spring transition */
+  transition:
+    transform .4s cubic-bezier(.34,1.56,.64,1),
+    box-shadow .4s ease,
+    background .35s ease,
+    backdrop-filter .35s ease;
 }
-/* shimmer sweep */
+.member-card:hover{
+  transform:translateY(-6px) scale(1.012);
+  box-shadow:0 28px 64px rgba(0,0,0,.13);
+  /* glass effect */
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+/* Shimmer sweep on hover */
 .member-card::after{
-  content:'';position:absolute;top:0;left:0;height:100%;width:60%;
-  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.07) 50%,transparent 60%);
-  transform:translateX(-120%);transition:transform .55s ease;pointer-events:none;
+  content:'';position:absolute;top:0;left:-60%;height:100%;width:60%;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.18) 50%,transparent 60%);
+  transform:translateX(-100%);transition:transform .65s ease;pointer-events:none;z-index:3;
 }
-.member-card:hover::after{transform:translateX(200%);}
-.member-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;}
+.member-card:hover::after{transform:translateX(350%);}
+
+/* left accent stripe */
+.member-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;z-index:2;}
 .member-card:nth-child(1)::before{background:var(--tiger);}
 .member-card:nth-child(2)::before{background:var(--indigo);}
 .member-card:nth-child(3)::before{background:var(--green);}
@@ -122,13 +156,42 @@ nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,.5);}
 .member-card:nth-child(6)::before{background:var(--tiger);}
 .member-card:nth-child(7)::before{background:var(--indigo);}
 .member-card:nth-child(8)::before{background:var(--green);}
-.member-card:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(0,0,0,.12);}
+
+/* ══════════════════════════════════════
+   2. ANIMATED GRADIENT BORDER
+   Wraps each card — glowing ring on hover
+══════════════════════════════════════ */
+.grad-border-wrap{
+  position:relative;
+  padding:2px;               /* space for the gradient ring */
+  background:transparent;
+  transition:background .3s;
+}
+.grad-border-wrap::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--tiger),var(--yellow),var(--green),var(--indigo),var(--violet),var(--tiger));
+  background-size:300% 300%;
+  animation:gradBorderSpin 3s linear infinite;
+  opacity:0;
+  transition:opacity .35s ease;
+  z-index:0;
+  border-radius:2px;
+}
+.grad-border-wrap:hover::before{opacity:1;}
+.grad-border-wrap > .member-card{
+  position:relative;z-index:1;
+  /* fill the 2px padding exactly */
+  margin:0;
+}
 
 /* Avatar */
-.member-ava{width:90px;height:90px;border-radius:50%;overflow:hidden;flex-shrink:0;position:relative;transition:transform .3s,box-shadow .3s;}
-.member-card:hover .member-ava{transform:scale(1.08);box-shadow:0 6px 20px rgba(0,0,0,.2);}
+.member-ava{width:90px;height:90px;border-radius:50%;overflow:hidden;flex-shrink:0;
+  position:relative;transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;}
+.member-card:hover .member-ava{transform:scale(1.1);box-shadow:0 8px 24px rgba(0,0,0,.22);}
 .member-img,.member-card.featured .member-img{width:100%;height:100%;object-fit:cover;display:block;}
-.ava-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--pf);font-size:1.8rem;color:var(--white);}
+.ava-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--pf);font-size:1.8rem;color:var(--white);}
 .member-card:nth-child(1) .member-ava{background:var(--tiger);}
 .member-card:nth-child(2) .member-ava{background:var(--indigo);}
 .member-card:nth-child(3) .member-ava{background:var(--green);}
@@ -151,13 +214,17 @@ nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,.5);}
 .member-name{font-family:var(--pf);font-size:1.3rem;letter-spacing:1px;text-transform:uppercase;color:var(--black);line-height:1.1;}
 .member-portfolio{font-size:.82rem;color:#666;line-height:1.6;margin-top:.3rem;}
 .member-tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.6rem;}
-.mtag{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:1px;text-transform:uppercase;padding:.28rem .7rem;background:var(--cream);color:#555;border:1px solid rgba(0,0,0,.1);transition:all .2s;}
+.mtag{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:1px;text-transform:uppercase;
+  padding:.28rem .7rem;background:var(--cream);color:#555;border:1px solid rgba(0,0,0,.1);transition:all .2s;}
 .mtag:hover{background:var(--black);color:var(--white);border-color:var(--black);}
 
 /* Social links */
 .member-socials{display:flex;gap:.5rem;margin-top:.8rem;flex-wrap:wrap;}
-.soc-link{display:inline-flex;align-items:center;gap:.4rem;font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:1px;text-transform:uppercase;padding:.32rem .8rem;background:var(--black);color:rgba(255,255,255,.7);text-decoration:none;transition:all .22s;border:1px solid transparent;transform:scale(1);}
-.soc-link:hover{transform:scale(1.06) translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.2);}
+.soc-link{display:inline-flex;align-items:center;gap:.4rem;font-family:'Space Mono',monospace;
+  font-size:.52rem;letter-spacing:1px;text-transform:uppercase;padding:.32rem .8rem;
+  background:var(--black);color:rgba(255,255,255,.7);text-decoration:none;
+  transition:all .22s;border:1px solid transparent;}
+.soc-link:hover{transform:scale(1.06) translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.25);}
 .soc-link svg{width:13px;height:13px;stroke:currentColor;}
 .soc-link.ig:hover{background:var(--tiger);color:var(--white);}
 .soc-link.tw:hover{background:var(--indigo);color:var(--white);}
@@ -165,9 +232,9 @@ nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,.5);}
 .soc-link.yt:hover{background:#ff0000;color:var(--white);}
 .soc-link.web:hover{background:var(--green);color:var(--white);}
 
-/* Featured card */
+/* Featured founder card */
 .member-card.featured{grid-column:1/-1;background:var(--black);display:grid;grid-template-columns:auto 1fr;gap:2.5rem;}
-.member-card.featured::after{background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.04) 50%,transparent 60%);}
+.member-card.featured:hover{background:rgba(20,20,20,.96);}
 .member-card.featured .member-ava{width:110px;height:110px;font-size:2.2rem;background:var(--tiger);}
 .member-card.featured .member-office{color:var(--yellow);}
 .member-card.featured .member-name{color:var(--white);font-size:1.6rem;}
@@ -175,38 +242,161 @@ nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,.5);}
 .member-card.featured .mtag{background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);border-color:rgba(255,255,255,.1);}
 .member-card.featured .mtag:hover{background:rgba(255,255,255,.18);color:var(--white);}
 .member-card.featured .soc-link{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.1);}
-.member-card.featured::before{background:linear-gradient(180deg,var(--yellow),var(--tiger));background-size:100% 200%;animation:stripeShift 2.5s ease infinite;}
+.member-card.featured::before{background:linear-gradient(180deg,var(--yellow),var(--tiger));
+  background-size:100% 200%;animation:stripeShift 2.5s ease infinite;}
 
-/* ═══ INVITE SECTION ═══ */
+/* ══════════════════════════════════════
+   3. SMOOTH MAGNETIC BUTTON
+   CSS-var spotlight + spring spring
+══════════════════════════════════════ */
+.mag-btn{
+  position:relative;overflow:hidden;
+  /* spring easing */
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),
+             box-shadow .3s ease,
+             background .22s, color .22s;
+}
+.mag-btn::before{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(
+    circle at var(--mx,50%) var(--my,50%),
+    rgba(255,255,255,.22) 0%,
+    transparent 65%
+  );
+  opacity:0;transition:opacity .28s ease;pointer-events:none;
+}
+.mag-btn:hover::before{opacity:1;}
+.mag-btn:hover{
+  box-shadow:0 14px 36px rgba(0,0,0,.25);
+}
+
+/* ══════════════════════════════════════
+   INVITE SECTION
+══════════════════════════════════════ */
 .board-invite{background:var(--tiger);padding:5.5rem 4rem;position:relative;overflow:hidden;}
-/* decorative starburst */
-.board-invite::before{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;background:rgba(255,255,255,.05);border-radius:50%;pointer-events:none;}
+.board-invite::before{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;
+  background:rgba(255,255,255,.05);border-radius:50%;pointer-events:none;}
 .bi-inner{display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:center;}
-.bi-label{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:10px;margin-bottom:.8rem;}
+.bi-label{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:4px;text-transform:uppercase;
+  color:rgba(255,255,255,.7);display:flex;align-items:center;gap:10px;margin-bottom:.8rem;}
 .bi-label::before{content:'';width:26px;height:2px;background:var(--yellow);}
-.bi-title{font-family:var(--pf);font-size:clamp(1.8rem,4vw,3.2rem);text-transform:uppercase;color:var(--white);margin-bottom:1rem;line-height:1;}
+.bi-title{font-family:var(--pf);font-size:clamp(1.8rem,4vw,3.2rem);text-transform:uppercase;
+  color:var(--white);margin-bottom:1rem;line-height:1;}
 .bi-body{font-size:.95rem;color:rgba(255,255,255,.78);line-height:1.8;margin-bottom:1.8rem;}
-.btn-y{font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:.9rem 2rem;background:var(--yellow);color:var(--black);text-decoration:none;display:inline-block;transition:all .25s;}
-.btn-y:hover{background:var(--white);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.2);}
+.btn-y{font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:.9rem 2rem;background:var(--yellow);color:var(--black);
+  text-decoration:none;display:inline-block;}
+.btn-y:hover{background:var(--white);}
 .bi-right{display:flex;flex-direction:column;gap:1rem;}
-.bi-stat{background:rgba(0,0,0,.18);padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1rem;transition:all .22s;border-left:3px solid transparent;}
-.bi-stat:hover{background:rgba(0,0,0,.28);border-color:var(--yellow);transform:translateX(4px);}
+.bi-stat{background:rgba(0,0,0,.18);padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1rem;
+  transition:all .25s;border-left:3px solid transparent;}
+.bi-stat:hover{background:rgba(0,0,0,.28);border-color:var(--yellow);transform:translateX(5px);}
 .bi-stat svg{min-width:20px;}
 .bi-stat-text h4{font-family:var(--pf);font-size:.88rem;letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:.2rem;}
 .bi-stat-text p{font-size:.8rem;color:rgba(255,255,255,.65);}
 
-/* ═══ FOOTER ═══ */
+/* ══════════════════════════════════════
+   4. PREMIUM FAQ ACCORDION
+══════════════════════════════════════ */
+.faq-section{
+  background:var(--black);
+  padding:6rem 4rem;
+  position:relative;overflow:hidden;
+}
+.faq-section::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 10% 50%,rgba(120,10,232,.08) 0%,transparent 55%),
+    radial-gradient(ellipse at 90% 20%,rgba(247,87,43,.06) 0%,transparent 55%);
+  pointer-events:none;
+}
+.faq-section::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--yellow),var(--tiger),var(--green));
+}
+.faq-inner{position:relative;z-index:2;max-width:860px;margin:0 auto;}
+.faq-label{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:4px;text-transform:uppercase;
+  color:var(--yellow);display:flex;align-items:center;gap:10px;margin-bottom:.8rem;}
+.faq-label::before{content:'';width:26px;height:2px;background:var(--yellow);}
+.faq-title{font-family:var(--pf);font-size:clamp(2rem,4.5vw,3.5rem);line-height:.95;letter-spacing:1px;
+  text-transform:uppercase;color:var(--white);margin-bottom:3rem;}
+.faq-title span{color:var(--yellow);}
+
+.faq-list{display:flex;flex-direction:column;}
+
+.faq-item{border-bottom:1px solid rgba(255,255,255,.08);overflow:hidden;}
+.faq-item:first-child{border-top:1px solid rgba(255,255,255,.08);}
+
+/* Question button */
+.faq-q{
+  width:100%;background:none;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;
+  padding:1.6rem 0;text-align:left;
+  font-family:var(--pf);font-size:clamp(.92rem,1.8vw,1.1rem);
+  letter-spacing:.5px;text-transform:uppercase;
+  color:rgba(255,255,255,.72);
+  transition:color .25s,padding .25s;
+  -webkit-tap-highlight-color:transparent;
+}
+.faq-q:hover{color:var(--yellow);}
+.faq-q.open{color:var(--yellow);padding-left:.4rem;}
+
+/* Icon ring */
+.faq-icon{
+  width:38px;height:38px;border-radius:50%;flex-shrink:0;
+  border:1.5px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;
+  transition:
+    background .3s,
+    border-color .3s,
+    transform .45s cubic-bezier(.34,1.56,.64,1);
+}
+.faq-q:hover .faq-icon{border-color:rgba(255,199,3,.5);}
+.faq-q.open .faq-icon{
+  background:var(--tiger);
+  border-color:var(--tiger);
+  transform:rotate(45deg);
+}
+.faq-icon svg{
+  width:15px;height:15px;fill:none;
+  stroke:rgba(255,255,255,.65);stroke-width:2.5;
+  stroke-linecap:round;stroke-linejoin:round;
+  transition:stroke .25s;
+}
+.faq-q.open .faq-icon svg{stroke:var(--white);}
+.faq-q:hover .faq-icon svg{stroke:var(--yellow);}
+.faq-q.open:hover .faq-icon svg{stroke:var(--white);}
+
+/* Answer panel */
+.faq-body{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .42s cubic-bezier(.4,0,.2,1);
+}
+.faq-body.open{grid-template-rows:1fr;}
+.faq-body-inner{
+  overflow:hidden;
+}
+.faq-body-content{
+  padding:0 0 1.8rem 0;
+  font-size:.95rem;line-height:1.9;color:rgba(255,255,255,.55);
+  border-left:3px solid var(--tiger);
+  padding-left:1.4rem;
+  margin-left:2px;
+  animation:faqOpen .3s ease both;
+}
+.faq-body-content strong{color:var(--yellow);font-weight:700;}
+.faq-body-content a{color:var(--tiger);text-decoration:none;}
+.faq-body-content a:hover{text-decoration:underline;}
+
+/* ══════════════ FOOTER ══════════════ */
 footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);padding:2.5rem 4rem;}
 .fbot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
-.flogo{font-family:var(--pf);font-size:1.3rem;letter-spacing:4px;text-transform:uppercase;color:var(--white);}
-.flogo span{color:var(--tiger);}
 .fcopy{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);}
 .fbow{height:3px;width:70px;background:linear-gradient(90deg,var(--tiger),var(--yellow),var(--green),var(--indigo));}
 
-/* ── Tilt ── */
-.tilt{transform-style:preserve-3d;transition:transform .15s ease;}
-
-/* ═══ RESPONSIVE ═══ */
+/* ══════════════ RESPONSIVE ══════════════ */
 @media(max-width:900px){
   nav{padding:.85rem 1.2rem;}
   .ncta{display:none;}
@@ -216,6 +406,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   .member-card.featured{grid-column:auto;}
   .bi-inner{grid-template-columns:1fr;gap:2.5rem;}
   .board-invite{padding:4.5rem 1.5rem;}
+  .faq-section{padding:4.5rem 1.5rem;}
   footer{padding:2rem 1.5rem;}
   #cursor-glow{display:none;}
 }
@@ -227,6 +418,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   .member-card.featured .member-name{font-size:1.3rem;}
   .board-section{padding:3.5rem 1rem;}
   .board-invite{padding:3.5rem 1rem;}
+  .faq-section{padding:3.5rem 1rem;}
+  .faq-q{font-size:.88rem;}
 }
 </style>
 </head>
@@ -238,19 +431,19 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
 <!-- ── CURSOR GLOW ── -->
 <div id="cursor-glow"></div>
 
-<!-- ═══ NAV ═══ -->
+<!-- ══ NAV ══ -->
 <nav id="nav">
   <a href="index.html" class="nav-back">
     <i data-lucide="arrow-left" style="width:14px;height:14px;stroke:rgba(255,255,255,.45);"></i>
     Back to KMTC
   </a>
   <a href="kmtc-board.html" class="logo">
-    <img src="logo.png" alt="KMTC" style="height: 40px; width: auto; display: block;" />
+    <img src="logo.png" alt="KMTC" style="height:40px;width:auto;display:block;"/>
   </a>
-  <a href="kmtc-program.html" class="ncta">View Program →</a>
+  <a href="kmtc-program.html" class="ncta mag-btn">View Program →</a>
 </nav>
 
-<!-- ═══ PAGE HERO ═══ -->
+<!-- ══ PAGE HERO ══ -->
 <div class="page-hero">
   <div id="particles"></div>
   <div class="hero-ring hr1"></div>
@@ -265,28 +458,26 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   </div>
 </div>
 
-<!-- ═══ BOARD SECTION ═══ -->
+<!-- ══ BOARD SECTION ══ -->
 <div class="board-section">
-  <div class="bs-label">The Board</div>
-  <h2 class="bs-title">Our Governing Board</h2>
-  <p class="bs-sub">KMTC is led by a diverse board of eight professionals. Update each member's name, bio, and social links when profiles are confirmed.</p>
+  <div class="bs-label ao">The Board</div>
+  <h2 class="bs-title ao">Our Governing Board</h2>
+  <p class="bs-sub ao">KMTC is led by a diverse board of eight professionals. Update each member's name, bio, and social links when profiles are confirmed.</p>
 
   <div class="board-grid" id="boardGrid">
 
-    <!-- MEMBER 1 — Founder (Featured) -->
+    <!-- MEMBER 1 — Founder (Featured) — no wrapper needed, featured spans full width -->
     <div class="member-card featured ao">
       <div class="member-ava">
-        <img src="John.jpeg" alt="Founder & Executive Director" class="member-img">
+        <img src="images/founder.jpg" alt="Founder & Executive Director" class="member-img">
       </div>
       <div class="member-info">
         <div class="member-office">Founder &amp; Executive Director</div>
-        <div class="member-name">Fatile John</div>
-        <p class="member-portfolio">Vision carrier and founder of KMTC. A seasoned media professional and Kingdom builder passionate about equipping the next generation of Spirit-led technologists and creatives.</p>
+        <div class="member-name">Name Surname</div>
+        <p class="member-portfolio">Vision carrier and founder of KMTC. A seasoned media professional and Kingdom builder passionate about equipping the next generation of Spirit-led technologists and creatives. [Update with actual bio]</p>
         <div class="member-tags">
-          <span class="mtag">Founder</span>
-          <span class="mtag">Media</span>
-          <span class="mtag">Kingdom Leadership</span>
-          <span class="mtag">Strategy</span>
+          <span class="mtag">Founder</span><span class="mtag">Media</span>
+          <span class="mtag">Kingdom Leadership</span><span class="mtag">Strategy</span>
         </div>
         <div class="member-socials">
           <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
@@ -297,177 +488,137 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
       </div>
     </div>
 
-    <!-- MEMBER 2 -->
-<div class="member-card ao d1">
-  <div class="member-ava">
-    <img src="comfort.jpeg" alt="Communication and Community Lead" class="member-img">
-  </div>
-
-  <div class="member-info">
-    <div class="member-office">Communication and Community Lead</div>
-    <div class="member-name">Comfort Onwe</div>
-
-    <p class="member-portfolio">
-      Comfort Onwe is a communications and content specialist with a strong focus on crafting engaging digital narratives and campaign messaging for brands and community-driven initiatives. 
-
-Her work is rooted in thoughtful storytelling, audience engagement, and clear, impactful communication that helps ideas connect meaningfully with people.
-
-She brings a creative approach to content development, often blending strategy and narrative to support projects that aim to inform, inspire, and build stronger audience relationships.
-
-    <div class="member-tags">
-      <span class="mtag">Strategy</span>
-      <span class="mtag">Governance</span>
-      <span class="mtag">Partnerships</span>
+    <!-- MEMBERS 2–8 wrapped in grad-border-wrap -->
+    <div class="grad-border-wrap ao d1">
+      <div class="member-card">
+        <div class="member-ava"><div class="ava-placeholder">A</div></div>
+        <div class="member-info">
+          <div class="member-office">Deputy Director / Co-Founder</div>
+          <div class="member-name">Name Surname</div>
+          <p class="member-portfolio">Co-founder and deputy director responsible for programme strategy, partnerships, and KMTC's governance framework. [Update with actual bio]</p>
+          <div class="member-tags"><span class="mtag">Strategy</span><span class="mtag">Governance</span><span class="mtag">Partnerships</span></div>
+          <div class="member-socials">
+            <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
+            <a href="#" class="soc-link li" target="_blank"><i data-lucide="linkedin"></i> LinkedIn</a>
+            <a href="#" class="soc-link web" target="_blank"><i data-lucide="globe"></i> Website</a>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="member-socials">
-      <a href="https://www.instagram.com/komfort_onwe?igsh=amp2d3FiejhuM2hk&utm_source=qr" class="soc-link ig" target="_blank">
-        <i data-lucide="instagram"></i> Instagram
-      </a>
-
-      <a href="https://www.linkedin.com/in/comfort-onwe-684419232?utm_source=share_via&utm_content=profile&utm_medium=member_ios" class="soc-link li" target="_blank">
-        <i data-lucide="linkedin"></i> LinkedIn
-      </a>
-
-      <a href="https://www.facebook.com/share/1GXwPwLuh2/?mibextid=wwXIfr" class="soc-link web" target="_blank">
-        <i data-lucide="facebook"></i> Facwbook
-      </a>
+    <div class="grad-border-wrap ao d2">
+      <div class="member-card">
+        <div class="member-ava"><div class="ava-placeholder">C</div></div>
+        <div class="member-info">
+          <div class="member-office">Creative Director</div>
+          <div class="member-name">Name Surname</div>
+          <p class="member-portfolio">Leads all creative, brand, and visual identity output at KMTC. Oversees design, motion, photography, and the storytelling layer of the KMTC ecosystem. [Update with actual bio]</p>
+          <div class="member-tags"><span class="mtag">Design</span><span class="mtag">Branding</span><span class="mtag">Creative</span></div>
+          <div class="member-socials">
+            <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
+            <a href="#" class="soc-link tw" target="_blank"><i data-lucide="twitter"></i> Twitter</a>
+            <a href="#" class="soc-link li" target="_blank"><i data-lucide="linkedin"></i> LinkedIn</a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+
+    <div class="grad-border-wrap ao d3">
+      <div class="member-card">
+        <div class="member-ava"><img src="tech-director.png" alt="Director of Technology" class="member-img"></div>
+        <div class="member-info">
+          <div class="member-office">Director of Technology</div>
+          <div class="member-name">Oladapo BAKARE</div>
+          <p class="member-portfolio">Oversees KMTC's digital infrastructure, tech strategy, and developer community. Bridges the gap between Kingdom vision and technical execution.</p>
+          <div class="member-tags"><span class="mtag">Technology</span><span class="mtag">Dev</span><span class="mtag">Infrastructure</span></div>
+          <div class="member-socials">
+            <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
+            <a href="https://www.linkedin.com/in/oladapobakare" class="soc-link li" target="_blank"><i data-lucide="linkedin"></i> LinkedIn</a>
+            <a href="https://standard-portfolio-woad.vercel.app/" class="soc-link web" target="_blank"><i data-lucide="globe"></i> Website</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grad-border-wrap ao d1">
+      <div class="member-card">
+        <div class="member-ava"><div class="ava-placeholder">M</div></div>
+        <div class="member-info">
+          <div class="member-office">Director of Media &amp; Content</div>
+          <div class="member-name">Name Surname</div>
+          <p class="member-portfolio">Oversees all media production, broadcast, and content strategy at KMTC. Connects media professionals across the Kingdom ecosystem. [Update with actual bio]</p>
+          <div class="member-tags"><span class="mtag">Media</span><span class="mtag">Broadcast</span><span class="mtag">Content</span></div>
+          <div class="member-socials">
+            <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
+            <a href="#" class="soc-link yt" target="_blank"><i data-lucide="youtube"></i> YouTube</a>
+            <a href="#" class="soc-link li" target="_blank"><i data-lucide="linkedin"></i> LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grad-border-wrap ao d2">
+      <div class="member-card">
+        <div class="member-ava"><div class="ava-placeholder">P</div></div>
+        <div class="member-info">
+          <div class="member-office">Director of Partnerships &amp; Strategy</div>
+          <div class="member-name">Name Surname</div>
+          <p class="member-portfolio">Manages KMTC's relationships with churches, brands, sponsors, and institutional partners. Drives Kingdom-aligned strategic alliances. [Update with actual bio]</p>
+          <div class="member-tags"><span class="mtag">Partnerships</span><span class="mtag">Strategy</span><span class="mtag">Business</span></div>
+          <div class="member-socials">
+            <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
+            <a href="#" class="soc-link li" target="_blank"><i data-lucide="linkedin"></i> LinkedIn</a>
+            <a href="#" class="soc-link web" target="_blank"><i data-lucide="globe"></i> Website</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grad-border-wrap ao d3">
+      <div class="member-card">
+        <div class="member-ava"><div class="ava-placeholder">S</div></div>
+        <div class="member-info">
+          <div class="member-office">Director of Spiritual Formation</div>
+          <div class="member-name">Name Surname</div>
+          <p class="member-portfolio">Provides spiritual covering, pastoral leadership, and Kingdom alignment for all KMTC activities. Ensures that excellence and anointing remain inseparable. [Update with actual bio]</p>
+          <div class="member-tags"><span class="mtag">Ministry</span><span class="mtag">Pastoral</span><span class="mtag">Formation</span></div>
+          <div class="member-socials">
+            <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
+            <a href="#" class="soc-link tw" target="_blank"><i data-lucide="twitter"></i> Twitter</a>
+            <a href="#" class="soc-link web" target="_blank"><i data-lucide="globe"></i> Website</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grad-border-wrap ao d4">
+      <div class="member-card">
+        <div class="member-ava"><div class="ava-placeholder">O</div></div>
+        <div class="member-info">
+          <div class="member-office">Director of Operations &amp; Finance</div>
+          <div class="member-name">Name Surname</div>
+          <p class="member-portfolio">Manages KMTC's operational systems, event logistics, finances, and governance structures — ensuring every programme runs with Kingdom excellence. [Update with actual bio]</p>
+          <div class="member-tags"><span class="mtag">Operations</span><span class="mtag">Finance</span><span class="mtag">Logistics</span></div>
+          <div class="member-socials">
+            <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
+            <a href="#" class="soc-link li" target="_blank"><i data-lucide="linkedin"></i> LinkedIn</a>
+            <a href="#" class="soc-link web" target="_blank"><i data-lucide="globe"></i> Website</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /board-grid -->
 </div>
 
-    <!-- MEMBER 3 -->
-<div class="member-card ao d2">
-
-  <div class="member-ava">
-    <img src="1005644005.jpg.jpeg" alt="Creative Director" class="member-img">
-  </div>
-
-  <div class="member-info">
-    <div class="member-office">Creative Director</div>
-
-    <div class="member-name">Taiwo Olagoke</div>
-
-    <p class="member-portfolio">
-      Leads all creative, brand, and visual identity output at KMTC. Oversees design, motion, photography, and the storytelling layer of the KMTC ecosystem. [Update with actual bio]
-    </p>
-
-    <div class="member-tags">
-      <span class="mtag">Design</span>
-      <span class="mtag">Branding</span>
-      <span class="mtag">Creative</span>
-    </div>
-
-    <div class="member-socials">
-      <a href=" https://Instagram.com/learnwitholat" class="soc-link ig" target="_blank">
-        <i data-lucide="instagram"></i> Instagram
-      </a>
-
-      <a href=" https://youtube.com/@learnwitholat?si=SsEiE1WgkYWS2YFc" class="soc-link tw" target="_blank">
-        <i data-lucide="youtube"></i> YouTube
-      </a>
-
-      <a href="https://LinkedIn.com/in/taiwo-olagoke" class="soc-link li" target="_blank">
-        <i data-lucide="linkedin"></i> LinkedIn
-      </a>
-    </div>
-  </div>
-
-</div>
-
-    <!-- MEMBER 4 -->
-    <div class="member-card ao d3">
-      <div class="member-ava">
-        <img src="tech-director.png" alt="Director of Technology" class="member-img">
-      </div>
-      <div class="member-info">
-        <div class="member-office">Director of Technology</div>
-        <div class="member-name">Oladapo BAKARE</div>
-        <p class="member-portfolio">Oversees KMTC's digital infrastructure, tech strategy, and developer community. Bridges the gap between Kingdom vision and technical execution.</p>
-        <div class="member-tags"><span class="mtag">Technology</span><span class="mtag">Dev</span><span class="mtag">Infrastructure</span></div>
-        <div class="member-socials">
-          <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
-          <a href="https://www.linkedin.com/in/oladapobakare" class="soc-link li" target="_blank"><i data-lucide="linkedin"></i> LinkedIn</a>
-          <a href="https://standard-portfolio-woad.vercel.app/" class="soc-link web" target="_blank"><i data-lucide="globe"></i> Website</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- MEMBER 5 -->
-    <div class="member-card ao d1">
-      <div class="member-ava"><div class="ava-placeholder">M</div></div>
-      <div class="member-info">
-        <div class="member-office">Director of Media &amp; Content</div>
-        <div class="member-name">Name Surname</div>
-        <p class="member-portfolio">Oversees all media production, broadcast, and content strategy at KMTC. Connects media professionals across the Kingdom ecosystem. [Update with actual bio]</p>
-        <div class="member-tags"><span class="mtag">Media</span><span class="mtag">Broadcast</span><span class="mtag">Content</span></div>
-        <div class="member-socials">
-          <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
-          <a href="#" class="soc-link yt" target="_blank"><i data-lucide="youtube"></i> YouTube</a>
-          <a href="#" class="soc-link li" target="_blank"><i data-lucide="linkedin"></i> LinkedIn</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- MEMBER 6 -->
-    <div class="member-card ao d2">
-      <div class="member-ava"><div class="ava-placeholder">P</div></div>
-      <div class="member-info">
-        <div class="member-office">Director of Partnerships &amp; Strategy</div>
-        <div class="member-name">Name Surname</div>
-        <p class="member-portfolio">Manages KMTC's relationships with churches, brands, sponsors, and institutional partners. Drives Kingdom-aligned strategic alliances. [Update with actual bio]</p>
-        <div class="member-tags"><span class="mtag">Partnerships</span><span class="mtag">Strategy</span><span class="mtag">Business</span></div>
-        <div class="member-socials">
-          <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
-          <a href="#" class="soc-link li" target="_blank"><i data-lucide="linkedin"></i> LinkedIn</a>
-          <a href="#" class="soc-link web" target="_blank"><i data-lucide="globe"></i> Website</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- MEMBER 7 -->
-    <div class="member-card ao d3">
-      <div class="member-ava"><div class="ava-placeholder">S</div></div>
-      <div class="member-info">
-        <div class="member-office">Director of Spiritual Formation</div>
-        <div class="member-name">Name Surname</div>
-        <p class="member-portfolio">Provides spiritual covering, pastoral leadership, and Kingdom alignment for all KMTC activities. Ensures that excellence and anointing remain inseparable. [Update with actual bio]</p>
-        <div class="member-tags"><span class="mtag">Ministry</span><span class="mtag">Pastoral</span><span class="mtag">Formation</span></div>
-        <div class="member-socials">
-          <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
-          <a href="#" class="soc-link tw" target="_blank"><i data-lucide="twitter"></i> Twitter</a>
-          <a href="#" class="soc-link web" target="_blank"><i data-lucide="globe"></i> Website</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- MEMBER 8 -->
-    <div class="member-card ao d4">
-      <div class="member-ava"><div class="ava-placeholder">O</div></div>
-      <div class="member-info">
-        <div class="member-office">Director of Operations &amp; Finance</div>
-        <div class="member-name">Name Surname</div>
-        <p class="member-portfolio">Manages KMTC's operational systems, event logistics, finances, and governance structures — ensuring every programme runs with Kingdom excellence. [Update with actual bio]</p>
-        <div class="member-tags"><span class="mtag">Operations</span><span class="mtag">Finance</span><span class="mtag">Logistics</span></div>
-        <div class="member-socials">
-          <a href="#" class="soc-link ig" target="_blank"><i data-lucide="instagram"></i> Instagram</a>
-          <a href="#" class="soc-link li" target="_blank"><i data-lucide="linkedin"></i> LinkedIn</a>
-          <a href="#" class="soc-link web" target="_blank"><i data-lucide="globe"></i> Website</a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ═══ INVITE SECTION ═══ -->
+<!-- ══ INVITE SECTION ══ -->
 <div class="board-invite">
   <div class="bi-inner">
     <div>
       <div class="bi-label ao">Join the Team</div>
       <h2 class="bi-title ao">Interested in Being Part of KMTC Leadership?</h2>
       <p class="bi-body ao">KMTC is always looking for Kingdom-minded professionals who carry excellence, integrity, and a heart for God's purposes in media and technology.</p>
-      <a href="kmtc-program.html" class="btn-y ao">Explore KMTC 2026</a>
+      <a href="kmtc-program.html" class="btn-y mag-btn ao">Explore KMTC 2026</a>
     </div>
     <div class="bi-right">
       <div class="bi-stat ao">
@@ -495,7 +646,71 @@ She brings a creative approach to content development, often blending strategy a
   </div>
 </div>
 
-<!-- ═══ FOOTER ═══ -->
+<!-- ══════════════════════════════════════
+   4. PREMIUM FAQ ACCORDION
+══════════════════════════════════════ -->
+<div class="faq-section">
+  <div class="faq-inner">
+    <div class="faq-label ao">Have Questions</div>
+    <h2 class="faq-title ao">Frequently<br><span>Asked</span></h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item ao">
+        <button class="faq-q" aria-expanded="false">
+          What is KMTC and who is it for?
+          <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-body"><div class="faq-body-inner"><div class="faq-body-content">
+          Kingdom Media &amp; Tech Confluence (KMTC) is a <strong>faith-driven annual gathering</strong> for media professionals, technologists, creatives, innovators, and Kingdom builders. It exists at the intersection of faith, media, and technology — equipping people who believe their skill is a calling. If you create, build, or innovate for God's glory, KMTC is for you.
+        </div></div></div>
+      </div>
+
+      <div class="faq-item ao d1">
+        <button class="faq-q" aria-expanded="false">
+          How can I join the KMTC board or leadership team?
+          <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-body"><div class="faq-body-inner"><div class="faq-body-content">
+          KMTC is always seeking <strong>Kingdom-minded professionals</strong> who carry excellence, integrity, and a heart for God's purposes in media and technology. Board membership is by invitation and discernment. To express interest, reach out via <a href="mailto:hello@kmtc.com">hello@kmtc.com</a> with your background, area of expertise, and how you believe you can contribute to the KMTC vision.
+        </div></div></div>
+      </div>
+
+      <div class="faq-item ao d2">
+        <button class="faq-q" aria-expanded="false">
+          Is KMTC 2026 free to attend?
+          <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-body"><div class="faq-body-inner"><div class="faq-body-content">
+          <strong>Yes — 100% free.</strong> There is no registration fee or ticket cost for KMTC 2026. Attendance is subject to availability and confirmation of your registration. We believe the Kingdom deserves access to excellence, not barriers. Register at <a href="kmtc-register.html">kmtc-register.html</a> to secure your spot.
+        </div></div></div>
+      </div>
+
+      <div class="faq-item ao d3">
+        <button class="faq-q" aria-expanded="false">
+          How can my organisation become a sponsor?
+          <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-body"><div class="faq-body-inner"><div class="faq-body-content">
+          KMTC offers four sponsorship tiers — <strong>Title, Gold, Silver, and Media Partner</strong> — each designed to deliver brand visibility, thought leadership positioning, and long-term ecosystem engagement within a curated Kingdom community. Contact the partnerships team at <a href="mailto:Partnership.kmtc@gmail.com">Partnership.kmtc@gmail.com</a> or view full details on the <a href="kmtc-sponsor.html">Sponsorship page</a>.
+        </div></div></div>
+      </div>
+
+      <div class="faq-item ao d4">
+        <button class="faq-q" aria-expanded="false">
+          What tracks and sessions does KMTC offer?
+          <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-body"><div class="faq-body-inner"><div class="faq-body-content">
+          KMTC 2026 features <strong>six curated tracks</strong>: Media &amp; Content, Tech &amp; Development, Creative Arts &amp; Design, Kingdom Business, Innovation &amp; Systems, and Spiritual Formation. Each track runs practical skill workshops, keynote sessions, panel discussions, and networking. Detailed programme schedules will be announced closer to the event — <a href="kmtc-register.html">register now</a> to be first to receive updates.
+        </div></div></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
 <footer>
   <div class="fbot">
     <img src="logo.png" alt="KMTC" style="height:42px;width:auto;display:block;"/>
@@ -507,57 +722,40 @@ She brings a creative approach to content development, often blending strategy a
 <script>
 try { lucide.createIcons(); } catch(e) {}
 
-/* ══════════════════════════════
-   REVEAL ANIMATION
-══════════════════════════════ */
+/* ── REVEAL ── */
 const animItems = document.querySelectorAll('.ao');
 animItems.forEach(el => el.classList.add('hidden'));
-
 const revObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.remove('hidden');
-      revObs.unobserve(e.target);
-    }
+    if (e.isIntersecting) { e.target.classList.remove('hidden'); revObs.unobserve(e.target); }
   });
 }, { threshold: 0.05, rootMargin: '0px 0px -10px 0px' });
 animItems.forEach(el => revObs.observe(el));
-
-// Fallback — show everything after 1s
 setTimeout(() => animItems.forEach(el => el.classList.remove('hidden')), 1000);
 
-/* ══════════════════════════════
-   SCROLL PROGRESS BAR
-══════════════════════════════ */
+/* ── SCROLL PROGRESS ── */
 const scrollBar = document.getElementById('scroll-bar');
 window.addEventListener('scroll', () => {
-  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-  scrollBar.style.width = Math.min(pct, 100) + '%';
+  scrollBar.style.width = Math.min(window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100, 100) + '%';
 }, { passive: true });
 
-/* ══════════════════════════════
-   NAV SCROLL SHADOW
-══════════════════════════════ */
+/* ── NAV SHADOW ── */
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
 }, { passive: true });
 
-/* ══════════════════════════════
-   CURSOR GLOW
-══════════════════════════════ */
+/* ── CURSOR GLOW ── */
 const glow = document.getElementById('cursor-glow');
 if (glow) {
   document.addEventListener('mousemove', e => {
-    glow.style.left    = e.clientX + 'px';
-    glow.style.top     = e.clientY + 'px';
+    glow.style.left = e.clientX + 'px';
+    glow.style.top  = e.clientY + 'px';
     glow.style.opacity = '1';
   });
   document.addEventListener('mouseleave', () => glow.style.opacity = '0');
 }
 
-/* ══════════════════════════════
-   HERO PARTICLES
-══════════════════════════════ */
+/* ── PARTICLES ── */
 (function(){
   const c = document.getElementById('particles');
   if (!c) return;
@@ -571,130 +769,65 @@ if (glow) {
   }
 })();
 
-/* ══════════════════════════════
-   PARALLAX HERO RINGS
-══════════════════════════════ */
+/* ── PARALLAX RINGS ── */
 window.addEventListener('scroll', () => {
   const sy = window.scrollY;
   document.querySelectorAll('.hero-ring').forEach((r, i) => {
-    r.style.transform = `translateY(${sy * (i + 1) * 0.15}px)`;
+    r.style.transform = `translateY(${sy * (i + 1) * 0.14}px)`;
   });
 }, { passive: true });
 
-/* ══════════════════════════════
-   MAGNETIC BUTTONS
-══════════════════════════════ */
-document.querySelectorAll('.btn-y,.ncta').forEach(btn => {
+/* ── 3. SMOOTH MAGNETIC BUTTON with spotlight ── */
+document.querySelectorAll('.mag-btn').forEach(btn => {
   btn.addEventListener('mousemove', e => {
     const r  = btn.getBoundingClientRect();
     const dx = e.clientX - (r.left + r.width  / 2);
     const dy = e.clientY - (r.top  + r.height / 2);
-    btn.style.transform = `translate(${dx*.18}px,${dy*.18}px)`;
+    const mx = ((e.clientX - r.left) / r.width  * 100).toFixed(1) + '%';
+    const my = ((e.clientY - r.top ) / r.height * 100).toFixed(1) + '%';
+    btn.style.setProperty('--mx', mx);
+    btn.style.setProperty('--my', my);
+    btn.style.transform = `translate(${dx * .22}px, ${dy * .22}px)`;
   });
-  btn.addEventListener('mouseleave', () => btn.style.transform = '');
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = '';
+  });
 });
 
-/* ══════════════════════════════
-   3D TILT on member cards
-══════════════════════════════ */
+/* ── 1+2. GLASSMORPHISM + GRADIENT BORDER: 3D tilt ── */
 document.querySelectorAll('.member-card').forEach(card => {
   card.addEventListener('mousemove', e => {
     const r = card.getBoundingClientRect();
     const x = (e.clientX - r.left) / r.width  - .5;
     const y = (e.clientY - r.top ) / r.height - .5;
-    card.style.transform = `perspective(900px) rotateY(${x*6}deg) rotateX(${-y*6}deg) translateY(-5px)`;
-    card.style.boxShadow = `${-x*16}px ${y*16}px 40px rgba(0,0,0,.14)`;
+    card.style.transform = `perspective(900px) rotateY(${x*5}deg) rotateX(${-y*5}deg) translateY(-6px) scale(1.012)`;
   });
   card.addEventListener('mouseleave', () => {
     card.style.transform = '';
     card.style.boxShadow = '';
   });
 });
-const scrollBar = document.getElementById('scroll-bar');
-window.addEventListener('scroll', () => {
-  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-  scrollBar.style.width = Math.min(pct, 100) + '%';
-}, { passive: true });
 
-/* ══════════════════════════════
-   4. NAV SCROLL SHADOW
-══════════════════════════════ */
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
-}, { passive: true });
+/* ── 4. PREMIUM FAQ ACCORDION ── */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item   = btn.closest('.faq-item');
+    const body   = item.querySelector('.faq-body');
+    const isOpen = btn.classList.contains('open');
 
-/* ══════════════════════════════
-   5. CURSOR GLOW
-══════════════════════════════ */
-const glow = document.getElementById('cursor-glow');
-if (glow) {
-  document.addEventListener('mousemove', e => {
-    glow.style.left    = e.clientX + 'px';
-    glow.style.top     = e.clientY + 'px';
-    glow.style.opacity = '1';
-  });
-  document.addEventListener('mouseleave', () => glow.style.opacity = '0');
-}
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.querySelector('.faq-q').classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      i.querySelector('.faq-body').classList.remove('open');
+    });
 
-/* ══════════════════════════════
-   6. HERO PARTICLES
-══════════════════════════════ */
-(function(){
-  const c = document.getElementById('particles');
-  if (!c) return;
-  const cols = ['#f7572b','#ffc703','#00b675','#780ae8','#e982eb'];
-  for (let i = 0; i < 18; i++) {
-    const p   = document.createElement('div');
-    p.className = 'pt';
-    const s   = Math.random() * 5 + 2;
-    p.style.cssText = `
-      width:${s}px;height:${s}px;
-      left:${Math.random()*100}%;
-      background:${cols[Math.floor(Math.random()*cols.length)]};
-      animation-duration:${Math.random()*14+10}s;
-      animation-delay:${Math.random()*12}s;
-    `;
-    c.appendChild(p);
-  }
-})();
-
-/* ══════════════════════════════
-   7. PARALLAX HERO RINGS
-══════════════════════════════ */
-window.addEventListener('scroll', () => {
-  const sy = window.scrollY;
-  document.querySelectorAll('.hero-ring').forEach((r, i) => {
-    r.style.transform = `translateY(${sy * (i + 1) * 0.15}px)`;
-  });
-}, { passive: true });
-
-/* ══════════════════════════════
-   8. MAGNETIC BUTTONS
-══════════════════════════════ */
-document.querySelectorAll('.btn-y,.ncta').forEach(btn => {
-  btn.addEventListener('mousemove', e => {
-    const r  = btn.getBoundingClientRect();
-    const dx = e.clientX - (r.left + r.width  / 2);
-    const dy = e.clientY - (r.top  + r.height / 2);
-    btn.style.transform = `translate(${dx*.18}px,${dy*.18}px)`;
-  });
-  btn.addEventListener('mouseleave', () => btn.style.transform = '');
-});
-
-/* ══════════════════════════════
-   9. 3D TILT on member cards
-══════════════════════════════ */
-document.querySelectorAll('.member-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const r = card.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width  - .5;
-    const y = (e.clientY - r.top ) / r.height - .5;
-    card.style.transform   = `perspective(900px) rotateY(${x*6}deg) rotateX(${-y*6}deg) translateY(-5px)`;
-    card.style.boxShadow   = `${-x*16}px ${y*16}px 40px rgba(0,0,0,.14)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-    card.style.boxShadow = '';
+    // Open clicked (if it was closed)
+    if (!isOpen) {
+      btn.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      body.classList.add('open');
+    }
   });
 });
 </script>
