@@ -90,7 +90,7 @@
     });
     // ── TILT CARDS + PREMIUM 3D GLARE ─────────────────────────────
     document
-        .querySelectorAll(".vc2,.wyi,.track-card,.why-card,.wc,.speaker-card,.acard,.dcard,.does-card,.member-card,.spon-tier,.obj-card,.pkg-card,.reason-card")
+        .querySelectorAll(".vc2,.wyi,.track-card,.why-card,.wc,.speaker-card,.acard,.dcard,.does-card,.member-card,.spon-tier,.obj-card,.pkg-card,.reason-card,.evt-card")
         .forEach((card) => {
         card.classList.add("tilt");
         let glare = card.querySelector(".tilt-glare");
@@ -146,7 +146,7 @@
         });
     }, { threshold: 0.1 });
     document
-        .querySelectorAll(".val-grid,.who-grid,.why-grid,.tracks-grid,.obj-grid,.speakers-grid,.goal-goals,.pkg-grid")
+        .querySelectorAll(".val-grid,.who-grid,.why-grid,.tracks-grid,.obj-grid,.speakers-grid,.goal-goals,.pkg-grid,.evt-grid")
         .forEach((g) => staggerObs.observe(g));
     // ── SECTION LABEL LINE ANIMATION ──────────────────────────────
     const lblObs = new IntersectionObserver((entries) => {
@@ -228,7 +228,7 @@
     window.toggleMob = toggleMob;
     /* ══════════════ PREMIUM 3D ENHANCEMENTS ══════════════ */
     // ── 3D SCROLL REVEAL (flip-in depth) ──────────────────────────
-    const depthItems = document.querySelectorAll(".acard,.dcard,.vc2,.wc,.wyi,.does-card,.mvc,.member-card,.track-card,.why-card,.speaker-card,.spon-tier,.obj-card,.pkg-card");
+    const depthItems = document.querySelectorAll(".acard,.dcard,.vc2,.wc,.wyi,.does-card,.mvc,.member-card,.track-card,.why-card,.speaker-card,.spon-tier,.obj-card,.pkg-card,.evt-card");
     if (depthItems.length) {
         depthItems.forEach((el) => el.classList.add("depth-in"));
         const depthObs = new IntersectionObserver((entries) => {
