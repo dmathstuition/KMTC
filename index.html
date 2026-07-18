@@ -100,13 +100,15 @@ nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,.5);}
 /* ═══ HERO ═══ */
 .hero{
   min-height:100vh;
+  min-height:100svh;
   display:grid;grid-template-columns:1fr 1fr;
   align-items:center;
   background:var(--black);
-  padding:7rem 4rem 5rem;
-  gap:4rem;
+  padding:6rem 4rem 4rem;
+  gap:3rem;
   position:relative;overflow:hidden;
 }
+.hero-right{display:flex;align-items:center;justify-content:center;}
 .hero::before{
   content:'';position:absolute;inset:0;
   background:
@@ -499,21 +501,21 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   .nl,.ncta{display:none;}
   .ham{display:flex;}
 
-  /* --- Hero: stack on mobile, show image below text --- */
+  /* --- Hero: stack on mobile, fit the animation below the text --- */
   .hero{
     grid-template-columns:1fr;
-    padding:5rem 1.2rem 3rem;
-    gap:1.5rem;
-    min-height:auto;
+    padding:4.75rem 1.2rem 1.5rem;
+    gap:.6rem;
+    min-height:100svh;
+    align-content:center;
   }
-  /* Show hero image on mobile */
   .hero-right{
-    display:block;
+    display:flex;
     width:100%;
     padding:0;
   }
-  .hero-h{font-size:clamp(2.6rem,10vw,4rem);}
-  .hero-p{font-size:.92rem;max-width:100%;}
+  .hero-h{font-size:clamp(2.3rem,9vw,3.4rem);margin-bottom:1rem;}
+  .hero-p{font-size:.88rem;max-width:100%;margin-bottom:1.3rem;}
   .hr1,.hr2{display:none;}
 
   /* --- Sections --- */
@@ -791,9 +793,11 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   margin-top:3rem;
 }
 
-/* The 3D orbit stage */
+/* The 3D orbit stage — geometry driven by responsive CSS variables so
+   the animation scales to fit desktop and phone (JS reads --r). */
+.orbit-3d{--r:150px;--core:150px;--node:118px;--ring:340px;}
 .orbit-wrap{
-  position:relative;height:420px;
+  position:relative;height:420px;width:100%;
   display:flex;align-items:center;justify-content:center;
   perspective:1100px;
 }
@@ -806,7 +810,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
 /* central Kingdom-Impact core */
 .orbit-core{
   position:absolute;top:50%;left:50%;
-  width:150px;height:150px;margin:-75px 0 0 -75px;
+  width:var(--core);height:var(--core);
+  margin:calc(var(--core) / -2) 0 0 calc(var(--core) / -2);
   border-radius:50%;
   background:radial-gradient(circle at 35% 30%,#ffc703,#f7572b 70%);
   box-shadow:0 0 60px rgba(247,87,43,.55),inset 0 0 40px rgba(0,0,0,.15);
@@ -819,15 +824,17 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
 .orbit-core .oc-title{font-family:var(--pf);font-size:1.05rem;line-height:1.05;text-transform:uppercase;letter-spacing:1px;margin-top:.2rem;}
 /* orbit guide ring */
 .orbit-ring{
-  position:absolute;top:50%;left:50%;width:340px;height:340px;
-  margin:-170px 0 0 -170px;border-radius:50%;
+  position:absolute;top:50%;left:50%;
+  width:var(--ring);height:var(--ring);
+  margin:calc(var(--ring) / -2) 0 0 calc(var(--ring) / -2);border-radius:50%;
   border:1px dashed rgba(255,255,255,.14);
   transform:rotateX(78deg);
 }
 /* the three converging nodes */
 .orbit-node{
   position:absolute;top:50%;left:50%;
-  width:118px;height:118px;margin:-59px 0 0 -59px;
+  width:var(--node);height:var(--node);
+  margin:calc(var(--node) / -2) 0 0 calc(var(--node) / -2);
   border-radius:18px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;
   text-align:center;padding:.6rem;
@@ -874,10 +881,29 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   #cursor-glow{display:none;}
   #goal{padding:4rem 1.5rem;}
   .goal-layout{grid-template-columns:1fr;gap:2rem;}
-  .orbit-wrap{height:360px;}
+  /* Scale the orbit down so it fits phone screens */
+  .orbit-3d{--r:120px;--core:118px;--node:94px;--ring:280px;}
+  .orbit-wrap{height:320px;}
+  .hero-orbit{height:300px;}
+  .orbit-node svg{width:22px;height:22px;}
+  .orbit-node .on-t{font-size:.7rem;}
+  .orbit-core .oc-title{font-size:.92rem;}
   .goal-stats{grid-template-columns:1fr;gap:2rem;}
-  /* Reduce heavy 3D tilt on touch for stability */
-  .hero .img-frame{transform:none!important;}
+}
+
+@media(max-width:430px){
+  /* Compress the hero so headline + copy + buttons + animation fit one screen */
+  .hero{padding:4.25rem 1.1rem 1.25rem;}
+  .hero-h{font-size:clamp(2rem,9vw,2.8rem);margin-bottom:.7rem;}
+  .hero-p{font-size:.84rem;margin-bottom:.9rem;}
+  .orbit-3d{--r:92px;--core:100px;--node:78px;--ring:220px;}
+  .orbit-wrap{height:250px;}
+  .hero-orbit{height:236px;}
+  .orbit-node{padding:.4rem;gap:.2rem;}
+  .orbit-node svg{width:19px;height:19px;}
+  .orbit-node .on-s{display:none;}
+  .orbit-core .oc-lbl{font-size:.44rem;}
+  .orbit-core .oc-title{font-size:.82rem;}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -958,9 +984,32 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   </div>
 
   <div class="hero-right">
-    <div class="img-frame">
-      <img src="image2.jpeg" alt="KMTC Community — Kingdom creators and technologists"/>
-      <div class="img-badge">KMTC 2026</div>
+    <!-- 3D convergence animation (Faith × Media × Tech → Kingdom Impact) -->
+    <div class="orbit-wrap hero-orbit">
+      <div class="orbit-3d">
+        <div class="orbit-ring"></div>
+        <div class="orbit-stage">
+          <div class="orbit-core">
+            <span class="oc-lbl">KMTC</span>
+            <span class="oc-title">Kingdom<br>Impact</span>
+          </div>
+          <div class="orbit-node on-faith">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ffc703" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M5 9h14"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/></svg>
+            <span class="on-t">Faith</span>
+            <span class="on-s">Spirit-led conviction</span>
+          </div>
+          <div class="orbit-node on-media">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#f7572b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+            <span class="on-t">Media</span>
+            <span class="on-s">Creative storytelling</span>
+          </div>
+          <div class="orbit-node on-tech">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00b675" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            <span class="on-t">Technology</span>
+            <span class="on-s">Excellent innovation</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
