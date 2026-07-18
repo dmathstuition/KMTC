@@ -123,7 +123,7 @@ interface Window {
   // ── TILT CARDS + PREMIUM 3D GLARE ─────────────────────────────
   document
     .querySelectorAll<HTMLElement>(
-      ".vc2,.wyi,.track-card,.why-card,.wc,.speaker-card,.acard,.dcard,.does-card,.member-card,.spon-tier,.obj-card,.pkg-card,.reason-card"
+      ".vc2,.wyi,.track-card,.why-card,.wc,.speaker-card,.acard,.dcard,.does-card,.member-card,.spon-tier,.obj-card,.pkg-card,.reason-card,.evt-card"
     )
     .forEach((card): void => {
       card.classList.add("tilt");
@@ -194,7 +194,7 @@ interface Window {
   );
   document
     .querySelectorAll<HTMLElement>(
-      ".val-grid,.who-grid,.why-grid,.tracks-grid,.obj-grid,.speakers-grid,.goal-goals,.pkg-grid"
+      ".val-grid,.who-grid,.why-grid,.tracks-grid,.obj-grid,.speakers-grid,.goal-goals,.pkg-grid,.evt-grid"
     )
     .forEach((g): void => staggerObs.observe(g));
 
@@ -290,7 +290,7 @@ interface Window {
 
   // ── 3D SCROLL REVEAL (flip-in depth) ──────────────────────────
   const depthItems = document.querySelectorAll<HTMLElement>(
-    ".acard,.dcard,.vc2,.wc,.wyi,.does-card,.mvc,.member-card,.track-card,.why-card,.speaker-card,.spon-tier,.obj-card,.pkg-card"
+    ".acard,.dcard,.vc2,.wc,.wyi,.does-card,.mvc,.member-card,.track-card,.why-card,.speaker-card,.spon-tier,.obj-card,.pkg-card,.evt-card"
   );
   if (depthItems.length) {
     depthItems.forEach((el): void => el.classList.add("depth-in"));
