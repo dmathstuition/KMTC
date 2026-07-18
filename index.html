@@ -727,9 +727,133 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
 .sb{transform:scale(1);}
 .sb:hover{transform:scale(1.18) translateY(-2px);}
 
-/* ── Mobile responsive stays intact ── */
+/* ═══════════════════════════════════════════════
+   PREMIUM 3D ENHANCEMENTS
+═══════════════════════════════════════════════ */
+/* Give tiltable cards real depth + a moving glare sheen */
+.tilt{transform-style:preserve-3d;transition:transform .18s cubic-bezier(.22,1,.36,1),box-shadow .3s;will-change:transform;position:relative;}
+.tilt-glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;mix-blend-mode:screen;z-index:5;}
+
+/* 3D flip-in reveal on scroll */
+.depth-in{opacity:0;transform:perspective(1200px) rotateX(14deg) translateY(42px) scale(.96);transform-origin:50% 100%;transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
+.depth-in.depth-shown{opacity:1;transform:perspective(1200px) rotateX(0) translateY(0) scale(1);}
+
+.hero .img-frame{transition:transform .25s cubic-bezier(.22,1,.36,1);transform-style:preserve-3d;will-change:transform;}
+
+/* ═══════════════════════════════════════════════
+   § OUR GOAL — 3D convergence illustration
+═══════════════════════════════════════════════ */
+#goal{
+  position:relative;background:var(--black);color:var(--white);
+  padding:6rem 4rem;overflow:hidden;
+}
+#goal::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 75% 30%,rgba(120,10,232,.16) 0%,transparent 55%),
+    radial-gradient(ellipse at 20% 80%,rgba(247,87,43,.12) 0%,transparent 55%);
+}
+.goal-head{position:relative;z-index:2;max-width:640px;}
+.goal-head .sh{color:var(--white);}
+.goal-sub{font-size:.98rem;line-height:1.85;color:rgba(255,255,255,.62);margin-top:1rem;}
+.goal-layout{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:3.5rem;align-items:center;
+  margin-top:3rem;
+}
+
+/* The 3D orbit stage */
+.orbit-wrap{
+  position:relative;height:420px;
+  display:flex;align-items:center;justify-content:center;
+  perspective:1100px;
+}
+.orbit-stage{
+  position:relative;width:2px;height:2px;
+  transform-style:preserve-3d;
+  transform:rotateX(-14deg);
+  will-change:transform;
+}
+/* central Kingdom-Impact core */
+.orbit-core{
+  position:absolute;top:50%;left:50%;
+  width:150px;height:150px;margin:-75px 0 0 -75px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#ffc703,#f7572b 70%);
+  box-shadow:0 0 60px rgba(247,87,43,.55),inset 0 0 40px rgba(0,0,0,.15);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;color:var(--black);
+  animation:corePulse 3.4s ease-in-out infinite;
+}
+@keyframes corePulse{0%,100%{box-shadow:0 0 60px rgba(247,87,43,.55),inset 0 0 40px rgba(0,0,0,.15);}50%{box-shadow:0 0 90px rgba(255,199,3,.75),inset 0 0 40px rgba(0,0,0,.15);}}
+.orbit-core .oc-lbl{font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:2px;text-transform:uppercase;opacity:.7;}
+.orbit-core .oc-title{font-family:var(--pf);font-size:1.05rem;line-height:1.05;text-transform:uppercase;letter-spacing:1px;margin-top:.2rem;}
+/* orbit guide ring */
+.orbit-ring{
+  position:absolute;top:50%;left:50%;width:340px;height:340px;
+  margin:-170px 0 0 -170px;border-radius:50%;
+  border:1px dashed rgba(255,255,255,.14);
+  transform:rotateX(78deg);
+}
+/* the three converging nodes */
+.orbit-node{
+  position:absolute;top:50%;left:50%;
+  width:118px;height:118px;margin:-59px 0 0 -59px;
+  border-radius:18px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;
+  text-align:center;padding:.6rem;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.16);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  will-change:transform,opacity,filter;
+}
+.orbit-node svg{width:26px;height:26px;}
+.orbit-node .on-t{font-family:var(--pf);font-size:.8rem;letter-spacing:1px;text-transform:uppercase;color:var(--white);}
+.orbit-node .on-s{font-size:.56rem;color:rgba(255,255,255,.55);line-height:1.3;}
+.on-faith{border-color:rgba(255,199,3,.55);box-shadow:0 0 30px rgba(255,199,3,.18);}
+.on-media{border-color:rgba(247,87,43,.55);box-shadow:0 0 30px rgba(247,87,43,.18);}
+.on-tech{border-color:rgba(0,182,117,.55);box-shadow:0 0 30px rgba(0,182,117,.18);}
+
+/* strategic goals list w/ count-up */
+.goal-goals{display:flex;flex-direction:column;gap:1.1rem;}
+.goal-card{
+  position:relative;display:flex;gap:1rem;align-items:flex-start;
+  padding:1.3rem 1.4rem;border-radius:14px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);
+  transition:transform .3s,border-color .3s,background .3s;
+}
+.goal-card:hover{transform:translateX(6px);border-color:rgba(255,199,3,.4);background:rgba(255,255,255,.06);}
+.goal-card .gc-ic{
+  flex-shrink:0;width:44px;height:44px;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,rgba(255,199,3,.16),rgba(247,87,43,.16));
+  border:1px solid rgba(255,255,255,.12);
+}
+.goal-card h4{font-family:var(--pf);font-size:1rem;letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:.25rem;}
+.goal-card p{font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.6);}
+
+.goal-stats{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
+  margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.09);
+}
+.gstat{text-align:center;}
+.gstat-num{font-family:var(--pf);font-size:clamp(2rem,5vw,3.2rem);line-height:1;background:linear-gradient(90deg,var(--yellow),var(--tiger));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.gstat-lbl{font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:.6rem;}
+
 @media(max-width:860px){
   #cursor-glow{display:none;}
+  #goal{padding:4rem 1.5rem;}
+  .goal-layout{grid-template-columns:1fr;gap:2rem;}
+  .orbit-wrap{height:360px;}
+  .goal-stats{grid-template-columns:1fr;gap:2rem;}
+  /* Reduce heavy 3D tilt on touch for stability */
+  .hero .img-frame{transform:none!important;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .orbit-core{animation:none;}
+  .depth-in{transition:opacity .4s ease;transform:none;}
 }
 </style>
 </head>
@@ -759,6 +883,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   <ul class="nl">
     <li><a href="#about">About</a></li>
     <li><a href="#conviction">Conviction</a></li>
+    <li><a href="#goal">Goal</a></li>
     <li><a href="#mission">Mission</a></li>
     <li><a href="#values">Values</a></li>
     <li><a href="#who">Community</a></li>
@@ -773,6 +898,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
 <nav class="mob-nav" id="mobNav">
   <a href="#about" onclick="closeMob()">About <span>→</span></a>
   <a href="#conviction" onclick="closeMob()">Conviction <span>→</span></a>
+  <a href="#goal" onclick="closeMob()">Our Goal <span>→</span></a>
   <a href="#mission" onclick="closeMob()">Mission &amp; Vision <span>→</span></a>
   <a href="#values" onclick="closeMob()">Core Values <span>→</span></a>
   <a href="#who" onclick="closeMob()">Community <span>→</span></a>
@@ -1031,6 +1157,67 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   </div>
 </section>
 
+<!-- ═══ § OUR GOAL ═══ -->
+<section id="goal">
+  <div class="goal-head">
+    <div class="slbl ao">Our Goal</div>
+    <h2 class="sh ao">Where Faith, Media &amp; Tech Converge</h2>
+    <p class="goal-sub ao">KMTC exists to bring three worlds into one Kingdom purpose — aligning spiritual conviction, creative media, and technical excellence so believers can shape culture without compromising conviction.</p>
+  </div>
+
+  <div class="goal-layout">
+    <!-- 3D convergence orbit (animated in TypeScript) -->
+    <div class="orbit-wrap ao">
+      <div id="goalOrbit" class="orbit-3d">
+        <div class="orbit-ring"></div>
+        <div class="orbit-stage">
+          <div class="orbit-core">
+            <span class="oc-lbl">The Goal</span>
+            <span class="oc-title">Kingdom<br>Impact</span>
+          </div>
+          <div class="orbit-node on-faith">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ffc703" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M5 9h14"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/></svg>
+            <span class="on-t">Faith</span>
+            <span class="on-s">Spirit-led conviction</span>
+          </div>
+          <div class="orbit-node on-media">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#f7572b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+            <span class="on-t">Media</span>
+            <span class="on-s">Creative storytelling</span>
+          </div>
+          <div class="orbit-node on-tech">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00b675" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            <span class="on-t">Technology</span>
+            <span class="on-s">Excellent innovation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Strategic goals -->
+    <div class="goal-goals">
+      <div class="goal-card ao">
+        <div class="gc-ic"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffc703" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+        <div><h4>Equip</h4><p>Equip Kingdom creatives with practical skills and spiritual clarity through training, mentorship, and masterclasses.</p></div>
+      </div>
+      <div class="goal-card ao d1">
+        <div class="gc-ic"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f7572b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div><h4>Connect</h4><p>Build a collaborative ecosystem that bridges church, media, and technology — a lasting community, not a one-off event.</p></div>
+      </div>
+      <div class="goal-card ao d2">
+        <div class="gc-ic"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00b675" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <div><h4>Commission</h4><p>Deploy Spirit-led leaders who amplify Kingdom voices and advance God's purpose in global media and tech conversations.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="goal-stats ao">
+    <div class="gstat"><div class="gstat-num" data-count="3">0</div><div class="gstat-lbl">Worlds United · Faith · Media · Tech</div></div>
+    <div class="gstat"><div class="gstat-num" data-count="7">0</div><div class="gstat-lbl">Core Values Driving Us</div></div>
+    <div class="gstat"><div class="gstat-num" data-count="1">0</div><div class="gstat-lbl">Movement · One Kingdom Purpose</div></div>
+  </div>
+</section>
+
 <!-- ═══ § CORE VALUES ═══ -->
 <section id="values">
   <svg class="vburst" width="220" height="220" viewBox="0 0 100 100" fill="none" stroke="black" stroke-width="1.5"><polygon points="50,2 56,38 90,14 68,44 98,50 68,56 90,86 56,62 50,98 44,62 10,86 32,56 2,50 32,44 10,14 44,38"/></svg>
@@ -1251,203 +1438,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   </div>
 </footer>
 
-<script>
-/* ════════════════════════════════
-   KMTC — PROFESSIONAL JS SUITE
-════════════════════════════════ */
+<!-- ── Interaction layer: authored in TypeScript (src/main.ts), compiled to src/main.js ── -->
+<script src="src/main.js" defer></script>
 
-// ── 1. PAGE LOADER ──────────────────────────────────────────
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('loader').classList.add('done');
-  }, 1900);
-});
-
-// ── 2. SCROLL PROGRESS BAR ──────────────────────────────────
-const scrollBar = document.getElementById('scroll-bar');
-window.addEventListener('scroll', () => {
-  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-  scrollBar.style.width = pct + '%';
-}, { passive: true });
-
-// ── 3. NAV SCROLL SHADOW ────────────────────────────────────
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
-}, { passive: true });
-
-// ── 4. CURSOR GLOW ──────────────────────────────────────────
-const cursorGlow = document.getElementById('cursor-glow');
-let cx = 0, cy = 0;
-document.addEventListener('mousemove', e => {
-  cx = e.clientX; cy = e.clientY;
-  cursorGlow.style.left = cx + 'px';
-  cursorGlow.style.top  = cy + 'px';
-  cursorGlow.style.opacity = '1';
-});
-document.addEventListener('mouseleave', () => { cursorGlow.style.opacity = '0'; });
-
-// ── 5. HERO PARTICLES ───────────────────────────────────────
-(function spawnParticles() {
-  const container = document.getElementById('particles');
-  if (!container) return;
-  const colors = ['#f7572b','#ffc703','#00b675','#780ae8','#e982eb'];
-  const total   = 22;
-  for (let i = 0; i < total; i++) {
-    const p = document.createElement('div');
-    p.className = 'pt';
-    const size = Math.random() * 5 + 2;
-    p.style.cssText = `
-      width:${size}px;height:${size}px;
-      left:${Math.random() * 100}%;
-      background:${colors[Math.floor(Math.random() * colors.length)]};
-      animation-duration:${Math.random() * 14 + 10}s;
-      animation-delay:${Math.random() * 12}s;
-      opacity:0;
-    `;
-    container.appendChild(p);
-  }
-})();
-
-// ── 6. MAGNETIC BUTTONS ─────────────────────────────────────
-document.querySelectorAll('.btn-y,.btn-gw,.ncta,.btn-dark,.inv-btn,.prog-action a').forEach(btn => {
-  btn.classList.add('btn-mag');
-  btn.addEventListener('mousemove', e => {
-    const r   = btn.getBoundingClientRect();
-    const dx  = e.clientX - (r.left + r.width  / 2);
-    const dy  = e.clientY - (r.top  + r.height / 2);
-    btn.style.transform = `translate(${dx * .22}px, ${dy * .22}px)`;
-  });
-  btn.addEventListener('mouseleave', () => {
-    btn.style.transform = '';
-  });
-});
-
-// ── 7. TILT CARDS ───────────────────────────────────────────
-document.querySelectorAll('.vc2,.wyi,.track-card,.why-card,.wc,.speaker-card').forEach(card => {
-  card.classList.add('tilt');
-  card.addEventListener('mousemove', e => {
-    const r   = card.getBoundingClientRect();
-    const x   = (e.clientX - r.left) / r.width  - .5;
-    const y   = (e.clientY - r.top ) / r.height - .5;
-    card.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateZ(6px)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-  });
-});
-
-// ── 8. SHIMMER CARDS ────────────────────────────────────────
-document.querySelectorAll('.acard,.dcard,.edr,.spon-tier,.obj-card').forEach(el => {
-  el.classList.add('shimmer');
-});
-
-// ── 9. REVEAL ANIMATION (enhanced stagger) ──────────────────
-const animItems = document.querySelectorAll('.ao');
-animItems.forEach(el => el.classList.add('hidden'));
-const revObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.remove('hidden');
-      revObs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
-animItems.forEach(el => revObs.observe(el));
-setTimeout(() => animItems.forEach(el => el.classList.remove('hidden')), 2000);
-
-// ── 10. STAGGER CHILDREN in section grids ───────────────────
-const staggerObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      Array.from(e.target.children).forEach((child, i) => {
-        child.classList.add('stagger-child');
-        setTimeout(() => child.classList.add('in'), i * 80);
-      });
-      staggerObs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.1 });
-document.querySelectorAll('.val-grid,.who-grid,.why-grid,.tracks-grid,.obj-grid,.speakers-grid').forEach(g => {
-  staggerObs.observe(g);
-});
-
-// ── 11. SECTION LABEL LINE ANIMATION ────────────────────────
-const lblObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) e.target.classList.add('animated');
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('.slbl,.ph-label,.block-label').forEach(l => lblObs.observe(l));
-
-// ── 12. ACTIVE NAV on scroll ────────────────────────────────
-const sections = document.querySelectorAll('section[id], div[id]');
-const navLinks = document.querySelectorAll('.nl a');
-const sectObs  = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      navLinks.forEach(a => a.classList.remove('nav-active'));
-      const match = document.querySelector(`.nl a[href="#${e.target.id}"]`);
-      if (match) match.classList.add('nav-active');
-    }
-  });
-}, { threshold: 0.35, rootMargin: '-64px 0px -40% 0px' });
-sections.forEach(s => sectObs.observe(s));
-
-// ── 13. PARALLAX on hero rings ──────────────────────────────
-window.addEventListener('scroll', () => {
-  const sy = window.scrollY;
-  document.querySelectorAll('.hero-ring').forEach((r, i) => {
-    const speed = (i + 1) * 0.18;
-    r.style.transform = `translateY(${sy * speed}px)`;
-  });
-}, { passive: true });
-
-// ── 14. MOBILE NAV ──────────────────────────────────────────
-const mobNav = document.getElementById('mobNav');
-const hamBtn = document.getElementById('hamBtn');
-let mobOpen = false;
-function toggleMob() {
-  mobOpen = !mobOpen;
-  mobNav.classList.toggle('open', mobOpen);
-  const spans = hamBtn.querySelectorAll('span');
-  if (mobOpen) {
-    spans[0].style.transform = 'rotate(45deg) translate(5px,5px)';
-    spans[1].style.opacity   = '0';
-    spans[2].style.transform = 'rotate(-45deg) translate(5px,-5px)';
-  } else {
-    spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
-  }
-}
-function closeMob() {
-  mobOpen = false;
-  mobNav.classList.remove('open');
-  hamBtn.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
-}
-hamBtn.addEventListener('click', toggleMob);
-document.addEventListener('click', (e) => {
-  if (mobOpen && !mobNav.contains(e.target) && !hamBtn.contains(e.target)) closeMob();
-});
-
-// ── 16. SMOOTH HERO HEADLINE TYPEWRITER ─────────────────────
-// Runs after loader clears
-setTimeout(() => {
-  const words = ['Faith','Meets','Tech'];
-  const spans = ['.w1','.w2','.w3'];
-  spans.forEach((sel, i) => {
-    const el = document.querySelector(sel);
-    if (!el) return;
-    const text = words[i];
-    el.textContent = '';
-    el.style.opacity = '1';
-    let j = 0;
-    const type = setInterval(() => {
-      el.textContent += text[j];
-      j++;
-      if (j >= text.length) clearInterval(type);
-    }, 55 + i * 25);
-  });
-}, 2100);
-
-</script>
 </body>
 </html>
