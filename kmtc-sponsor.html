@@ -223,6 +223,12 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   .kpi-grid{grid-template-columns:1fr 1fr;}
   .contact-cta{padding:5rem 1.2rem;}
 }
+/* ═══ PREMIUM 3D ENHANCEMENTS (shared, driven by src/premium.js) ═══ */
+.tilt{transform-style:preserve-3d;transition:transform .18s cubic-bezier(.22,1,.36,1),box-shadow .3s;will-change:transform;position:relative;}
+.tilt-glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;mix-blend-mode:screen;z-index:5;}
+.depth-in{opacity:0;transform:perspective(1200px) rotateX(14deg) translateY(42px) scale(.96);transform-origin:50% 100%;transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
+.depth-in.depth-shown{opacity:1;transform:perspective(1200px) rotateX(0) translateY(0) scale(1);}
+@media (prefers-reduced-motion: reduce){.depth-in{transition:opacity .4s ease;transform:none;}.tilt{transition:none;}}
 </style>
 </head>
 <body>
@@ -496,17 +502,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   <div class="fbow"></div>
 </footer>
 
-<script>
-const animItems = document.querySelectorAll('.ao');
-animItems.forEach(el => el.classList.add('hidden'));
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if(e.isIntersecting){e.target.classList.remove('hidden');obs.unobserve(e.target);} });
-}, { threshold: 0.07, rootMargin: '0px 0px -20px 0px' });
-animItems.forEach(el => obs.observe(el));
-setTimeout(() => animItems.forEach(el => el.classList.remove('hidden')), 2000);
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
-}, { passive: true });
-</script>
+<!-- Interaction: TypeScript (src/premium.ts) compiled to committed JS -->
+<script src="src/premium.js" defer></script>
 </body>
 </html>
