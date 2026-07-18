@@ -1,0 +1,13 @@
+{
+  "name": "kmtc-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Kingdom Media & Tech Confluence — front-end interaction layer (authored in TypeScript, compiled to main.js which is committed so the static site deploys with no build step).",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "tsc -p tsconfig.json --watch"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.0"
+  }
+}

@@ -481,54 +481,8 @@ footer{background:#0a0a0a;border-top:1px solid rgba(255,255,255,.06);padding:2.5
   <div class="fbow"></div>
 </footer>
 
-<script>
-// ── NAV scroll shadow ──
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
-}, { passive: true });
-
-// ── MOBILE TABLE OF CONTENTS DROPDOWN ──
-const tocBtn   = document.getElementById('tocBtn');
-const tocPanel = document.getElementById('tocPanel');
-let tocOpen = false;
-
-function openToc() {
-  tocOpen = true;
-  tocBtn.classList.add('open');
-  tocPanel.classList.add('open');
-  tocBtn.setAttribute('aria-expanded', 'true');
-}
-function closeToc() {
-  tocOpen = false;
-  tocBtn.classList.remove('open');
-  tocPanel.classList.remove('open');
-  tocBtn.setAttribute('aria-expanded', 'false');
-}
-
-if (tocBtn) {
-  tocBtn.addEventListener('click', () => tocOpen ? closeToc() : openToc());
-}
-// Close on outside tap
-document.addEventListener('click', (e) => {
-  if (tocOpen && !document.getElementById('mobToc').contains(e.target)) closeToc();
-});
-
-// ── SCROLL SPY — highlight active section in both sidebars ──
-const clauses   = document.querySelectorAll('.clause');
-const sideLinks = document.querySelectorAll('.sidebar-nav a, .mob-toc-panel a');
-
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      sideLinks.forEach(a => a.classList.remove('active'));
-      // Highlight matching link in both desktop sidebar and mobile panel
-      document.querySelectorAll(`.sidebar-nav a[href="#${e.target.id}"], .mob-toc-panel a[href="#${e.target.id}"]`)
-        .forEach(a => a.classList.add('active'));
-    }
-  });
-}, { threshold: 0.35, rootMargin: '-80px 0px -40% 0px' });
-
-clauses.forEach(c => obs.observe(c));
-</script>
+<!-- Interaction: TypeScript (src/*.ts) compiled to committed JS -->
+<script src="src/premium.js" defer></script>
+<script src="src/privacy.js" defer></script>
 </body>
 </html>

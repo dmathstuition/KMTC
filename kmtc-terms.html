@@ -319,24 +319,8 @@ footer{background:#0a0a0a;border-top:1px solid rgba(255,255,255,.06);padding:2.5
   <div class="fbow"></div>
 </footer>
 
-<script>
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
-}, { passive: true });
-
-// Highlight active sidebar link on scroll
-const clauses = document.querySelectorAll('.clause');
-const sideLinks = document.querySelectorAll('.sidebar-nav a');
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      sideLinks.forEach(a => a.classList.remove('active'));
-      const active = document.querySelector(`.sidebar-nav a[href="#${e.target.id}"]`);
-      if (active) active.classList.add('active');
-    }
-  });
-}, { threshold: 0.4, rootMargin: '-80px 0px -40% 0px' });
-clauses.forEach(c => obs.observe(c));
-</script>
+<!-- Interaction: TypeScript (src/*.ts) compiled to committed JS -->
+<script src="src/premium.js" defer></script>
+<script src="src/terms.js" defer></script>
 </body>
 </html>
